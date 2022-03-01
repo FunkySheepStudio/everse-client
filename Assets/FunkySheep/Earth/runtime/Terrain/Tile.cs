@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 namespace FunkySheep.Earth.Terrain
 {
@@ -27,20 +28,26 @@ namespace FunkySheep.Earth.Terrain
 
             float[,] heights = new float[terrain.terrainData.heightmapResolution, terrain.terrainData.heightmapResolution];
 
-            for (int i = 0; i < pixels.Length; i++)
+            for (int x = 0; x < terrain.terrainData.heightmapResolution; x++)
             {
-                int x = (int)((float)terrain.terrainData.heightmapResolution / (float)texture.width * (i % texture.width));
-                int y = (int)((float)terrain.terrainData.heightmapResolution / (float)texture.height * (i / texture.height));
-                Color32 color = pixels[i];
+                for (int y = 0; y < terrain.terrainData.heightmapResolution; y++)
+                {
+                    float xRatio = (float)texture.width / (float)terrain.terrainData.heightmapResolution;
+                    float yRatio = (float)texture.height / (float)terrain.terrainData.heightmapResolution;
 
-                float height = (Mathf.Floor(color.r * 256.0f) + Mathf.Floor(color.g)  + color.b / 256) - 32768.0f;
-                height /= 8900;
+                    Color32 color = pixels[
+                        Convert.ToInt32(y * yRatio) + 
+                        Convert.ToInt32(x * xRatio) * texture.width];
 
-                // Convert the resulting color value to an elevation in meters.
-                heights[
-                    x,
-                    y
-                ] = height;
+                    float height = (Mathf.Floor(color.r * 256.0f) + Mathf.Floor(color.g)  + color.b / 256) - 32768.0f;
+                    height /= 8900;
+
+                    // Convert the resulting color value to an elevation in meters.
+                    heights[
+                        x,
+                        y
+                    ] = height;
+                }
             }
 
             //terrainData.SetHeights(0, 0, heights);
