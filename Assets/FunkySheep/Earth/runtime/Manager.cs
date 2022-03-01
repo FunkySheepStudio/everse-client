@@ -15,6 +15,7 @@ namespace FunkySheep.Earth
         public FunkySheep.Types.Vector2Int lastMapPosition;
         public FunkySheep.Types.Vector2Int mapPosition;
         public FunkySheep.Types.Vector2 initialOffset;
+        public FunkySheep.Types.Vector2 initialWorldOffset;
         public FunkySheep.Types.Vector2 offset;
         public FunkySheep.Types.Vector2 insideCellPosition;
         public FunkySheep.Events.Vector2IntEvent onMapPositionChanged;
@@ -37,6 +38,7 @@ namespace FunkySheep.Earth
             UpdatePositions();
             initialMapPosition.value = mapPosition.value;
             initialOffset.value = offset.value;
+            initialWorldOffset.value = initialOffset.value * tileSize.value;
         }
 
         public void UpdatePositions()

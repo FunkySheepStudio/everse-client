@@ -80,7 +80,10 @@ namespace FunkySheep.Map
 
                 tilemap.SetTile(tile.tilemapPosition, tile.data);
 
-                addedTileEvent.Raise(tile);
+                if (addedTileEvent != null)
+                {
+                    addedTileEvent.Raise(tile);
+                }
             }));
         }
 

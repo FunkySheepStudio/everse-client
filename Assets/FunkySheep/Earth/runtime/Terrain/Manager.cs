@@ -10,9 +10,9 @@ namespace FunkySheep.Earth.Terrain
         {
             GameObject terrainTileGo = new GameObject();
             terrainTileGo.transform.position = new Vector3(
-                earth.tileSize.value * mapTile.tilemapPosition.x,
+                earth.tileSize.value * mapTile.tilemapPosition.x + earth.initialWorldOffset.value.x,
                 0,
-                earth.tileSize.value * mapTile.tilemapPosition.y
+                earth.tileSize.value * mapTile.tilemapPosition.y + earth.initialWorldOffset.value.y
             );
             terrainTileGo.transform.parent = transform;
             terrainTileGo.name = mapTile.tilemapPosition.ToString();
