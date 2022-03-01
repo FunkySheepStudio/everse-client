@@ -12,27 +12,115 @@ namespace FunkySheep.Map
         public FunkySheep.Types.Int32 zoomLevel;
         public FunkySheep.Types.String url;
         public FunkySheep.Types.Vector2Int textureResolution;
-        float tileSize;
+        public AddedTileEvent addedTileEvent;
+        public FunkySheep.Types.Float tileSize;
+        public FunkySheep.Types.Vector2Int initialMapPosition;
+        public FunkySheep.Types.Vector2 initialOffset;
         Tilemap tilemap;
 
         private void Awake() {
-            tileSize = (float)Utils.TileSize(zoomLevel.value);
-
             tilemap = GetComponent<Tilemap>();
+            transform.Rotate(new Vector3(90, 0, 0));
+            tilemap.GetComponent<Grid>().cellSize = new Vector3(
+                textureResolution.value.x,
+                textureResolution.value.y,
+                1
+            );
+        }
+
+        /// <summary>
+        /// Set the default values
+        /// </summary>
+        void Reset()
+        {
             tilemap.transform.localScale = new Vector3(
-                tileSize / textureResolution.value.x,
-                tileSize / textureResolution.value.y,
+                tileSize.value / textureResolution.value.x,
+                tileSize.value / textureResolution.value.y,
             1f);
+
+            tilemap.tileAnchor = new Vector3(
+                initialOffset.value.x,
+                initialOffset.value.y,
+                0
+            );
         }
 
-        public float GetTileSize()
+        /// <summary>
+        /// Add a tile
+        /// </summary>
+        /// <param name="latitude"></param>
+        /// <param name="longitude"></param>
+        public void AddTile(Vector2Int mapPosition)
         {
-            return tileSize;
+            // Set the default values
+            if (!tilemap.HasTile(Vector3Int.zero))
+            {
+                Reset();
+            }
+
+            // Reverse mercator and grid positions
+            Vector2Int gridPosition = (mapPosition - initialMapPosition.value) * new Vector2Int(1, -1);
+            Vector3Int tileMapPosition = new Vector3Int(gridPosition.x, gridPosition.y, 0);
+
+            if (!tilemap.HasTile(tileMapPosition))
+            {                
+                string url = InterpolatedUrl(mapPosition);
+                DownloadTile(tileMapPosition, mapPosition, url);
+            }
         }
 
-        public void AddTile(int x, int y)
+        public void DownloadTile(Vector3Int tileMapPosition, Vector2Int mapPosition, string url)
         {
+            StartCoroutine(FunkySheep.Network.Downloader.Download(url, (fileID, file) => {
+                Tile tile = new Tile(
+                    tileMapPosition,
+                    mapPosition,
+                    SetTile(file)
+                );
+
+                tilemap.SetTile(tile.tilemapPosition, tile.data);
+
+                addedTileEvent.Raise(tile);
+            }));
+        }
+
+        /// <summary>
+        /// Set the tile object
+        /// </summary>
+        /// <param name="texture">The texture to set on the tile sprite</param>
+        public UnityEngine.Tilemaps.Tile SetTile(byte[] textureFile)
+        {
+            Texture2D texture = new Texture2D(256, 256);
+            texture.LoadImage(textureFile);
+            UnityEngine.Tilemaps.Tile tileData;
+            texture.wrapMode = TextureWrapMode.Clamp;
+            texture.filterMode = FilterMode.Point;
+            tileData = ScriptableObject.CreateInstance<UnityEngine.Tilemaps.Tile>();
+            tileData.sprite = Sprite.Create((Texture2D) texture, new Rect(0.0f, 0.0f, texture.width, texture.height), Vector2.zero, 1);
+            return tileData;
+        }
+
+        /// <summary>
+        /// Interpolate the url inserting the coordinates and zoom values
+        /// </summary>
+        /// <param name="zoom">The zoom value</param>
+        /// <param name="position">The coordinates</param>
+        /// <returns>The interpolated Url</returns>
+        public string InterpolatedUrl(Vector2Int mapPosition)
+        {
+            string [] parameters = new string[3];
+            string [] parametersNames = new string[3];
+
+            parameters[0] = zoomLevel.value.ToString();
+            parametersNames[0] = "zoom";
             
+            parameters[1] =  mapPosition.x.ToString();
+            parametersNames[1] = "position.x";
+            
+            parameters[2] =  mapPosition.y.ToString();
+            parametersNames[2] = "position.y";
+
+            return url.Interpolate(parameters, parametersNames);
         }
     }
 }

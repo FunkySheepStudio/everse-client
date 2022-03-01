@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7eac544227e4274897eb79dfac27790, type: 3}
-  m_Name: terrain-map-url
+  m_Script: {fileID: 11500000, guid: dbd53c3826680d145b76440c7dfaf4ca, type: 3}
+  m_Name: earth-on-map-position-changed
   m_EditorClassIdentifier: 
-  value: https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{zoom}/{position.x}/{position.y}.png

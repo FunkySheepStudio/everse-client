@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 2574598}
   - component: {fileID: 2574597}
   - component: {fileID: 2574596}
+  - component: {fileID: 2574600}
   m_Layer: 0
   m_Name: Elevation
   m_TagString: Untagged
@@ -172,6 +173,10 @@ MonoBehaviour:
   zoomLevel: {fileID: 11400000, guid: 3c67854377f8eff499cddc25ae9a481d, type: 2}
   url: {fileID: 11400000, guid: 29dafbe20c1eb124c91aca8fa029a2ff, type: 2}
   textureResolution: {fileID: 11400000, guid: 0161f8f866a9f45418f06c8966021bc6, type: 2}
+  addedTileEvent: {fileID: 11400000, guid: 18cac7f8eb97cbe4e981d63a4459dad1, type: 2}
+  tileSize: {fileID: 11400000, guid: 4b0c99defd41a84458e71f6a7656fbf4, type: 2}
+  initialMapPosition: {fileID: 11400000, guid: 39b48b23ddf0f4a4e9997ae09cfdabe0, type: 2}
+  initialOffset: {fileID: 11400000, guid: 14667fbe75ba069409a56428e39dff15, type: 2}
 --- !u!156049354 &2574597
 Grid:
   m_ObjectHideFlags: 0
@@ -270,6 +275,34 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &2574600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2574594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc199f0b08fcc2c488ec49760cc00aeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 18cac7f8eb97cbe4e981d63a4459dad1, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1097300365}
+        m_TargetAssemblyTypeName: FunkySheep.Earth.Terrain.Manager, Assembly-CSharp
+        m_MethodName: AddTile
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,6 +427,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   latitude: {fileID: 11400000, guid: 1ccafd01e79cc9c4bbb58c488adde6fe, type: 2}
   longitude: {fileID: 11400000, guid: 31dd15ddd45ce1840949a4cdda2134b6, type: 2}
+  initialMercatorPosition: {fileID: 11400000, guid: eed82b21d5f7ca9469baabddd913b59a, type: 2}
   onStartedEvent: {fileID: 11400000, guid: 1e685dbd91264994aabbb98304a96ad0, type: 2}
 --- !u!4 &939605766
 Transform:
@@ -501,8 +535,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1097300364}
-  - component: {fileID: 1097300367}
-  - component: {fileID: 1097300366}
   - component: {fileID: 1097300365}
   m_Layer: 0
   m_Name: Terrain
@@ -537,51 +569,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4f6925f8ec9c8a4f828049c21d6697c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: {fileID: 2574596}
---- !u!154 &1097300366
-TerrainCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1097300363}
-  m_Material: {fileID: 0}
-  m_Enabled: 1
-  m_TerrainData: {fileID: 0}
-  m_EnableTreeColliders: 1
---- !u!218 &1097300367
-Terrain:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1097300363}
-  m_Enabled: 1
-  serializedVersion: 6
-  m_TerrainData: {fileID: 0}
-  m_TreeDistance: 5000
-  m_TreeBillboardDistance: 50
-  m_TreeCrossFadeLength: 5
-  m_TreeMaximumFullLODCount: 50
-  m_DetailObjectDistance: 80
-  m_DetailObjectDensity: 1
-  m_HeightmapPixelError: 5
-  m_SplatMapDistance: 1000
-  m_HeightmapMaximumLOD: 0
-  m_ShadowCastingMode: 2
-  m_DrawHeightmap: 1
-  m_DrawInstanced: 0
-  m_DrawTreesAndFoliage: 1
-  m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 0}
-  m_BakeLightProbesForTrees: 1
-  m_PreserveTreePrototypeLayers: 0
-  m_DeringLightProbesForTrees: 1
-  m_ScaleInLightmap: 1
-  m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
-  m_GroupingID: 0
-  m_RenderingLayerMask: 1
-  m_AllowAutoConnect: 0
+  earth: {fileID: 1100245712}
+  material: {fileID: 2100000, guid: 4cb5493f26d785f4abb722098b4dd445, type: 2}
 --- !u!1 &1100245710
 GameObject:
   m_ObjectHideFlags: 0
@@ -591,6 +580,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1100245711}
+  - component: {fileID: 1100245712}
+  - component: {fileID: 1100245713}
   m_Layer: 0
   m_Name: Earth
   m_TagString: Untagged
@@ -606,13 +597,64 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1100245710}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 611.4962, y: 191.35841, z: 611.4962}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1097300364}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1100245712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100245710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08499b9e9a9a9724ea93504a824ab719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoomLevel: {fileID: 11400000, guid: 3c67854377f8eff499cddc25ae9a481d, type: 2}
+  latitude: {fileID: 11400000, guid: c2a2effd4a7189146987974805aeb53c, type: 2}
+  longitude: {fileID: 11400000, guid: 643b43aae78fc134eb2c021ad724331d, type: 2}
+  tileSize: {fileID: 11400000, guid: 4b0c99defd41a84458e71f6a7656fbf4, type: 2}
+  initialMapPosition: {fileID: 11400000, guid: 39b48b23ddf0f4a4e9997ae09cfdabe0, type: 2}
+  lastMapPosition: {fileID: 11400000, guid: b9ca3f23bc2c10e48b9cb2e74806873e, type: 2}
+  mapPosition: {fileID: 11400000, guid: 7bc1a31561e0b2d458f3b41ae0614537, type: 2}
+  initialOffset: {fileID: 11400000, guid: 14667fbe75ba069409a56428e39dff15, type: 2}
+  offset: {fileID: 11400000, guid: 37ff42217c9dfdb48abc7fb08322d9b8, type: 2}
+  insideCellPosition: {fileID: 11400000, guid: 9e9251a7b02a53149b333153409c21e3, type: 2}
+  onMapPositionChanged: {fileID: 11400000, guid: a0e475e34cacc114482fbec9b6e6c189, type: 2}
+--- !u!114 &1100245713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100245710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 424446812be1ac04a96e3be95d5e4763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: a0e475e34cacc114482fbec9b6e6c189, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2574596}
+        m_TargetAssemblyTypeName: FunkySheep.Map.Manager, Assembly-CSharp
+        m_MethodName: AddTile
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1171716213
 GameObject:
   m_ObjectHideFlags: 0
@@ -637,10 +679,57 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1171716213}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 611.4962, y: 191.35841, z: 611.4962}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2574595}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1778746585
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1778746586}
+  - component: {fileID: 1778746587}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1778746586
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778746585}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1778746587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778746585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79a0b314011e91149afb7acc80dd9b46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialMercatorPosition: {fileID: 11400000, guid: eed82b21d5f7ca9469baabddd913b59a, type: 2}
+  calculatedLatitude: {fileID: 11400000, guid: c2a2effd4a7189146987974805aeb53c, type: 2}
+  calculatedLongitude: {fileID: 11400000, guid: 643b43aae78fc134eb2c021ad724331d, type: 2}
+  earth: {fileID: 1100245712}

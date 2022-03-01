@@ -1,60 +1,41 @@
 using UnityEngine;
 namespace FunkySheep.Earth.Terrain
 {
-    [AddComponentMenu("FunkySheep/Earth/Earth Terrain Manager")]
-    [RequireComponent(typeof(UnityEngine.Terrain))]
-    [RequireComponent(typeof(UnityEngine.TerrainCollider))]
     public class Manager : MonoBehaviour
     {
-        public FunkySheep.Map.Manager map;
-        UnityEngine.TerrainData terrainData;
+        public FunkySheep.Earth.Manager earth;
+        public Material material;
 
-        private void Awake() {
-            float tileSize = map.GetTileSize();
-            terrainData = new TerrainData();
-            terrainData.size = new Vector3(
-                tileSize,
-                8900,
-                tileSize
-            );
-            GetComponent<UnityEngine.Terrain>().terrainData = terrainData;
-            GetComponent<UnityEngine.TerrainCollider>().terrainData = terrainData;
-        }
-
-        private void Start() {
-            //LoadTerrarium(texture);
-        }
-        
-        /// <summary>
-        /// Load Terrarium texture
-        /// https://github.com/tilezen/joerd/blob/master/docs/formats.md#terrarium
-        /// </summary>
-        /// <param name="texture"></param>
-        public void LoadTerrarium(Texture2D texture)
+        public void AddTile(Map.Tile mapTile)
         {
-            // Set required texture options;
-            Color32[] pixels = texture.GetPixels32();
-            float[,] heights = new float[terrainData.heightmapResolution, terrainData.heightmapResolution];
+            GameObject terrainTileGo = new GameObject();
+            terrainTileGo.transform.position = new Vector3(
+                earth.tileSize.value * mapTile.tilemapPosition.x,
+                0,
+                earth.tileSize.value * mapTile.tilemapPosition.y
+            );
+            terrainTileGo.transform.parent = transform;
+            terrainTileGo.name = mapTile.tilemapPosition.ToString();
 
-            for (int i = 0; i < pixels.Length; i++)
-            {
-                int x = (int)((float)terrainData.heightmapResolution / (float)texture.width * (i % texture.width));
-                int y = (int)((float)terrainData.heightmapResolution / (float)texture.height * (i / texture.height));
-                Color32 color = pixels[i];
+            // Set the terrain tile componenet
+            Tile terrainTile = terrainTileGo.AddComponent<Tile>();
 
-                float height = (Mathf.Floor(color.r * 256.0f) + Mathf.Floor(color.g)  + color.b / 256) - 32768.0f;
-                height /= 9000;
+            UnityEngine.Terrain terrain = terrainTile.GetComponent<UnityEngine.Terrain>();
 
-                // Convert the resulting color value to an elevation in meters.
-                heights[
-                    x,
-                    y
-                ] = height;
-            }
-            
-            //terrainData.SetHeights(0, 0, heights);
-            terrainData.SetHeightsDelayLOD(0, 0, heights);
-            terrainData.SyncHeightmap();
+            // Set the tile size
+            terrain.terrainData.size = new Vector3(
+                earth.tileSize.value,
+                8900,
+                earth.tileSize.value
+            );
+
+            terrain.allowAutoConnect = true;
+            terrain.materialTemplate = material;
+
+            terrainTile.SetHeights(mapTile);
+
+            // Set the terrain Connector
+            terrainTileGo.AddComponent<Connector>();
         }
     }    
 }
