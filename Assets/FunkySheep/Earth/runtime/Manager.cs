@@ -48,6 +48,7 @@ namespace FunkySheep.Earth
           initialOffset.value = offset.value;
           initialWorldOffset.value = initialOffset.value * tileSize.value;
           onStarted.Raise();
+          onMapPositionChanged.Raise(mapPosition.value);
         }
 
         public void UpdatePositions()

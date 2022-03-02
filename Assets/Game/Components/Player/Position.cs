@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.Player
 {
-    public class EarthPosition : MonoBehaviour
+    public class Position : MonoBehaviour
     {
         public FunkySheep.Types.Double calculatedLatitude;
         public FunkySheep.Types.Double calculatedLongitude;
