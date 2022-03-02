@@ -4,7 +4,7 @@ using UnityEngine.Events;
 namespace FunkySheep.Events
 {
   [AddComponentMenu("FunkySheep/Listeners/Simple Listener")]
-  public abstract class SimpleListener : MonoBehaviour
+  public class SimpleListener : MonoBehaviour
   {
     [Tooltip("Event to register with.")]
     public SimpleEvent Event;

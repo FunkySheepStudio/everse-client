@@ -9,8 +9,6 @@ namespace FunkySheep.Gps
     {
         public FunkySheep.Types.Double latitude;
         public FunkySheep.Types.Double longitude;
-        public FunkySheep.Types.Vector2 initialMercatorPosition;
-
         public FunkySheep.Events.Event<GameObject> onStartedEvent;
 
         ///GameObject dialog = null;
@@ -49,7 +47,6 @@ namespace FunkySheep.Gps
         public void reset()
         {
             GetData();
-            initialMercatorPosition.value = Utils.toCartesianVector2(longitude.value, latitude.value);
             onStartedEvent.Raise(gameObject);
         }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace FunkySheep.Events
 {
     [CreateAssetMenu(menuName = "FunkySheep/Events/Simple Event")]
-    public abstract class SimpleEvent : ScriptableObject
+    public class SimpleEvent : ScriptableObject
     {
         /// <summary>
         /// The list of listeners that this event will notify if it is raised.
