@@ -73,7 +73,7 @@ namespace FunkySheep.Earth.Map
         /// </summary>
         /// <returns></returns>
         public static double TileSize(int zoom, double latitude) {
-            return 156543.03 / Math.Pow(2, zoom) * Math.Cos(latitude) * 256;
+            return 156543.03 / Math.Pow(2, zoom) * Math.Cos(Mathf.Deg2Rad * latitude) * 256;
         }
 
         /// <summary>

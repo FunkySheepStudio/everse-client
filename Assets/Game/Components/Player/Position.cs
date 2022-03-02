@@ -18,7 +18,7 @@ namespace Game.Player
         }
 
         private void Update() {
-            if (Vector3.Distance(lastPosition, transform.position) > 50)
+            if (Vector3.Distance(lastPosition, transform.position) > 1)
             {
                 Calculate();
                 lastPosition = transform.position;

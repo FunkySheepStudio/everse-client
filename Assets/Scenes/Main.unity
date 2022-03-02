@@ -660,7 +660,8 @@ MonoBehaviour:
   initialOffset: {fileID: 11400000, guid: 14667fbe75ba069409a56428e39dff15, type: 2}
   initialWorldOffset: {fileID: 11400000, guid: 9f629f6fb4bb9e146ac388113192dab7, type: 2}
   offset: {fileID: 11400000, guid: 37ff42217c9dfdb48abc7fb08322d9b8, type: 2}
-  insideCellPosition: {fileID: 11400000, guid: 9e9251a7b02a53149b333153409c21e3, type: 2}
+  lastInsideCellPosition: {fileID: 11400000, guid: f4a6e6d99f54c7e4388d16d052fb1b0d, type: 2}
+  insideCellPosition: {fileID: 11400000, guid: de6686cc9591a7d49af97d286cdc0430, type: 2}
   onStarted: {fileID: 11400000, guid: 3785cf3207a61ef41b7ea94111ce5aab, type: 2}
   onMapPositionChanged: {fileID: 11400000, guid: a0e475e34cacc114482fbec9b6e6c189, type: 2}
 --- !u!114 &1100245713

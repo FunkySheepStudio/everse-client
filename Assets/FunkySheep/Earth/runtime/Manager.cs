@@ -21,7 +21,8 @@ namespace FunkySheep.Earth
         public FunkySheep.Types.Vector2 initialOffset;
         public FunkySheep.Types.Vector2 initialWorldOffset;
         public FunkySheep.Types.Vector2 offset;
-        public FunkySheep.Types.Vector2 insideCellPosition;
+        public FunkySheep.Types.Vector2Int lastInsideCellPosition;
+        public FunkySheep.Types.Vector2Int insideCellPosition;
         public FunkySheep.Events.SimpleEvent onStarted;
         public FunkySheep.Events.Vector2IntEvent onMapPositionChanged;
 
@@ -30,39 +31,46 @@ namespace FunkySheep.Earth
         }
 
         private void Update() {
-            if (lastMapPosition.value != mapPosition.value)
+            if (insideCellPosition.value != lastInsideCellPosition.value)
             {
-                onMapPositionChanged.Raise(mapPosition.value);
-                lastMapPosition.value = mapPosition.value;
+              Debug.Log(insideCellPosition.value);
+              AddCells();
+              lastInsideCellPosition.value = insideCellPosition.value;
             }
+        }
+
+        public void AddCells()
+        {
+          onMapPositionChanged.Raise(mapPosition.value);
+          onMapPositionChanged.Raise(mapPosition.value + insideCellPosition.value * Vector2Int.up);
+          onMapPositionChanged.Raise(mapPosition.value + insideCellPosition.value * Vector2Int.right);
+          onMapPositionChanged.Raise(mapPosition.value + insideCellPosition.value);
         }
 
         public void Reset()
         {
           latitude.value = initialLatitude.value;
           longitude.value = initialLongitude.value;
-          tileSize.value = (float)Map.Utils.TileSize(zoomLevel.value, latitude.value);
+          tileSize.value = (float)Map.Utils.TileSize(zoomLevel.value);
           UpdatePositions();
           initialMercatorPosition.value = mercatorPosition.value;
           initialMapPosition.value = mapPosition.value;
           initialOffset.value = offset.value;
           initialWorldOffset.value = initialOffset.value * tileSize.value;
           onStarted.Raise();
-          onMapPositionChanged.Raise(mapPosition.value);
+          AddCells();
         }
 
         public void UpdatePositions()
         {
             mercatorPosition.value = Utils.toCartesianVector2(longitude.value, latitude.value);
-            mapPosition.value = new Vector2Int(
-                Map.Utils.LongitudeToX(zoomLevel.value, longitude.value),
-                Map.Utils.LatitudeToZ(zoomLevel.value, latitude.value)
-            );
+            mapPosition.value = Map.Utils.GpsToMap(zoomLevel.value, latitude.value, longitude.value);
 
             offset.value = new Vector2(
                 -Map.Utils.LongitudeToInsideX(zoomLevel.value, longitude.value),
                 -1 + Map.Utils.LatitudeToInsideZ(zoomLevel.value, latitude.value)
             );
+
 
             if (-offset.value.x >= 0.5f)
             {
