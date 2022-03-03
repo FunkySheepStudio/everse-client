@@ -34,9 +34,6 @@ namespace FunkySheep.Earth.Terrain
             terrain.materialTemplate = material;
 
             terrainTile.SetHeights(mapTile);
-
-            // Set the terrain Connector
-            terrainTileGo.AddComponent<Connector>();
         }
     }    
 }

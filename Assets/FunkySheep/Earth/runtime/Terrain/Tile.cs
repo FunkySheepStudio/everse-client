@@ -1,5 +1,6 @@
-using System;
+using System.Threading;
 using UnityEngine;
+
 namespace FunkySheep.Earth.Terrain
 {
     [AddComponentMenu("FunkySheep/Earth/Earth Terrain Manager")]
@@ -8,11 +9,30 @@ namespace FunkySheep.Earth.Terrain
     public class Tile : MonoBehaviour
     {
         UnityEngine.Terrain terrain;
+        Color32[] pixels;
+        float[,] heights;
+        Texture2D texture;
+
+        bool heightsCalculated = false;
+        public bool heightUpdated = false;
+
 
         private void Awake() {
             terrain = GetComponent<UnityEngine.Terrain>();
             terrain.terrainData = new TerrainData();
             GetComponent<UnityEngine.TerrainCollider>().terrainData = terrain.terrainData;
+        }
+
+        private void Update() {
+            if (heightsCalculated)
+            {
+                 //terrainData.SetHeights(0, 0, heights);
+                terrain.terrainData.SetHeightsDelayLOD(0, 0, heights);
+                terrain.terrainData.SyncHeightmap();
+                gameObject.AddComponent<Connector>();
+                heightsCalculated = false;
+                enabled = false;
+            }
         }
         
         /// <summary>
@@ -22,37 +42,58 @@ namespace FunkySheep.Earth.Terrain
         /// <param name="texture"></param>
         public void SetHeights(Map.Tile tile)
         {
-            Texture2D texture = tile.data.sprite.texture;
-            // Set required texture options;
-            Color32[] pixels = texture.GetPixels32();
+            texture = tile.data.sprite.texture;
+            pixels = texture.GetPixels32();
+            heights = new float[terrain.terrainData.heightmapResolution, terrain.terrainData.heightmapResolution];
 
-            float[,] heights = new float[terrain.terrainData.heightmapResolution, terrain.terrainData.heightmapResolution];
+            Thread thread = new Thread(() => this.ProcessHeights());
 
-            for (int x = 0; x < terrain.terrainData.heightmapResolution; x++)
+            thread.Start();
+        }
+
+        public void ProcessHeights()
+        {
+
+            for (int x = 0; x < Mathf.Sqrt(pixels.Length); x++)
             {
-                for (int y = 0; y < terrain.terrainData.heightmapResolution; y++)
+                for (int y = 0; y < Mathf.Sqrt(pixels.Length); y++)
                 {
-                    float xRatio = (float)texture.width / (float)terrain.terrainData.heightmapResolution;
-                    float yRatio = (float)texture.height / (float)terrain.terrainData.heightmapResolution;
-
-                    Color32 color = pixels[
-                        Convert.ToInt32(y * yRatio) + 
-                        Convert.ToInt32(x * xRatio) * texture.width];
-
-                    float height = (Mathf.Floor(color.r * 256.0f) + Mathf.Floor(color.g)  + color.b / 256) - 32768.0f;
-                    height /= 8900;
-
+                    float height = GetHeightFromColor(x, y);
                     // Convert the resulting color value to an elevation in meters.
                     heights[
                         x,
                         y
-                    ] = height;
+                    ] += height * 0.25f;
+
+                    heights[
+                        x + 1,
+                        y
+                    ] += height * 0.25f;
+
+                    heights[
+                        x,
+                        y + 1
+                    ] += height * 0.25f;
+
+                    heights[
+                        x + 1,
+                        y + 1
+                    ] += height * 0.25f;
                 }
             }
+            heightsCalculated = true;
+        }
 
-            //terrainData.SetHeights(0, 0, heights);
-            terrain.terrainData.SetHeightsDelayLOD(0, 0, heights);
-            terrain.terrainData.SyncHeightmap();
+        public float GetHeightFromColor(int x, int y)
+        {
+            Color32 color = pixels[
+                y + 
+                x * (int)Mathf.Sqrt(pixels.Length)];
+
+            float height = (Mathf.Floor(color.r * 256.0f) + Mathf.Floor(color.g)  + color.b / 256) - 32768.0f;
+            height /= 8900;
+
+            return height;
         }
     }    
 }
