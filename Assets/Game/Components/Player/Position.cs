@@ -11,12 +11,14 @@ namespace Game.Player
     public FunkySheep.Earth.Manager earth;
     public Vector2Int lastTilePosition;
     public Vector2Int tilePosition;
+    public Vector2Int insideTileQuarterPosition;
+    public Vector2Int lastInsideTileQuarterPosition;
     Vector3 lastPosition;
 
     private void Start() {
       lastPosition = transform.position;
-      Calculate();
       earth.Reset();
+      Calculate();
     }
 
     private void Update() {
@@ -34,20 +36,21 @@ namespace Game.Player
         )
       );
 
-      if (tilePosition != lastTilePosition)
-      {
-        earth.AddTile(tilePosition);
-        lastTilePosition = tilePosition;
-      }
-
-      Vector2 insideTileQuarterPosition =  earth.tilesManager.InsideTilePosition(
+      insideTileQuarterPosition =  earth.tilesManager.InsideTileQuarterPosition(
         new Vector2(
           transform.position.x,
           transform.position.z
         )
       );
 
-      Debug.Log(insideTileQuarterPosition);
+      if (insideTileQuarterPosition != lastInsideTileQuarterPosition)
+      {
+        earth.AddTile(tilePosition);
+        earth.AddTile(tilePosition + insideTileQuarterPosition.y * Vector2Int.up);
+        earth.AddTile(tilePosition + insideTileQuarterPosition.x * Vector2Int.right);
+        earth.AddTile(tilePosition + insideTileQuarterPosition);
+        lastInsideTileQuarterPosition = insideTileQuarterPosition;
+      }
     }
   }
 }

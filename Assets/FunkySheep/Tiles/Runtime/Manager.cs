@@ -79,11 +79,14 @@ namespace FunkySheep.Tiles
     public Vector2 InsideTilePosition(Vector2 position)
     {
       Vector2 relativePosition = RelativePosition(position);
-      Vector2 insideTilePosition = relativePosition - 
-        new Vector2(
-          Mathf.FloorToInt(relativePosition.x),
-          Mathf.FloorToInt(relativePosition.y)
-        );
+      Vector2Int tilePosition = TilePosition(position);
+      Vector2 insideTilePosition = relativePosition -
+      new Vector2(
+        tilePosition.x * tileSize.value,
+        tilePosition.y * tileSize.value
+      );
+
+      insideTilePosition /= tileSize.value;
 
       return insideTilePosition;
     }
@@ -97,6 +100,21 @@ namespace FunkySheep.Tiles
     {
       Vector2 insideTilePosition = InsideTilePosition(position);
       Vector2Int insideTileQuarterPosition = Vector2Int.zero;
+
+      if (insideTilePosition.x >= 0.5f)
+      {
+        insideTileQuarterPosition.x = 1;
+      } else {
+        insideTileQuarterPosition.x = -1;
+      }
+
+      if (insideTilePosition.y >= 0.5f)
+      {
+        insideTileQuarterPosition.y = 1;
+      } else {
+        insideTileQuarterPosition.y = -1;
+      }
+
       return insideTileQuarterPosition;
     }
 
