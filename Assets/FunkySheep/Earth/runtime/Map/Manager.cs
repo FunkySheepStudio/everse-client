@@ -16,13 +16,13 @@ namespace FunkySheep.Earth.Map
         Tilemap tilemap;
 
         private void Awake() {
-            tilemap = GetComponent<Tilemap>();
-            transform.Rotate(new Vector3(90, 0, 0));
-            tilemap.GetComponent<Grid>().cellSize = new Vector3(
-                textureResolution.value.x,
-                textureResolution.value.y,
-                1
-            );
+          transform.Rotate(new Vector3(90, 0, 0));
+          tilemap = GetComponent<Tilemap>();
+          GetComponent<Grid>().cellSize = new Vector3(
+              textureResolution.value.x,
+              textureResolution.value.y,
+              1
+          );
         }
 
         /// <summary>
@@ -31,32 +31,31 @@ namespace FunkySheep.Earth.Map
         void Reset()
         {
             tilemap.transform.localScale = new Vector3(
-                earth.tileSize.value / textureResolution.value.x,
-                earth.tileSize.value / textureResolution.value.y,
+                earth.tilesManager.tileSize.value / textureResolution.value.x,
+                earth.tilesManager.tileSize.value / textureResolution.value.y,
             1f);
 
             tilemap.tileAnchor = new Vector3(
-                earth.initialOffset.value.x,
-                earth.initialOffset.value.y,
+                earth.tilesManager.initialOffset.value.x,
+                earth.tilesManager.initialOffset.value.y,
                 0
             );
         }
 
         /// <summary>
-        /// Add a tile
+        /// Add osm tile at given position
         /// </summary>
-        /// <param name="latitude"></param>
-        /// <param name="longitude"></param>
+        /// <param name="mapPosition"></param>
         public void AddTile(Vector2Int mapPosition)
         {
             // Set the default values
             if (!tilemap.HasTile(Vector3Int.zero))
             {
-                Reset();
+              Reset();
             }
 
             // Reverse mercator and grid positions
-            Vector2Int gridPosition = (mapPosition - earth.initialMapPosition.value) * new Vector2Int(1, -1);
+            Vector2Int gridPosition = (mapPosition - new Vector2Int(Mathf.FloorToInt(earth.initialMapPosition.value.x), Mathf.FloorToInt(earth.initialMapPosition.value.y))) * new Vector2Int(1, -1);
             Vector3Int tileMapPosition = new Vector3Int(gridPosition.x, gridPosition.y, 0);
 
             if (!tilemap.HasTile(tileMapPosition))

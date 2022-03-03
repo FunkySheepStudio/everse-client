@@ -10,10 +10,21 @@ namespace FunkySheep.Earth.Map
         /// </summary>
         /// <returns></returns>
         public static Vector2Int GpsToMap(int zoom, double latitude, double longitude) {
-        return new Vector2Int(
-            LongitudeToX(zoom, longitude),
-            LatitudeToZ(zoom, latitude)
-        );
+          return new Vector2Int(
+              LongitudeToX(zoom, longitude),
+              LatitudeToZ(zoom, latitude)
+          );
+        }
+
+        /// <summary>
+        /// Get the map tile position depending on zoom level and GPS postions
+        /// </summary>
+        /// <returns></returns>
+        public static Vector2 GpsToMapReal(int zoom, double latitude, double longitude) {
+          return new Vector2(
+              LongitudeToXReal(zoom, longitude),
+              LatitudeToZReal(zoom, latitude)
+          );
         }
 
         /// <summary>
@@ -23,6 +34,15 @@ namespace FunkySheep.Earth.Map
         public static int LongitudeToX(int zoom, double longitude) {
             return (int)(Math.Floor((longitude + 180.0) / 360.0 * (1 << zoom)));
         }
+
+        /// <summary>
+        /// Get the X number of the tile relative to Longitude position
+        /// </summary>
+        /// <returns></returns>
+        public static float LongitudeToXReal(int zoom, double longitude) {
+            return (float)((longitude + 180.0) / 360.0 * (1 << zoom));
+        }
+
 
         /// <summary>
         /// Get the Real X number inside the tile
@@ -39,6 +59,15 @@ namespace FunkySheep.Earth.Map
         /// <returns></returns>
         public static int LatitudeToZ(int zoom, double latitude) {
             return (int)Math.Floor((1 - Math.Log(Math.Tan(Mathf.Deg2Rad * latitude) + 1 / Math.Cos(Mathf.Deg2Rad * latitude)) / Math.PI) / 2 * (1 << zoom));
+        }
+
+        /// <summary>
+        /// /// Get the Y number of the tile relative to Latitude position
+        /// /// !!! The Y position is the reverse of the cartesian one !!!
+        /// </summary>
+        /// <returns></returns>
+        public static float LatitudeToZReal(int zoom, double latitude) {
+            return (float)((1 - Math.Log(Math.Tan(Mathf.Deg2Rad * latitude) + 1 / Math.Cos(Mathf.Deg2Rad * latitude)) / Math.PI) / 2 * (1 << zoom));
         }
 
         /// <summary>

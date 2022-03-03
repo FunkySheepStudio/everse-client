@@ -10,9 +10,9 @@ namespace FunkySheep.Earth.Terrain
         {
             GameObject terrainTileGo = new GameObject();
             terrainTileGo.transform.position = new Vector3(
-                earth.tileSize.value * mapTile.tilemapPosition.x + earth.initialWorldOffset.value.x,
+                earth.tilesManager.tileSize.value * mapTile.tilemapPosition.x + earth.tilesManager.WorldOffset().x,
                 0,
-                earth.tileSize.value * mapTile.tilemapPosition.y + earth.initialWorldOffset.value.y
+                earth.tilesManager.tileSize.value * mapTile.tilemapPosition.y + earth.tilesManager.WorldOffset().y
             );
             terrainTileGo.transform.parent = transform;
             terrainTileGo.name = mapTile.tilemapPosition.ToString();
@@ -25,9 +25,9 @@ namespace FunkySheep.Earth.Terrain
             terrain.terrainData.heightmapResolution = mapTile.data.sprite.texture.width;
             // Set the tile size
             terrain.terrainData.size = new Vector3(
-                earth.tileSize.value,
+                earth.tilesManager.tileSize.value,
                 8900,
-                earth.tileSize.value
+                earth.tilesManager.tileSize.value
             );
 
             terrain.allowAutoConnect = true;
