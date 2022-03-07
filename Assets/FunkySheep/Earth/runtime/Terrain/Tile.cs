@@ -8,9 +8,11 @@ namespace FunkySheep.Earth.Terrain
     [RequireComponent(typeof(UnityEngine.TerrainCollider))]
     public class Tile : MonoBehaviour
     {
-        UnityEngine.Terrain terrain;
+        public Vector2Int position;
+        public FunkySheep.Earth.Terrain.AddedTileEvent addedTileEvent;
+        public UnityEngine.Terrain terrain;
         Color32[] pixels;
-        float[,] heights;
+        public float[,] heights;
         Texture2D texture;
 
         bool heightsCalculated = false;
@@ -31,6 +33,7 @@ namespace FunkySheep.Earth.Terrain
                 terrain.terrainData.SyncHeightmap();
                 gameObject.AddComponent<Connector>();
                 heightsCalculated = false;
+                addedTileEvent.Raise(this);
                 enabled = false;
             }
         }
@@ -49,6 +52,12 @@ namespace FunkySheep.Earth.Terrain
             Thread thread = new Thread(() => this.ProcessHeights());
 
             thread.Start();
+        }
+
+        public void SetHeights(float[,] heights)
+        {
+          terrain.terrainData.SetHeightsDelayLOD(0, 0, heights);
+          terrain.terrainData.SyncHeightmap();
         }
 
         public void ProcessHeights()

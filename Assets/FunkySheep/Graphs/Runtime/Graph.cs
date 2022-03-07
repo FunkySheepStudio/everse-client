@@ -8,8 +8,8 @@ namespace FunkySheep.Graphs
   [Serializable]
   public class Graph<T>
   {
-    public List<T> vertices;
-    public List<Edge<T>> edges;
+    public List<T> vertices = new List<T>();
+    public List<Edge<T>> edges = new List<Edge<T>>();
 
     public bool Contains(T verticeA, T verticeB)
     {

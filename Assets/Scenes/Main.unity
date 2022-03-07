@@ -566,6 +566,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1097300364}
   - component: {fileID: 1097300365}
+  - component: {fileID: 1097300366}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -600,7 +601,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   earth: {fileID: 1100245712}
+  addedTileEvent: {fileID: 11400000, guid: 7298d18c648a4614882739bf227ef025, type: 2}
   material: {fileID: 2100000, guid: 4cb5493f26d785f4abb722098b4dd445, type: 2}
+--- !u!114 &1097300366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097300363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5ab7fe3172127d418c13a628db50576, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 7298d18c648a4614882739bf227ef025, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1439652342}
+        m_TargetAssemblyTypeName: FunkySheep.Earth.Roads.Manager, Assembly-CSharp
+        m_MethodName: AddTile
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1100245710
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,8 +831,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7255899beaae6724cbdf767617707eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  url: {fileID: 11400000, guid: ebc057e3d47ab504eb443396d981233b, type: 2}
+  terrainTextureResolution: {fileID: 0}
   earthManager: {fileID: 1100245712}
   graphManager: {fileID: 0}
+  roads: []
 --- !u!114 &1439652343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -817,13 +850,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graph:
     vertices: []
-    edges:
-    - verticeA: {x: 0, y: 0}
-      verticeB: {x: 10, y: 0}
-    - verticeA: {x: 10, y: 0}
-      verticeB: {x: 10, y: 10}
-    - verticeA: {x: 10, y: 10}
-      verticeB: {x: 20, y: 0}
+    edges: []
 --- !u!1 &1568215724
 GameObject:
   m_ObjectHideFlags: 0
@@ -1056,7 +1083,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 512613e316e845845b04a208240e2ec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 50
   rotateSpeed: 1
 --- !u!1001 &2125309810
 PrefabInstance:

@@ -4,6 +4,7 @@ namespace FunkySheep.Earth.Terrain
     public class Manager : MonoBehaviour
     {
         public FunkySheep.Earth.Manager earth;
+        public FunkySheep.Earth.Terrain.AddedTileEvent addedTileEvent;
         public Material material;
 
         public void AddTile(Map.Tile mapTile)
@@ -19,6 +20,8 @@ namespace FunkySheep.Earth.Terrain
 
             // Set the terrain tile componenet
             Tile terrainTile = terrainTileGo.AddComponent<Tile>();
+            terrainTile.position = mapTile.mapPosition;
+            terrainTile.addedTileEvent = addedTileEvent;
 
             UnityEngine.Terrain terrain = terrainTile.GetComponent<UnityEngine.Terrain>();
 
