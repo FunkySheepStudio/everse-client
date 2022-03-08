@@ -15,8 +15,13 @@ namespace FunkySheep.Earth.Terrain
         public float[,] heights;
         Texture2D texture;
 
-        bool heightsCalculated = false;
+        public bool heightsCalculated = false;
+        public bool heightsAdded = false;
+        public bool roadsCalculated = false;
+        public bool roadsAdded = false;
         public bool heightUpdated = false;
+
+        int terrainResolution;
 
 
         private void Awake() {
@@ -28,13 +33,20 @@ namespace FunkySheep.Earth.Terrain
         private void Update() {
             if (heightsCalculated)
             {
-                 //terrainData.SetHeights(0, 0, heights);
-                terrain.terrainData.SetHeightsDelayLOD(0, 0, heights);
-                terrain.terrainData.SyncHeightmap();
-                gameObject.AddComponent<Connector>();
-                heightsCalculated = false;
-                addedTileEvent.Raise(this);
-                enabled = false;
+              terrain.terrainData.SetHeightsDelayLOD(0, 0, heights);
+              terrain.terrainData.SyncHeightmap();
+              heightsCalculated = false;
+              heightsAdded = true;
+              addedTileEvent.Raise(this);
+            }
+
+            if (heightsAdded && roadsCalculated)
+            {
+              terrain.terrainData.SetHeightsDelayLOD(0, 0, heights);
+              terrain.terrainData.SyncHeightmap();
+              gameObject.AddComponent<Connector>();
+              roadsCalculated = false;
+              roadsAdded = true;
             }
         }
         
@@ -45,13 +57,14 @@ namespace FunkySheep.Earth.Terrain
         /// <param name="texture"></param>
         public void SetHeights(Map.Tile tile)
         {
-            texture = tile.data.sprite.texture;
-            pixels = texture.GetPixels32();
-            heights = new float[terrain.terrainData.heightmapResolution, terrain.terrainData.heightmapResolution];
+          terrainResolution = terrain.terrainData.heightmapResolution;
+          texture = tile.data.sprite.texture;
+          pixels = texture.GetPixels32();
+          heights = new float[terrain.terrainData.heightmapResolution, terrain.terrainData.heightmapResolution];
 
-            Thread thread = new Thread(() => this.ProcessHeights());
+          Thread thread = new Thread(() => this.ProcessHeights());
 
-            thread.Start();
+          thread.Start();
         }
 
         public void SetHeights(float[,] heights)
@@ -62,35 +75,22 @@ namespace FunkySheep.Earth.Terrain
 
         public void ProcessHeights()
         {
-
-            for (int x = 0; x < Mathf.Sqrt(pixels.Length); x++)
+          for (float x = 0; x < terrainResolution; x++)
+          {
+            for (float y = 0; y < terrainResolution; y++)
             {
-                for (int y = 0; y < Mathf.Sqrt(pixels.Length); y++)
-                {
-                    float height = GetHeightFromColor(x, y);
-                    // Convert the resulting color value to an elevation in meters.
-                    heights[
-                        x,
-                        y
-                    ] += height * 0.25f;
-
-                    heights[
-                        x + 1,
-                        y
-                    ] += height * 0.25f;
-
-                    heights[
-                        x,
-                        y + 1
-                    ] += height * 0.25f;
-
-                    heights[
-                        x + 1,
-                        y + 1
-                    ] += height * 0.25f;
-                }
+              float height = GetHeightFromColor(
+                Mathf.RoundToInt(x / terrainResolution * Mathf.Sqrt(pixels.Length)),
+                Mathf.RoundToInt(y / terrainResolution * Mathf.Sqrt(pixels.Length))
+              );
+              // Convert the resulting color value to an elevation in meters.
+              heights[
+                  (int)x,
+                  (int)y
+              ] = height;
             }
-            heightsCalculated = true;
+          }
+          heightsCalculated = true;
         }
 
         public float GetHeightFromColor(int x, int y)

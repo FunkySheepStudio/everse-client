@@ -20,21 +20,24 @@ namespace FunkySheep.Earth.Terrain
     }
 
     private void Update() {
-      if (!topConnected && terrain.topNeighbor != null && !terrain.topNeighbor.GetComponent<Tile>().enabled)
+      if (
+        !topConnected &&
+        terrain.topNeighbor != null &&
+        terrain.topNeighbor.GetComponent<Tile>().roadsAdded
+      )
       {
         ConnectTop(terrain.topNeighbor);
-        
       }
 
-      if (!leftConnected && terrain.leftNeighbor != null && !terrain.leftNeighbor.GetComponent<Tile>().enabled)
+      if (!leftConnected && terrain.leftNeighbor != null && terrain.leftNeighbor.GetComponent<Tile>().roadsAdded)
       {
         ConnectLeft(terrain.leftNeighbor);
       }
 
       if (!cornerConnected &&
-          terrain.leftNeighbor != null && !terrain.leftNeighbor.GetComponent<Tile>().enabled &&
-          terrain.topNeighbor != null && !terrain.topNeighbor.GetComponent<Tile>().enabled &&
-          terrain.leftNeighbor.topNeighbor != null && !terrain.leftNeighbor.topNeighbor.GetComponent<Tile>().enabled
+          terrain.leftNeighbor != null && terrain.leftNeighbor.GetComponent<Tile>().roadsAdded &&
+          terrain.topNeighbor != null && terrain.topNeighbor.GetComponent<Tile>().roadsAdded &&
+          terrain.leftNeighbor.topNeighbor != null && terrain.leftNeighbor.topNeighbor.GetComponent<Tile>().roadsAdded
           )
       {
         ConnectCorners();
@@ -48,18 +51,18 @@ namespace FunkySheep.Earth.Terrain
     
     void ConnectTop(UnityEngine.Terrain top)
     {
-      float[,] heights = terrainData.GetHeights(1, terrainData.heightmapResolution - 1, terrainData.heightmapResolution - 2, 1);
-      float[,] heightsTop = top.terrainData.GetHeights(1, 0, terrainData.heightmapResolution - 2, 1);
+      float[,] heights = terrainData.GetHeights(0, terrainData.heightmapResolution - 1, terrainData.heightmapResolution, 1);
+      float[,] heightsTop = top.terrainData.GetHeights(0, 0, terrainData.heightmapResolution, 1);
       float[,] heightsNew = heights;
 
       for (int y = 0; y < heightsNew.Length; y++)
       {
-        heightsNew[0, y] = (heights[0, y] + heightsTop[0, y]);
+        heightsNew[0, y] = (heights[0, y] + heightsTop[0, y]) / 2;
       }
 
-      terrainData.SetHeightsDelayLOD(1, top.terrainData.heightmapResolution - 1, heightsNew);
+      terrainData.SetHeightsDelayLOD(0, top.terrainData.heightmapResolution - 1, heightsNew);
       terrainData.SyncHeightmap();
-      top.terrainData.SetHeightsDelayLOD(1, 0, heightsNew);
+      top.terrainData.SetHeightsDelayLOD(0, 0, heightsNew);
       top.terrainData.SyncHeightmap();
 
       topConnected = true;
@@ -67,18 +70,18 @@ namespace FunkySheep.Earth.Terrain
 
     void ConnectLeft(UnityEngine.Terrain left)
     {
-      float[,] heights = terrainData.GetHeights(0, 1, 1, terrainData.heightmapResolution - 2);
-      float[,] heightsLeft = left.terrainData.GetHeights(terrainData.heightmapResolution - 1, 1, 1, terrainData.heightmapResolution - 2);
+      float[,] heights = terrainData.GetHeights(0, 0, 1, terrainData.heightmapResolution);
+      float[,] heightsLeft = left.terrainData.GetHeights(terrainData.heightmapResolution - 1, 0, 1, terrainData.heightmapResolution);
       float[,] heightsNew = heights;
 
       for (int x = 0; x < heightsNew.Length; x++)
       {
-        heightsNew[x, 0] = (heights[x, 0] + heightsLeft[x, 0]);
+        heightsNew[x, 0] = (heights[x, 0] + heightsLeft[x, 0]) / 2;
       }
 
-      terrainData.SetHeightsDelayLOD(0, 1, heightsNew);
+      terrainData.SetHeightsDelayLOD(0, 0, heightsNew);
       terrainData.SyncHeightmap();
-      left.terrainData.SetHeightsDelayLOD(left.terrainData.heightmapResolution - 1, 1, heightsNew);
+      left.terrainData.SetHeightsDelayLOD(left.terrainData.heightmapResolution - 1, 0, heightsNew);
       left.terrainData.SyncHeightmap();
 
       leftConnected = true;
@@ -93,7 +96,7 @@ namespace FunkySheep.Earth.Terrain
 
       float[,] heightsNew = heights;
 
-      heightsNew[0, 0] = (heights[0, 0] + heightsLeft[0, 0] + heightsTop[0, 0] + heightsLeftTop[0, 0]);
+      heightsNew[0, 0] = (heights[0, 0] + heightsLeft[0, 0] + heightsTop[0, 0] + heightsLeftTop[0, 0]) / 4;
       
       terrainData.SetHeightsDelayLOD(0, terrainData.heightmapResolution - 1, heights);
       terrainData.SyncHeightmap();

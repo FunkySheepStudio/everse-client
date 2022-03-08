@@ -832,10 +832,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   url: {fileID: 11400000, guid: ebc057e3d47ab504eb443396d981233b, type: 2}
-  terrainTextureResolution: {fileID: 0}
+  terrainTextureResolution: {fileID: 11400000, guid: 3c67854377f8eff499cddc25ae9a481d, type: 2}
   earthManager: {fileID: 1100245712}
-  graphManager: {fileID: 0}
-  roads: []
 --- !u!114 &1439652343
 MonoBehaviour:
   m_ObjectHideFlags: 0

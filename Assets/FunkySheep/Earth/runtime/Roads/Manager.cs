@@ -11,13 +11,7 @@ namespace FunkySheep.Earth.Roads
     public FunkySheep.Types.String url;
     public FunkySheep.Types.Int32 terrainTextureResolution;
     public Earth.Manager earthManager;
-    public FunkySheep.Graphs.Vector2.Manager graphManager;
-    public List<Road> roads = new List<Road>();
     Queue<Tile> pendingTiles = new Queue<Tile>();
-
-    private void Awake() {
-      graphManager = GetComponent<FunkySheep.Graphs.Vector2.Manager>();
-    }
 
     private void Update() {
       if (pendingTiles.Count != 0)
@@ -34,17 +28,13 @@ namespace FunkySheep.Earth.Roads
         FunkySheep.OSM.Data parsedData = FunkySheep.OSM.Parser.Parse(tile.osmFile);
         foreach (FunkySheep.OSM.Way way in parsedData.ways)
         {
-          Road road = this.roads.Find(road => road.id == way.id);
-          if (road == null)
+          
+          for (int i = 1; i < way.nodes.Count; i++)
           {
-            road = new Road(way.id);
+            FunkySheep.OSM.Node previousNode = way.nodes[i - 1];
+            FunkySheep.OSM.Node node = way.nodes[i];
 
-            for (int i = 1; i < way.nodes.Count; i++)
-            {
-              FunkySheep.OSM.Node previousNode = way.nodes[i - 1];
-              FunkySheep.OSM.Node node = way.nodes[i];
-
-              if (
+            if (
                 previousNode.latitude >= tile.gpsBoundaries[0] && 
                 node.latitude >= tile.gpsBoundaries[0] &&
                 previousNode.longitude >= tile.gpsBoundaries[1] && 
@@ -54,47 +44,52 @@ namespace FunkySheep.Earth.Roads
                 previousNode.longitude <= tile.gpsBoundaries[3] && 
                 node.longitude <= tile.gpsBoundaries[3]
               )
-              {
-                Vector2 previousNodePosition = FunkySheep.Earth.Map.Utils.GpsToMapReal(
+            {
+
+              Vector2 previousNodePosition = FunkySheep.Earth.Map.Utils.GpsToMapReal(
+              earthManager.zoomLevel.value,
+              previousNode.latitude,
+              previousNode.longitude
+              ) - earthManager.initialMapPosition.value;
+
+              // Invert Y axis since OSM map y is inverted
+              previousNodePosition.y = -previousNodePosition.y;
+              previousNodePosition *= earthManager.tilesManager.tileSize.value;
+
+              Vector2 nodePosition = FunkySheep.Earth.Map.Utils.GpsToMapReal(
                 earthManager.zoomLevel.value,
-                previousNode.latitude,
-                previousNode.longitude
-                ) - earthManager.initialMapPosition.value;
+                node.latitude,
+                node.longitude
+              ) - earthManager.initialMapPosition.value;
 
-                // Invert Y axis since OSM map y is inverted
-                previousNodePosition.y = -previousNodePosition.y;
-                previousNodePosition *= earthManager.tilesManager.tileSize.value;
+              // Invert Y axis since OSM map y is inverted
+              nodePosition.y = -nodePosition.y;
+              nodePosition *= earthManager.tilesManager.tileSize.value;
 
-                Vector2 nodePosition = FunkySheep.Earth.Map.Utils.GpsToMapReal(
-                  earthManager.zoomLevel.value,
-                  node.latitude,
-                  node.longitude
-                ) - earthManager.initialMapPosition.value;
+              Debug.DrawLine(
+                new Vector3(
+                  previousNodePosition.x,
+                  500,
+                  previousNodePosition.y
+                ),
+                new Vector3(
+                  nodePosition.x,
+                  500,
+                  nodePosition.y
+                ),
+                Color.red, 600
+              );
 
-                // Invert Y axis since OSM map y is inverted
-                nodePosition.y = -nodePosition.y;
-                nodePosition *= earthManager.tilesManager.tileSize.value;
+              Vector2 previousInsidePos = earthManager.tilesManager.InsideTilePosition(previousNodePosition) * 256;
+              Vector2 insidePos = earthManager.tilesManager.InsideTilePosition(nodePosition) * 256;
 
-                tile.graph.edges.Add(
-                  new Graphs.Edge<Vector2>(previousNodePosition, nodePosition)
-                );
-
-                Debug.DrawLine(
-                  new Vector3(
-                    previousNodePosition.x,
-                    500,
-                    previousNodePosition.y
-                  ),
-                  new Vector3(
-                    nodePosition.x,
-                    500,
-                    nodePosition.y
-                  ),
-                  Color.red, 600);
-              }
-
+              tile.graph.edges.Add(
+                new Graphs.Edge<Vector2>(
+                  previousInsidePos,
+                  insidePos
+                )
+              );
             }
-            roads.Add(road);
           }
         }
 
@@ -107,59 +102,50 @@ namespace FunkySheep.Earth.Roads
     }
 
     public void ProcessRoads(Tile tile) {
-      int size = 3;
-
+      int size = 10;
+      
       foreach (Graphs.Edge<Vector2> edge in tile.graph.edges)
       {
         float diag = Diagolale(edge.verticeA, edge.verticeB);
-        Vector2 perpPosition = Vector2.Perpendicular(
+        /*Vector2 perpPosition = Vector2.Perpendicular(
             edge.verticeB - edge.verticeA
           ).normalized;
 
         Vector2Int perpPositionInt = new Vector2Int(
           Mathf.RoundToInt(perpPosition.x),
           Mathf.RoundToInt(perpPosition.y)
-        );
+        );*/
 
         for (float i = 0; i < diag; i++)
         {
           Vector2Int roundedPosition = GetPosition(i, diag, edge);
 
-          if (i > 0)
+          if (i > 0 && i < (diag - 1))
           {
-            // Smooth the road on it's axis
-            tile.terrainTile.heights[roundedPosition.x, roundedPosition.y] =
-            (
-              tile.terrainTile.heights[GetPosition(i - 1, diag, edge).x, GetPosition(i - 1, diag, edge).y] +
-              tile.terrainTile.heights[GetPosition(i + 1, diag, edge).x, GetPosition(i + 1, diag, edge).y]
-            ) / 2;
+            Vector2Int lastPosition = GetPosition(i - 1, diag, edge);
+            Vector2Int nextPosition = GetPosition(i + 1, diag, edge);
+            tile.terrainTile.heights[roundedPosition.x, roundedPosition.y] = 
+            (tile.terrainTile.heights[lastPosition.x, lastPosition.y] +
+            tile.terrainTile.heights[nextPosition.x, nextPosition.y]) / 2; 
+            
           }
 
-          for (int j = 1; j <= size; j++)
+          for (int x = -size; x <= size; x++)
           {
-            Vector2Int nextSizeLeft = roundedPosition + perpPositionInt * j;
-            Vector2Int nextSizeRight = roundedPosition - perpPositionInt * j;
-            tile.terrainTile.heights[nextSizeLeft.x, nextSizeLeft.y] = tile.terrainTile.heights[roundedPosition.x, roundedPosition.y];
-            tile.terrainTile.heights[nextSizeRight.x, nextSizeRight.y] = tile.terrainTile.heights[roundedPosition.x, roundedPosition.y];
-
-
-            // Handle the case where the offset is (1, 1) in absolute so we set the intermediates values
-            if (i > 0 && Mathf.Abs(perpPositionInt.x) == Mathf.Abs(perpPositionInt.y))
+            for (int y = -size; y <= size; y++)
             {
-              Vector2Int lastPosition = GetPosition(i - 1, diag, edge);
+              if (roundedPosition.x + x > 256 || roundedPosition.x + x < 0)
+                break;
+              if (roundedPosition.y + y > 256 || roundedPosition.y + y < 0)
+                break;
 
-              float mediumHeight = (tile.terrainTile.heights[roundedPosition.x, roundedPosition.y] + tile.terrainTile.heights[lastPosition.x, lastPosition.y]) / 2;
-              tile.terrainTile.heights[nextSizeLeft.x - 1, nextSizeLeft.y] =  mediumHeight;
-              tile.terrainTile.heights[nextSizeRight.x - 1, nextSizeRight.y] =  mediumHeight;
-
-              tile.terrainTile.heights[nextSizeLeft.x, nextSizeLeft.y - 1] =  mediumHeight;
-              tile.terrainTile.heights[nextSizeRight.x, nextSizeRight.y - 1] =  mediumHeight;
+              int distance = Mathf.Abs(x) + Mathf.Abs(y);
+              tile.terrainTile.heights[roundedPosition.x + x, roundedPosition.y + y] = (distance * tile.terrainTile.heights[roundedPosition.x + x, roundedPosition.y + y] + tile.terrainTile.heights[roundedPosition.x, roundedPosition.y]) / (distance + 1);
             }
           }
         }
       }
-      tile.terrainTile.terrain.terrainData.SetHeightsDelayLOD(0, 0, tile.terrainTile.heights);
-      tile.terrainTile.terrain.terrainData.SyncHeightmap();
+      tile.terrainTile.roadsCalculated = true;
     }
 
     public Vector2Int GetPosition(float index, float diag, Graphs.Edge<Vector2> edge)
@@ -168,8 +154,8 @@ namespace FunkySheep.Earth.Roads
       Vector2 position = Vector2.Lerp(edge.verticeA, edge.verticeB, t);
 
       return new Vector2Int(
-        Mathf.RoundToInt(position.x),
-        Mathf.RoundToInt(position.y)
+        Mathf.RoundToInt(position.y),
+        Mathf.RoundToInt(position.x)
       );
     }
 
