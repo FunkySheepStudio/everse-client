@@ -34,62 +34,64 @@ namespace FunkySheep.Earth.Roads
             FunkySheep.OSM.Node previousNode = way.nodes[i - 1];
             FunkySheep.OSM.Node node = way.nodes[i];
 
-            if (
-                previousNode.latitude >= tile.gpsBoundaries[0] && 
-                node.latitude >= tile.gpsBoundaries[0] &&
-                previousNode.longitude >= tile.gpsBoundaries[1] && 
-                node.longitude >= tile.gpsBoundaries[1] &&
-                previousNode.latitude <= tile.gpsBoundaries[2] && 
-                node.latitude <= tile.gpsBoundaries[2] &&
-                previousNode.longitude <= tile.gpsBoundaries[3] && 
-                node.longitude <= tile.gpsBoundaries[3]
-              )
+            Color debugColor = Color.green;
+
+            if (!IsInsideBoundaries(previousNode, tile) && !IsInsideBoundaries(node, tile))
             {
-
-              Vector2 previousNodePosition = FunkySheep.Earth.Map.Utils.GpsToMapReal(
-              earthManager.zoomLevel.value,
-              previousNode.latitude,
-              previousNode.longitude
-              ) - earthManager.initialMapPosition.value;
-
-              // Invert Y axis since OSM map y is inverted
-              previousNodePosition.y = -previousNodePosition.y;
-              previousNodePosition *= earthManager.tilesManager.tileSize.value;
-
-              Vector2 nodePosition = FunkySheep.Earth.Map.Utils.GpsToMapReal(
-                earthManager.zoomLevel.value,
-                node.latitude,
-                node.longitude
-              ) - earthManager.initialMapPosition.value;
-
-              // Invert Y axis since OSM map y is inverted
-              nodePosition.y = -nodePosition.y;
-              nodePosition *= earthManager.tilesManager.tileSize.value;
-
-              Debug.DrawLine(
-                new Vector3(
-                  previousNodePosition.x,
-                  500,
-                  previousNodePosition.y
-                ),
-                new Vector3(
-                  nodePosition.x,
-                  500,
-                  nodePosition.y
-                ),
-                Color.red, 600
-              );
-
-              Vector2 previousInsidePos = earthManager.tilesManager.InsideTilePosition(previousNodePosition) * 256;
-              Vector2 insidePos = earthManager.tilesManager.InsideTilePosition(nodePosition) * 256;
-
-              tile.graph.edges.Add(
-                new Graphs.Edge<Vector2>(
-                  previousInsidePos,
-                  insidePos
-                )
-              );
+              break;
+            } else if (!IsInsideBoundaries(previousNode, tile))
+            {
+              previousNode = SetGpsLimits(previousNode, node, tile);
+              debugColor = Color.red;
+            } else if (!IsInsideBoundaries(node, tile))
+            {
+              node = SetGpsLimits(node, previousNode, tile);
+              debugColor = Color.red;
             }
+
+            Vector2 previousNodePosition = FunkySheep.Earth.Map.Utils.GpsToMapReal(
+            earthManager.zoomLevel.value,
+            previousNode.latitude,
+            previousNode.longitude
+            ) - earthManager.initialMapPosition.value;
+
+            // Invert Y axis since OSM map y is inverted
+            previousNodePosition.y = -previousNodePosition.y;
+            previousNodePosition *= earthManager.tilesManager.tileSize.value;
+
+            Vector2 nodePosition = FunkySheep.Earth.Map.Utils.GpsToMapReal(
+              earthManager.zoomLevel.value,
+              node.latitude,
+              node.longitude
+            ) - earthManager.initialMapPosition.value;
+
+            // Invert Y axis since OSM map y is inverted
+            nodePosition.y = -nodePosition.y;
+            nodePosition *= earthManager.tilesManager.tileSize.value;
+
+            Debug.DrawLine(
+              new Vector3(
+                previousNodePosition.x,
+                500,
+                previousNodePosition.y
+              ),
+              new Vector3(
+                nodePosition.x,
+                500,
+                nodePosition.y
+              ),
+              debugColor, 600
+            );
+
+            Vector2 previousInsidePos = earthManager.tilesManager.InsideTilePosition(previousNodePosition) * 256;
+            Vector2 insidePos = earthManager.tilesManager.InsideTilePosition(nodePosition) * 256;
+
+            tile.graph.edges.Add(
+              new Graphs.Edge<Vector2>(
+                previousInsidePos,
+                insidePos
+              )
+            );
           }
         }
 
@@ -99,6 +101,92 @@ namespace FunkySheep.Earth.Roads
       {
         Debug.Log(e);
       }
+    }
+
+    public bool IsInsideBoundaries(FunkySheep.OSM.Node node, Tile tile)
+    {
+      if (node.latitude < tile.gpsBoundaries[0])
+        return false;
+      if (node.longitude < tile.gpsBoundaries[1])
+        return false;
+      if (node.latitude > tile.gpsBoundaries[2])
+        return false;
+      if (node.longitude > tile.gpsBoundaries[3])
+        return false;
+
+      return true;
+    }
+
+    public FunkySheep.OSM.Node SetGpsLimits(FunkySheep.OSM.Node node, FunkySheep.OSM.Node otherNode, Tile tile)
+    {
+      int[,] boundaries = {
+        {0,1,2,1},
+        {2,1,2,3},
+        {2,3,0,3},
+        {0,3,0,1}
+      };
+
+      for (int i = 0; i < 4; i ++)
+      {
+        bool ok;
+        Vector2 newPosition = GetIntersectionPointCoordinates(
+          new Vector2(
+            (float)node.latitude,
+            (float)node.longitude
+          ),
+          new Vector2(
+            (float)otherNode.latitude,
+            (float)otherNode.longitude
+          ),
+          new Vector2(
+            (float)tile.gpsBoundaries[boundaries[i, 2]],
+            (float)tile.gpsBoundaries[boundaries[i, 1]]
+          ),
+          new Vector2(
+            (float)tile.gpsBoundaries[boundaries[i, 0]],
+            (float)tile.gpsBoundaries[boundaries[i, 3]]
+          ),
+          out ok
+        );
+
+        if (ok)
+        {
+          node.latitude = newPosition.x;
+          node.longitude = newPosition.y;
+        }
+      }
+
+      return node;
+    }
+
+  /// <summary>
+  /// Gets the coordinates of the intersection point of two lines.
+  /// </summary>
+  /// <param name="A1">A point on the first line.</param>
+  /// <param name="A2">Another point on the first line.</param>
+  /// <param name="B1">A point on the second line.</param>
+  /// <param name="B2">Another point on the second line.</param>
+  /// <param name="found">Is set to false of there are no solution. true otherwise.</param>
+  /// <returns>The intersection point coordinates. Returns Vector2.zero if there is no solution.</returns>
+  public Vector2 GetIntersectionPointCoordinates(Vector2 A1, Vector2 A2, Vector2 B1, Vector2 B2, out bool found)
+  {
+      float tmp = (B2.x - B1.x) * (A2.y - A1.y) - (B2.y - B1.y) * (A2.x - A1.x);
+  
+      if (tmp == 0)
+      {
+          // No solution!
+          found = false;
+          return Vector2.zero;
+      }
+  
+      float mu = ((A1.x - B1.x) * (A2.y - A1.y) - (A1.y - B1.y) * (A2.x - A1.x)) / tmp;
+  
+      found = true;
+  
+      return new Vector2(
+          B1.x + (B2.x - B1.x) * mu,
+          B1.y + (B2.y - B1.y) * mu
+      );
     }
 
     public void ProcessRoads(Tile tile) {
