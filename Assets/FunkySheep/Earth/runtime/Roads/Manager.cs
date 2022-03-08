@@ -102,33 +102,17 @@ namespace FunkySheep.Earth.Roads
     }
 
     public void ProcessRoads(Tile tile) {
-      int size = 10;
+      int size = 3;
+      float[,] heights = new float[257, 257];
+      int[,] weights = new int[257, 257];
       
       foreach (Graphs.Edge<Vector2> edge in tile.graph.edges)
       {
         float diag = Diagolale(edge.verticeA, edge.verticeB);
-        /*Vector2 perpPosition = Vector2.Perpendicular(
-            edge.verticeB - edge.verticeA
-          ).normalized;
-
-        Vector2Int perpPositionInt = new Vector2Int(
-          Mathf.RoundToInt(perpPosition.x),
-          Mathf.RoundToInt(perpPosition.y)
-        );*/
-
+        
         for (float i = 0; i < diag; i++)
         {
           Vector2Int roundedPosition = GetPosition(i, diag, edge);
-
-          if (i > 0 && i < (diag - 1))
-          {
-            Vector2Int lastPosition = GetPosition(i - 1, diag, edge);
-            Vector2Int nextPosition = GetPosition(i + 1, diag, edge);
-            tile.terrainTile.heights[roundedPosition.x, roundedPosition.y] = 
-            (tile.terrainTile.heights[lastPosition.x, lastPosition.y] +
-            tile.terrainTile.heights[nextPosition.x, nextPosition.y]) / 2; 
-            
-          }
 
           for (int x = -size; x <= size; x++)
           {
@@ -139,8 +123,25 @@ namespace FunkySheep.Earth.Roads
               if (roundedPosition.y + y > 256 || roundedPosition.y + y < 0)
                 break;
 
-              int distance = Mathf.Abs(x) + Mathf.Abs(y);
-              tile.terrainTile.heights[roundedPosition.x + x, roundedPosition.y + y] = (distance * tile.terrainTile.heights[roundedPosition.x + x, roundedPosition.y + y] + tile.terrainTile.heights[roundedPosition.x, roundedPosition.y]) / (distance + 1);
+              if (heights[roundedPosition.x + x, roundedPosition.y + y] == 0)
+              {
+                heights[roundedPosition.x + x, roundedPosition.y + y] = tile.terrainTile.heights[roundedPosition.x, roundedPosition.y];
+                weights[roundedPosition.x + x, roundedPosition.y + y] = 1;
+              } else {
+                heights[roundedPosition.x + x, roundedPosition.y + y] += tile.terrainTile.heights[roundedPosition.x, roundedPosition.y];
+                weights[roundedPosition.x + x, roundedPosition.y + y]++;
+              }
+            }
+          }
+        }
+
+        for (int x = 0; x < 257; x++)
+        {
+          for (int y = 0; y < 257; y++)
+          {
+            if (heights[x, y] != 0)
+            {
+              tile.terrainTile.heights[x, y] = heights[x, y] / weights[x, y];
             }
           }
         }
