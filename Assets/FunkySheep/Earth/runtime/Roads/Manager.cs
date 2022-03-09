@@ -72,12 +72,12 @@ namespace FunkySheep.Earth.Roads
             Debug.DrawLine(
               new Vector3(
                 previousNodePosition.x,
-                500,
+                0,
                 previousNodePosition.y
               ),
               new Vector3(
                 nodePosition.x,
-                500,
+                0,
                 nodePosition.y
               ),
               debugColor, 600
@@ -117,42 +117,71 @@ namespace FunkySheep.Earth.Roads
       return true;
     }
 
+    public bool IsInsideBoundaries(Vector2 node, Tile tile)
+    {
+      if (node.x <= tile.gpsBoundaries[0])
+        return false;
+      if (node.y <= tile.gpsBoundaries[1])
+        return false;
+      if (node.x >= tile.gpsBoundaries[2])
+        return false;
+      if (node.y >= tile.gpsBoundaries[3])
+        return false;
+
+      return true;
+    }
+
     public FunkySheep.OSM.Node SetGpsLimits(FunkySheep.OSM.Node node, FunkySheep.OSM.Node otherNode, Tile tile)
     {
       int[,] boundaries = {
-        {0,1,2,1},
-        {2,1,2,3},
-        {2,3,0,3},
-        {0,3,0,1}
+        {2,3,2,1}, //UP
+        {0,1,0,3}, // DOWN
+        {2,3,0,3}, //RIGHT
+        {0,1,2,1}, //LEFT
       };
+
+      Vector2 nodeVector = new Vector2(
+            (float)node.latitude,
+            (float)node.longitude
+          );  
+      Vector2 otherNodeVector = new Vector2(
+        (float)otherNode.latitude,
+        (float)otherNode.longitude
+      );
+
 
       for (int i = 0; i < 4; i ++)
       {
         bool ok;
-        Vector2 newPosition = GetIntersectionPointCoordinates(
-          new Vector2(
-            (float)node.latitude,
-            (float)node.longitude
-          ),
-          new Vector2(
-            (float)otherNode.latitude,
-            (float)otherNode.longitude
-          ),
-          new Vector2(
-            (float)tile.gpsBoundaries[boundaries[i, 2]],
-            (float)tile.gpsBoundaries[boundaries[i, 1]]
-          ),
-          new Vector2(
-            (float)tile.gpsBoundaries[boundaries[i, 0]],
-            (float)tile.gpsBoundaries[boundaries[i, 3]]
-          ),
+
+        Vector2 startBound = new Vector2(
+          (float)tile.gpsBoundaries[boundaries[i, 2]],
+          (float)tile.gpsBoundaries[boundaries[i, 3]]
+        );
+
+        Vector2 endBound = new Vector2(
+          (float)tile.gpsBoundaries[boundaries[i, 0]],
+          (float)tile.gpsBoundaries[boundaries[i, 1]]
+        );
+
+        Vector2 newGpsPositions = GetIntersectionPointCoordinates(
+          nodeVector,
+          otherNodeVector,
+          startBound,
+          endBound,
           out ok
         );
 
         if (ok)
         {
-          node.latitude = newPosition.x;
-          node.longitude = newPosition.y;
+          float oldDistance = Vector2.Distance(otherNodeVector, nodeVector);
+          float newDistance = Vector2.Distance(otherNodeVector, newGpsPositions);
+
+          if (newDistance < oldDistance)
+          {
+            node.latitude = newGpsPositions.x;
+            node.longitude = newGpsPositions.y;
+          }
         }
       }
 
@@ -296,3 +325,5 @@ namespace FunkySheep.Earth.Roads
     }
   }
 }
+
+
