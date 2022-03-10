@@ -16,37 +16,46 @@ namespace FunkySheep.Earth.Roads
     private void Update() {
       if (pendingTiles.Count != 0)
       {
-        Thread extractOsmThread = new Thread(() => this.ExtractOsmData(pendingTiles.Dequeue()));
+        Thread extractOsmThread = new Thread(() => pendingTiles.Dequeue().ExtractOsmData());
         extractOsmThread.Start();
       }
     }
 
-    private void ExtractOsmData(Tile tile)
+    /*private void ExtractOsmData(Tile tile)
     {
       try
       {
         FunkySheep.OSM.Data parsedData = FunkySheep.OSM.Parser.Parse(tile.osmFile);
+        
+        System.Random rand = new System.Random(parsedData.ways.Count);
+        Color mainColor = new Color(
+          (float)rand.NextDouble(),
+          (float)rand.NextDouble(),
+          (float)rand.NextDouble()
+        );
+
         foreach (FunkySheep.OSM.Way way in parsedData.ways)
         {
           
           for (int i = 1; i < way.nodes.Count; i++)
           {
+            Color debugColor = mainColor;
+
             FunkySheep.OSM.Node previousNode = way.nodes[i - 1];
             FunkySheep.OSM.Node node = way.nodes[i];
 
-            Color debugColor = Color.green;
-
             if (!IsInsideBoundaries(previousNode, tile) && !IsInsideBoundaries(node, tile))
             {
-              break;
+              debugColor = Color.red;
+              //break;
             } else if (!IsInsideBoundaries(previousNode, tile))
             {
               previousNode = SetGpsLimits(previousNode, node, tile);
-              debugColor = Color.red;
+              debugColor = Color.green;
             } else if (!IsInsideBoundaries(node, tile))
             {
               node = SetGpsLimits(node, previousNode, tile);
-              debugColor = Color.red;
+              debugColor = Color.green;
             }
 
             Vector2 previousNodePosition = FunkySheep.Earth.Map.Utils.GpsToMapReal(
@@ -101,17 +110,17 @@ namespace FunkySheep.Earth.Roads
       {
         Debug.Log(e);
       }
-    }
+    }*/
 
-    public bool IsInsideBoundaries(FunkySheep.OSM.Node node, Tile tile)
+    /*public bool IsInsideBoundaries(FunkySheep.OSM.Node node, Tile tile)
     {
-      if (node.latitude < tile.gpsBoundaries[0])
+      if (node.latitude <= tile.gpsBoundaries[0])
         return false;
-      if (node.longitude < tile.gpsBoundaries[1])
+      if (node.longitude <= tile.gpsBoundaries[1])
         return false;
-      if (node.latitude > tile.gpsBoundaries[2])
+      if (node.latitude >= tile.gpsBoundaries[2])
         return false;
-      if (node.longitude > tile.gpsBoundaries[3])
+      if (node.longitude >= tile.gpsBoundaries[3])
         return false;
 
       return true;
@@ -218,7 +227,7 @@ namespace FunkySheep.Earth.Roads
       );
     }
 
-    public void ProcessRoads(Tile tile) {
+    /*public void ProcessRoads(Tile tile) {
       int size = 3;
       float[,] heights = new float[257, 257];
       int[,] weights = new int[257, 257];
@@ -283,7 +292,7 @@ namespace FunkySheep.Earth.Roads
       float dy = p1.y - p0.y;
       float diagonal = Mathf.Max(Mathf.Abs(dx), Mathf.Abs(dy));
       return diagonal;
-    }
+    }*/
 
     public void AddTile(Terrain.Tile terrainTile)
     {
@@ -292,9 +301,10 @@ namespace FunkySheep.Earth.Roads
 
       StartCoroutine(FunkySheep.Network.Downloader.Download(interpolatedUrl, (fileID, file) => {
         Tile roadTile = new Tile(terrainTile.position);
-        roadTile.gpsBoundaries = gpsBoundaries;
-        roadTile.terrainTile = terrainTile;
-        roadTile.osmFile = file;
+        roadTile.earthManager = earthManager;
+        roadTile.SetBoudaries(gpsBoundaries);
+        roadTile.SetTerrainTile(terrainTile);
+        roadTile.SetOsmFile(file);
         pendingTiles.Enqueue(roadTile);
       }));
     }
