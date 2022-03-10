@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7eac544227e4274897eb79dfac27790, type: 3}
   m_Name: roads-osm-url
   m_EditorClassIdentifier: 
-  value: https://overpass.kumi.systems/api/interpreter?data=[out:json][timeout:25];(way[%22highway%22~%22primary|secondary|tertiary|residential%22]({startLatitude},{startLongitude},{endLatitude},{endLongitude}););out%20body%20geom%20qt;
+  value: https://overpass.kumi.systems/api/interpreter?data=[out:json][timeout:25];(way[%22highway%22~%22primary|secondary|tertiary%22]({startLatitude},{startLongitude},{endLatitude},{endLongitude}););out%20body%20geom%20qt;
