@@ -14,6 +14,7 @@ namespace FunkySheep.Earth.Roads
     double[] gpsBoundaries;
     Vector2 worldBoundaryStart;
     Vector2 worldBoundaryEnd;
+    float [,] heights;
 
     public Graphs.Graph<Vector2> graph = new Graphs.Graph<Vector2>();
     public Tile(Vector2Int postition) : base(postition)
@@ -47,6 +48,18 @@ namespace FunkySheep.Earth.Roads
     {
       this.terrainTile = terrainTile;
       terrainResolution = terrainTile.terrain.terrainData.heightmapResolution;
+      heights = new float
+      [
+        terrainTile.terrain.terrainData.heightmapResolution,
+        terrainTile.terrain.terrainData.heightmapResolution
+      ];
+
+      Buffer.BlockCopy(
+        terrainTile.heights,
+        0,
+        heights, 0,
+        terrainTile.heights.Length*sizeof(float)
+      );
     }
 
     public void SetOsmFile(byte[] osmFile)
@@ -74,9 +87,13 @@ namespace FunkySheep.Earth.Roads
               way.nodes[i].longitude
             );
 
-            ProcessSegment(previousNode, node);
+            ProcessSegment(way, previousNode, node);
           }
         }
+
+        // Trigger the terrain update
+        terrainTile.heights = heights;
+        terrainTile.roadsCalculated = true;
       }
       catch (Exception e)
       {
@@ -84,8 +101,26 @@ namespace FunkySheep.Earth.Roads
       }
     }
 
-    public void ProcessSegment(Node previousNode, Node node)
+    public void ProcessSegment(FunkySheep.OSM.Way way, Node previousNode, Node node)
     {
+      string roadType = way.tags.Find(tag => tag.name == "highway").value;
+      int roadSize = 1;
+
+      switch (roadType)
+      {
+        case "primary":
+          roadSize = 4;
+          break;
+        case "secondary":
+          roadSize = 3;
+          break;
+        case "tertiary":
+          roadSize = 2;
+          break;
+        default:
+          break;
+      }
+
       previousNode.SetWorldPosition(earthManager);
       node.SetWorldPosition(earthManager);
       float step = earthManager.tilesManager.tileSize.value / terrainResolution;
@@ -104,9 +139,12 @@ namespace FunkySheep.Earth.Roads
 
       for (float i = 0; i < diag; i++)
       {
+        // Interpolate a position in grid between 2 points
+        // https://en.wikipedia.org/wiki/Line_drawing_algorithm#:~:text=In%20computer%20graphics%2C%20a%20line,rasterize%20lines%20in%20one%20color.
         float t = diag == 0 ? 0f : i / diag;
         Vector2 gridPoint = Vector2.Lerp(previousNodeGridPosition, nodeGridPosition, t);
 
+        // round the point on the world grid
         gridPoint = new Vector2(
           Mathf.RoundToInt(gridPoint.x / step) * step,
           Mathf.RoundToInt(gridPoint.y / step) * step
@@ -120,43 +158,31 @@ namespace FunkySheep.Earth.Roads
           gridPoint.y < worldBoundaryEnd.y
         )
         {
-          Vector3 leftup = new Vector3(
-            gridPoint.x - step / 2,
-            0,
-            gridPoint.y - step / 2
+          // Get the inside tile position relative to the terrain resolution
+          gridPoint = earthManager.tilesManager.InsideTilePosition(gridPoint) * (terrainResolution - 1);
+          Vector2Int terrainCell = new Vector2Int(
+            Mathf.RoundToInt(gridPoint.y),
+            Mathf.RoundToInt(gridPoint.x)
           );
 
-          Vector3 downright = new Vector3(
-            gridPoint.x + step / 2,
-            0,
-            gridPoint.y + step / 2
-          );
+           for (int x = -roadSize; x <= roadSize; x++)
+          {
+            for (int y = -roadSize; y <= roadSize; y++)
+            {
+              if (terrainCell.x + x > 256 || terrainCell.x + x < 0)
+                break;
+              if (terrainCell.y + y > 256 || terrainCell.y + y < 0)
+                break;
 
-          Vector3 leftright = new Vector3(
-            gridPoint.x - step / 2,
-            0,
-            gridPoint.y + step / 2
-          );
-
-          Vector3 downleft = new Vector3(
-            gridPoint.x + step / 2,
-            0,
-            gridPoint.y - step / 2
-          );
-
-          Debug.DrawLine(
-            leftup,
-            downright,
-            Color.green,
-            600
-          );
-
-          Debug.DrawLine(
-            leftright,
-            downleft,
-            Color.red,
-            600
-          );
+              heights[
+                terrainCell.x + x,
+                terrainCell.y + y
+              ] = terrainTile.heights[
+                terrainCell.x,
+                terrainCell.y
+              ];
+            }
+          }
         }
       }
     }
@@ -173,25 +199,6 @@ namespace FunkySheep.Earth.Roads
       float dy = p1.y - p0.y;
       float diagonal = Mathf.Max(Mathf.Abs(dx), Mathf.Abs(dy));
       return diagonal;
-    }
-
-    /// <summary>
-    /// Interpolate a position in grid between 2 points
-    /// https://en.wikipedia.org/wiki/Line_drawing_algorithm#:~:text=In%20computer%20graphics%2C%20a%20line,rasterize%20lines%20in%20one%20color.
-    /// </summary>
-    /// <param name="index"></param>
-    /// <param name="diag"></param>
-    /// <param name="edge"></param>
-    /// <returns></returns>
-    public Vector2Int GetPosition(float index, float diag, Vector2 start, Vector2 end)
-    {
-      float t = diag == 0 ? 0f : index / diag;
-      Vector2 position = Vector2.Lerp(start, end, t);
-
-      return new Vector2Int(
-        Mathf.RoundToInt(position.y),
-        Mathf.RoundToInt(position.x)
-      );
     }
   }
 }
