@@ -109,13 +109,13 @@ namespace FunkySheep.Earth.Roads
       switch (roadType)
       {
         case "primary":
-          roadSize = 4;
-          break;
-        case "secondary":
           roadSize = 3;
           break;
-        case "tertiary":
+        case "secondary":
           roadSize = 2;
+          break;
+        case "tertiary":
+          roadSize = 1;
           break;
         default:
           break;

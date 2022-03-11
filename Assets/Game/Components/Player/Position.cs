@@ -6,13 +6,14 @@ namespace Game.Player
 {
   public class Position : MonoBehaviour
   {
-    public FunkySheep.Types.Double calculatedLatitude;
-    public FunkySheep.Types.Double calculatedLongitude;
+    //public FunkySheep.Types.Double calculatedLatitude;
+    //public FunkySheep.Types.Double calculatedLongitude;
     public FunkySheep.Earth.Manager earth;
     public Vector2Int lastTilePosition;
     public Vector2Int tilePosition;
     public Vector2Int insideTileQuarterPosition;
     public Vector2Int lastInsideTileQuarterPosition;
+    public FunkySheep.Events.Vector3Event onMove;
     Vector3 lastPosition;
 
     private void Start() {
@@ -22,9 +23,10 @@ namespace Game.Player
     }
 
     private void Update() {
-      if (Vector3.Distance(lastPosition, transform.position) > 1)
+      if (Vector3.Distance(lastPosition, transform.position) > 10)
       {
           Calculate();
+          onMove.Raise(transform.position);
           lastPosition = transform.position;
       }
     }

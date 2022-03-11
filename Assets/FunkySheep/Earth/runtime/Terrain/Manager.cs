@@ -38,5 +38,37 @@ namespace FunkySheep.Earth.Terrain
 
             terrainTile.SetHeights(mapTile);
         }
+
+        public static float GetHeight(Vector2 position)
+        {
+          foreach (UnityEngine.Terrain terrain in UnityEngine.Terrain.activeTerrains)
+          {
+            UnityEngine.Bounds bounds = terrain.terrainData.bounds;
+            Vector2 terrainMin = new Vector2(
+              bounds.min.x + terrain.transform.position.x,
+              bounds.min.z + terrain.transform.position.z
+            );
+
+            Vector2 terrainMax = new Vector2(
+              bounds.max.x + terrain.transform.position.x,
+              bounds.max.z + terrain.transform.position.z
+            );
+            
+            if (position.x >= terrainMin.x && position.y >= terrainMin.y && position.x <= terrainMax.x && position.y <= terrainMax.y)
+            {
+              return terrain.terrainData.GetInterpolatedHeight(
+                (position.x - terrainMin.x) / (terrainMax.x - terrainMin.x),
+                (position.y - terrainMin.y) / (terrainMax.y - terrainMin.y)
+              );
+            }
+          }
+          Debug.Log(UnityEngine.Terrain.activeTerrains.Length);
+          return 0;
+        }
+
+        public static float GetHeight(Vector3 position)
+        {
+          return GetHeight(new Vector2(position.x, position.z));
+        }
     }    
 }
