@@ -62,7 +62,6 @@ namespace FunkySheep.Earth.Terrain
               );
             }
           }
-          Debug.Log(UnityEngine.Terrain.activeTerrains.Length);
           return 0;
         }
 

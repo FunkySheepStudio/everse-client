@@ -104,7 +104,6 @@ namespace FunkySheep.Earth.Buildings
           0,
           building.position.y
         );
-        buildingPosition.y = Terrain.Manager.GetHeight(positionV2);
 
         GameObject go = new GameObject(building.id.ToString());
         go.transform.position = buildingPosition;

@@ -11,26 +11,26 @@ namespace FunkySheep.Earth.Buildings
     public Building building;
     public Material material;
     ProBuilderMesh mesh;
+
+    public float? minHeight = null;
+    public float? maxHeight = null;
     private void Awake() {
       mesh = this.GetComponent<ProBuilderMesh>();
     }
 
     public void Create()
     {
-      float? minHeight = null;
-      float? maxHeight = null;
-
       // Get the min and max heights
       foreach (Vector2 point in building.points)
       {
         float height = Terrain.Manager.GetHeight(point);
 
-        if (minHeight == null || height < minHeight)
+        if (minHeight == null || height <= minHeight)
         {
           minHeight = height;
         }
 
-        if (maxHeight == null || height > minHeight)
+        if (maxHeight == null || height >= maxHeight)
         {
           maxHeight = height;
         }
@@ -45,7 +45,7 @@ namespace FunkySheep.Earth.Buildings
         newPositions[i].z = building.points[i].y - building.position.y;
       }
       
-      mesh.CreateShapeFromPolygon(newPositions, maxHeight.Value - minHeight.Value + 1f, false);
+      mesh.CreateShapeFromPolygon(newPositions, maxHeight.Value - minHeight.Value + 0.2f, false);
       GetComponent<MeshRenderer>().material = material;
       transform.position = new Vector3(building.position.x, minHeight.Value, building.position.y);
     }
