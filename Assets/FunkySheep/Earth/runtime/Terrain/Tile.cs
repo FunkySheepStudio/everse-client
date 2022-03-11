@@ -80,8 +80,8 @@ namespace FunkySheep.Earth.Terrain
             for (float y = 0; y < terrainResolution; y++)
             {
               float height = GetHeightFromColor(
-                Mathf.RoundToInt(x / terrainResolution * Mathf.Sqrt(pixels.Length)),
-                Mathf.RoundToInt(y / terrainResolution * Mathf.Sqrt(pixels.Length))
+                Mathf.FloorToInt(x / terrainResolution * Mathf.Sqrt(pixels.Length)),
+                Mathf.FloorToInt(y / terrainResolution * Mathf.Sqrt(pixels.Length))
               );
               // Convert the resulting color value to an elevation in meters.
               heights[

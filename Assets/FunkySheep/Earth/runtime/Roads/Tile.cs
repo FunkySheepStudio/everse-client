@@ -154,9 +154,9 @@ namespace FunkySheep.Earth.Roads
           {
             for (int y = -roadSize; y <= roadSize; y++)
             {
-              if (terrainCell.x + x > 256 || terrainCell.x + x < 0)
+              if (terrainCell.x + x > (terrainResolution - 1) || terrainCell.x + x < 0)
                 break;
-              if (terrainCell.y + y > 256 || terrainCell.y + y < 0)
+              if (terrainCell.y + y > (terrainResolution - 1) || terrainCell.y + y < 0)
                 break;
 
               heights[

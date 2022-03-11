@@ -39,14 +39,7 @@ namespace FunkySheep.Earth.Roads
 
     public void SetWorldPosition(FunkySheep.Earth.Manager earthManager)
     {
-      worldPosition = FunkySheep.Earth.Map.Utils.GpsToMapReal(
-        earthManager.zoomLevel.value,
-        gpsCoordinates.x,
-        gpsCoordinates.y
-      ) - earthManager.initialMapPosition.value;
-
-      worldPosition.y = -worldPosition.y;
-      worldPosition *= earthManager.tilesManager.tileSize.value;
+      worldPosition = earthManager.CalculatePosition(gpsCoordinates.x, gpsCoordinates.y);
     }
   } 
 }
