@@ -18,13 +18,31 @@ namespace FunkySheep.Earth.Map
 
         /// <summary>
         /// Get the map tile position depending on zoom level and GPS postions
+        /// https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#Lon..2Flat._to_tile_numbers
         /// </summary>
         /// <returns></returns>
         public static Vector2 GpsToMapReal(int zoom, double latitude, double longitude) {
-          return new Vector2(
-              LongitudeToXReal(zoom, longitude),
-              LatitudeToZReal(zoom, latitude)
-          );
+          Vector2 p = new Vector2();
+          p.x = (float)((longitude + 180.0) / 360.0 * (1 << zoom));
+          p.y = (float)((1.0 - Math.Log(Math.Tan(latitude * Math.PI / 180.0) + 
+            1.0 / Math.Cos(latitude * Math.PI / 180.0)) / Math.PI) / 2.0 * (1 << zoom));
+            
+          return p;
+        }
+
+        /// <summary>
+        /// Get the map tile position depending on zoom level and GPS postions
+        /// https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#Lon..2Flat._to_tile_numbers
+        /// </summary>
+        /// <returns></returns>
+        public static Vector2 GpsToMapReal(int zoom, double latitude, double longitude, Vector2 offset)
+        {
+          Vector2 p = new Vector2();
+          p.x = (float)(((longitude + 180.0) / 360.0 * (1 << zoom)) - offset.x);
+          p.y = (float)(((1.0 - Math.Log(Math.Tan(latitude * Math.PI / 180.0) + 
+            1.0 / Math.Cos(latitude * Math.PI / 180.0)) / Math.PI) / 2.0 * (1 << zoom)) - offset.y);
+            
+          return p;
         }
 
         /// <summary>
@@ -67,7 +85,7 @@ namespace FunkySheep.Earth.Map
         /// </summary>
         /// <returns></returns>
         public static float LatitudeToZReal(int zoom, double latitude) {
-            return (float)((1 - Math.Log(Math.Tan(Mathf.Deg2Rad * latitude) + 1 / Math.Cos(Mathf.Deg2Rad * latitude)) / Math.PI) / 2 * (1 << zoom));
+          return (float)((1 - Math.Log(Math.Tan(Mathf.Deg2Rad * latitude) ) / Math.PI) / 2 * (1 << zoom));
         }
 
         /// <summary>

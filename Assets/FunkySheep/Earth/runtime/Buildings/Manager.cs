@@ -33,17 +33,9 @@ namespace FunkySheep.Earth.Buildings
         {
           Building building = new Building(way.id);
 
-          for (int i = 1; i < way.nodes.Count; i++)
+          for (int i = 0; i < way.nodes.Count - 1; i++)
           {
-            Vector2 point =FunkySheep.Earth.Map.Utils.GpsToMapReal(
-              earthManager.zoomLevel.value,
-              way.nodes[i].latitude,
-              way.nodes[i].longitude
-            ) - earthManager.initialMapPosition.value;
-
-            point.y = -point.y;
-            point *= earthManager.tilesManager.tileSize.value;
-
+            Vector2 point = earthManager.CalculatePosition(way.nodes[i].latitude, way.nodes[i].longitude);
             building.points.Add(point);
           }
 
@@ -57,17 +49,9 @@ namespace FunkySheep.Earth.Buildings
           {
             Building building = new Building(way.id);
 
-            for (int i = 1; i < way.nodes.Count; i++)
+            for (int i = 0; i < way.nodes.Count - 1; i++)
             {
-              Vector2 point =FunkySheep.Earth.Map.Utils.GpsToMapReal(
-                earthManager.zoomLevel.value,
-                way.nodes[i].latitude,
-                way.nodes[i].longitude
-              ) - earthManager.initialMapPosition.value;
-
-              point.y = -point.y;
-              point *= earthManager.tilesManager.tileSize.value;
-
+              Vector2 point = earthManager.CalculatePosition(way.nodes[i].latitude, way.nodes[i].longitude);
               building.points.Add(point);
             }
 

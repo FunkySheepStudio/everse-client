@@ -36,7 +36,7 @@ namespace FunkySheep.Earth.Buildings
         Vector2 center = Vector2.zero;
         for (int i = 0; i < points.Count; i++)
         {
-            center += points[i];
+          center += points[i];
         }
 
         center /= points.Count;
@@ -52,7 +52,7 @@ namespace FunkySheep.Earth.Buildings
     {
         float area = 0;
         
-        for (int i = 0; i < points.Count -1; i++)
+        for (int i = 0; i < points.Count; i++)
         {
             area += Vector2.Distance(points[i], points[i + 1]);
         }
@@ -66,7 +66,6 @@ namespace FunkySheep.Earth.Buildings
     /// <returns></returns>
     public void SetClockWise()
     {
-      // Skip the last point since it is the same as the first
       int result = FunkySheep.Vectors.Utils.IsClockWise(points[1], points[points.Count - 1] , points[0]);
       if (result < 0) {
           points.Reverse();
@@ -79,13 +78,11 @@ namespace FunkySheep.Earth.Buildings
     public void SetFirstPoint()
     {
         int maxPointIndex = 0;
-        Vector2 maxPoint = new Vector2(0, 0);
         for (int i = 0; i < points.Count; i++)
         {
-            if (maxPoint.magnitude < points[i].magnitude)
+            if ((points[maxPointIndex] - position).magnitude < (points[i] - position).magnitude)
             {
-                maxPointIndex = i;
-                maxPoint = points[i];
+              maxPointIndex = i;
             }
         }
 
@@ -94,7 +91,7 @@ namespace FunkySheep.Earth.Buildings
         
         for (int i = 0; i < points.Count; i++)
         {
-            points[i] = tempPoints[(i + maxPointIndex) %  points.Count];
+          points[i] = tempPoints[(i + maxPointIndex) %  points.Count];
         }
     }
   }

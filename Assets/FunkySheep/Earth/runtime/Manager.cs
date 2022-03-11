@@ -52,5 +52,20 @@ namespace FunkySheep.Earth
         - 1 + (initialMapPosition.value.y - Mathf.Floor(initialMapPosition.value.y))
       );
     }
+
+    public Vector2 CalculatePosition(double latitude, double longitude)
+    {
+      Vector2 position = Map.Utils.GpsToMapReal(
+        zoomLevel.value,
+        latitude,
+        longitude,
+        initialMapPosition.value
+      );
+
+      position.y = -position.y;
+      position *= tilesManager.tileSize.value;
+
+      return position;
+    }
   }
 }

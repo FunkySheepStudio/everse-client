@@ -25,23 +25,8 @@ namespace FunkySheep.Earth.Roads
     {
       this.gpsBoundaries = gpsBoundaries;
 
-      worldBoundaryStart = FunkySheep.Earth.Map.Utils.GpsToMapReal(
-        earthManager.zoomLevel.value,
-        this.gpsBoundaries[0],
-        this.gpsBoundaries[1]
-      ) - earthManager.initialMapPosition.value;
-
-      worldBoundaryStart.y = -worldBoundaryStart.y;
-      worldBoundaryStart *= earthManager.tilesManager.tileSize.value;
-
-      worldBoundaryEnd = FunkySheep.Earth.Map.Utils.GpsToMapReal(
-        earthManager.zoomLevel.value,
-        this.gpsBoundaries[2],
-        this.gpsBoundaries[3]
-      ) - earthManager.initialMapPosition.value;
-
-      worldBoundaryEnd.y = -worldBoundaryEnd.y;
-      worldBoundaryEnd *= earthManager.tilesManager.tileSize.value;
+      worldBoundaryStart = earthManager.CalculatePosition(this.gpsBoundaries[0], this.gpsBoundaries[1]);
+      worldBoundaryEnd = earthManager.CalculatePosition(this.gpsBoundaries[2], this.gpsBoundaries[3]);
     }
 
     public void SetTerrainTile(Terrain.Tile terrainTile)
