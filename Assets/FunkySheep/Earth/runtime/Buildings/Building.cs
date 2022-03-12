@@ -11,6 +11,7 @@ namespace FunkySheep.Earth.Buildings
     public List<Vector2> points = new List<Vector2>();
     public List<Vector2> heights = new List<Vector2>();
     public Vector2 position;
+    public float area;
     public float? lowPoint = null;
     public float? hightPoint = null;
 
@@ -24,6 +25,7 @@ namespace FunkySheep.Earth.Buildings
       this.position = Position();
       SetFirstPoint();
       SetClockWise();
+      area = Area();
     }
 
     /// <summary>
@@ -54,7 +56,7 @@ namespace FunkySheep.Earth.Buildings
         
         for (int i = 0; i < points.Count; i++)
         {
-            area += Vector2.Distance(points[i], points[i + 1]);
+            area += Vector2.Distance(points[i], points[(i + 1) % points.Count]);
         }
 
         return area;
