@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace FunkySheep.Earth.Buildings
 {
-  [AddComponentMenu("FunkySheep/Earth/Buildings Manager")]
+  [AddComponentMenu("FunkySheep/Earth/Earth Buildings Manager")]
   public class Manager : MonoBehaviour
   {
     public FunkySheep.Types.String urlTemplate;

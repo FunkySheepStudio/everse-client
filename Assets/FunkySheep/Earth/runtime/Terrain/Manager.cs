@@ -25,7 +25,7 @@ namespace FunkySheep.Earth.Terrain
 
             UnityEngine.Terrain terrain = terrainTile.GetComponent<UnityEngine.Terrain>();
 
-            terrain.terrainData.heightmapResolution = mapTile.data.sprite.texture.width;
+            terrain.terrainData.heightmapResolution = mapTile.data.sprite.texture.width / 2;
             // Set the tile size
             terrain.terrainData.size = new Vector3(
                 earth.tilesManager.tileSize.value,

@@ -45,7 +45,7 @@ namespace FunkySheep.Earth.Buildings
         newPositions[i].z = building.points[i].y - building.position.y;
       }
       
-      mesh.CreateShapeFromPolygon(newPositions, maxHeight.Value - minHeight.Value + building.area / 4, false);
+      mesh.CreateShapeFromPolygon(newPositions, maxHeight.Value - minHeight.Value + 10, false);
       GetComponent<MeshRenderer>().material = material;
       transform.position = new Vector3(building.position.x, minHeight.Value, building.position.y);
     }
