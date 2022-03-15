@@ -30,7 +30,6 @@ namespace FunkySheep.Earth.Trees
 
     public void ProcessImage(Vector3Int mapPosition, Vector3 tileScale, Color32[] pixels)
     {
-      Debug.Log("run");
       try
       {
           int lastX = -8;
@@ -53,7 +52,6 @@ namespace FunkySheep.Earth.Trees
                   lastY = y;
               }
           }
-          Debug.Log("stop " + positions.Count);
       }
       catch (Exception e)
       {
@@ -65,10 +63,11 @@ namespace FunkySheep.Earth.Trees
     {
       GameObject go = GameObject.Instantiate(tree);
       go.transform.position = position;
+
       go.transform.localScale = new Vector3(
-          UnityEngine.Random.Range(5, 10),
-          UnityEngine.Random.Range(5, 10),
-          UnityEngine.Random.Range(5, 10)
+          UnityEngine.Random.Range(3, 5),
+          UnityEngine.Random.Range(3, 5),
+          UnityEngine.Random.Range(3, 5)
       );
       go.transform.Rotate(
           new Vector3(
@@ -77,6 +76,7 @@ namespace FunkySheep.Earth.Trees
           UnityEngine.Random.Range(0, 10)
           )
       );
+      go.transform.parent = transform;
     }
 
     public void Create(Vector3 playerPosition)
