@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31e54557dbe2f5148b93b53395f810f6, type: 3}
+  m_Name: authentification-create
+  m_EditorClassIdentifier: 
+  apiPath: /api/system/authentication
+  ack: 1
+  fields:
+  - {fileID: 11400000, guid: 496f9591e91622f43a1d8331a0d47bd9, type: 2}
+  - {fileID: 11400000, guid: bc6db6dd55af4f84f995d50cdb805576, type: 2}
+  - {fileID: 11400000, guid: 3d1e1663399e5004190010fbf89cb268, type: 2}

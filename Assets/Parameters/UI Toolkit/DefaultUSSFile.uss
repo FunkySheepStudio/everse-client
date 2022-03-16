@@ -1,0 +1,9 @@
+* {
+  color: white;
+}
+
+Button {
+  color: black;
+  background-color: orange;
+}
+VisualElement {}
