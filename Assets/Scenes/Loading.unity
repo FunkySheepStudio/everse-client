@@ -157,7 +157,6 @@ MonoBehaviour:
   onConnect: {fileID: 11400000, guid: dd74ddb2f0259b04e949cdcf950c65d5, type: 2}
   onDisconnect: {fileID: 11400000, guid: ed37dfd9f33638c48bc5c852284ddc16, type: 2}
   services:
-  - {fileID: 0}
   - {fileID: 11400000, guid: 7f5c2323b2aa383499001f38260f446e, type: 2}
 --- !u!4 &476294910
 Transform:
@@ -580,6 +579,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   authenticate: {fileID: 11400000, guid: 7f5c2323b2aa383499001f38260f446e, type: 2}
+  login: {fileID: 11400000, guid: 496f9591e91622f43a1d8331a0d47bd9, type: 2}
+  password: {fileID: 11400000, guid: bc6db6dd55af4f84f995d50cdb805576, type: 2}
 --- !u!114 &2018725486
 MonoBehaviour:
   m_ObjectHideFlags: 0
