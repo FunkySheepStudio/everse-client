@@ -29,7 +29,7 @@ namespace Game.Authentication
       login.value = txtLogin.value;
       password.value = txtPassword.value;
       authenticate.Execute();
-      //SceneManager.LoadScene("Scenes/Main");
+      SceneManager.LoadScene("Scenes/Main");
     }
   }  
 }
