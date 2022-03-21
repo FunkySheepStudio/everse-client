@@ -12,8 +12,7 @@ namespace FunkySheep.Network
     public Connection connection;
     public FunkySheep.Events.SimpleEvent onConnect;
     public FunkySheep.Events.SimpleEvent onDisconnect;
-    [SerializeField]
-    List<Services.Service> services = new List<Services.Service>();
+    public List<Services.Service> services = new List<Services.Service>();
     WebSocket webSocket;
 
     private void Start() {
@@ -76,14 +75,6 @@ namespace FunkySheep.Network
     async void OnApplicationQuit()
     {
       await webSocket.Close();
-    }
-
-    public void Regiser(Services.Service service)
-    {
-      if (!services.Contains(service))
-      {
-        services.Add(service);
-      }
     }
 
     public void Send(string message)
