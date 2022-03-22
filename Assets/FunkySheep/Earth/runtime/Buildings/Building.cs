@@ -9,7 +9,8 @@ namespace FunkySheep.Earth.Buildings
   {
     public long id;
     public List<Vector2> points = new List<Vector2>();
-    public List<Vector2> heights = new List<Vector2>();
+    public List<Vector2> innerPoints = new List<Vector2>();
+    public int stagesCount = 5;
     public Vector2 position;
     public float area;
     public float? lowPoint = null;

@@ -106,6 +106,7 @@ namespace FunkySheep.Earth.Buildings
         );
 
         GameObject go = new GameObject(building.id.ToString());
+        go.tag = "Floor";
         go.transform.position = buildingPosition;
         go.transform.parent = transform;
         FunkySheep.Earth.Buildings.Floor floor = go.AddComponent<FunkySheep.Earth.Buildings.Floor>();
