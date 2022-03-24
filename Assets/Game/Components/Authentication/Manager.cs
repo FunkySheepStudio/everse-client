@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using FunkySheep.SimpleJSON;
 
 namespace Game.Authentication
 {
@@ -29,7 +30,16 @@ namespace Game.Authentication
       login.value = txtLogin.value;
       password.value = txtPassword.value;
       authenticate.Execute();
-      SceneManager.LoadScene("Scenes/Main");
+    }
+
+    public void onAuthReceived(JSONNode authResponse)
+    {
+      if (authResponse["data"]["accessToken"] != null)
+      {
+        SceneManager.LoadScene("Scenes/Main");
+      } else {
+        Debug.Log(authResponse["data"].ToString());
+      }
     }
   }  
 }

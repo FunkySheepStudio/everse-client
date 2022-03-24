@@ -54,22 +54,15 @@ namespace FunkySheep.Network
       string msgService = msgObject["service"];
       string msgRequest = msgObject["request"];
       
-      /*services.FindAll(service => service.api == msgService)
+      services.FindAll(service => service.apiPath == msgService)
         .ForEach(service => {
-          service.lastRawMsg = msgObject;
-
-          service.fields.ForEach(field => {
-            if (field.apiName != "" && msgObject["data"][field.apiName] != null)
-              field.variable.fromJSONNode(msgObject["data"][field.apiName]);
-          });
-
           //  Raise the event
-          if (service.onReception) {
-            service.onReception.Raise();
+          if (service.onReceptionEvent) {
+            service.onReceptionEvent.Raise(msgObject);
           }
-        });*/
+        });
 
-        Debug.Log("Received message: " + strMsg + this);
+        //Debug.Log("Received message: " + strMsg + this);
     }
 
     async void OnApplicationQuit()

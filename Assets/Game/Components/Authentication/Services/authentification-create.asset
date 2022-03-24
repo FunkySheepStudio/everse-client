@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: authentification-create
   m_EditorClassIdentifier: 
   apiPath: /api/system/authentication
+  onReceptionEvent: {fileID: 11400000, guid: b3109d097a48dd34e92d295e2793bf63, type: 2}
   ack: 1
   fields:
   - {fileID: 11400000, guid: 496f9591e91622f43a1d8331a0d47bd9, type: 2}
