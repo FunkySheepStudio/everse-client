@@ -7,17 +7,24 @@ namespace Game.Player
   public class Movements : MonoBehaviour
   {
     public float speed = 20;
+    public float curSpeed;
     public float rotateSpeed = 1;
-    private CharacterController characterController;
+    public CharacterController characterController;
+    public Animator animator;
+    public GameObject mobileController;
     
     private void Awake() {
       characterController = GetComponent<CharacterController>();
+      #if UNITY_ANDROID
+        mobileController = GameObject.Instantiate(mobileController);
+        mobileController.GetComponentInChildren<Game.Player.Joystick>().movements = this;
+      #endif
     }
 
     // Update is called once per frame
     void Update()
     {
-      float curSpeed = 0;
+      curSpeed = 0;
 
       #if UNITY_EDITOR
         transform.Rotate(0, Input.GetAxis("Horizontal") * rotateSpeed, 0);
@@ -27,14 +34,26 @@ namespace Game.Player
           Jump();
         }
       #endif
+      Move();
+    }
 
-      characterController.SimpleMove(transform.forward * curSpeed);
+    private void FixedUpdate() {
+      if (characterController.isGrounded)
+      {
+        animator.SetBool("isGrounded", true);
+      }
     }
 
     public void Jump()
     {
-      //animator.SetBool("isGrounded", false);
+      animator.SetBool("isGrounded", false);
       characterController.Move(Vector3.up * 0.1f + transform.forward * 0.1f);
+    }
+
+    public void Move()
+    {
+      animator.SetFloat("Speed", curSpeed);
+      characterController.SimpleMove(transform.forward * curSpeed);
     }
   }
 }
