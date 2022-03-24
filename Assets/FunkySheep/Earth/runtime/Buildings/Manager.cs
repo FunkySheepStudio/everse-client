@@ -98,7 +98,6 @@ namespace FunkySheep.Earth.Buildings
 
       foreach (Building building in closeBuildings.ToList())
       {
-        buildings.Remove(building);
         Vector3 buildingPosition = new Vector3(
           building.position.x,
           0,
@@ -113,6 +112,7 @@ namespace FunkySheep.Earth.Buildings
         floor.building = building;
         floor.material = floorMaterial;
         floor.Create();
+        buildings.Remove(building);
       }
     }
   }

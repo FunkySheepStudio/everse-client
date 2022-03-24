@@ -30,6 +30,25 @@ namespace Game.Player
           lastPosition = transform.position;
       }
     }
+
+    public void SetInitialHeight(FunkySheep.Earth.Terrain.Tile terrainTile)
+    {
+      if (
+        terrainTile.position == 
+        new Vector2Int(
+          (int)earth.initialMapPosition.value.x,
+          (int)earth.initialMapPosition.value.y
+        )
+      )
+      {
+        this.transform.position = new Vector3(
+          transform.position.x,
+          FunkySheep.Earth.Terrain.Manager.GetHeight(this.transform.position),
+          transform.position.z
+        );
+      }
+    }
+
     public void Calculate() {
       tilePosition = earth.tilesManager.TilePosition(
         new Vector2(

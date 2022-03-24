@@ -36,7 +36,8 @@ namespace Game.Authentication
     {
       if (authResponse["data"]["accessToken"] != null)
       {
-        SceneManager.LoadScene("Scenes/Main");
+        SceneManager.LoadSceneAsync("Scenes/Main", LoadSceneMode.Additive);
+        gameObject.SetActive(false);
       } else {
         Debug.Log(authResponse["data"].ToString());
       }

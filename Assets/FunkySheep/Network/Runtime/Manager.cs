@@ -37,11 +37,17 @@ namespace FunkySheep.Network
     }
 
     private void onConnectionOpen() {
-      onConnect.Raise();
+      if (onConnect != null)
+      {
+        onConnect.Raise();
+      }
     }
 
     private void onConnectionClose(WebSocketCloseCode code) {
-      onDisconnect.Raise();
+      if (onDisconnect != null)
+      {
+        onDisconnect.Raise();
+      }
     }
 
     private void onConnectionError(string errMsg) {
