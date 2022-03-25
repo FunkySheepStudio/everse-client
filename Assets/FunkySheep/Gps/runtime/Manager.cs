@@ -11,7 +11,7 @@ namespace FunkySheep.Gps
         public FunkySheep.Types.Double longitude;
         public FunkySheep.Events.Event<GameObject> onStartedEvent;
 
-        ///GameObject dialog = null;
+        GameObject dialog = null;
         IEnumerator Start()
         {
             // Let some time for the editor to get the services location
@@ -22,7 +22,7 @@ namespace FunkySheep.Gps
             if (!Permission.HasUserAuthorizedPermission(Permission.FineLocation))
             {
                 Permission.RequestUserPermission(Permission.FineLocation);
-                //dialog = new GameObject();
+                dialog = new GameObject();
             }
 
             // First, check if user has location service enabled

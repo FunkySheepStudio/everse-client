@@ -47,7 +47,7 @@ namespace Game.Player
     public void Jump()
     {
       animator.SetBool("isGrounded", false);
-      characterController.Move(Vector3.up * 0.1f + transform.forward * 0.1f);
+      characterController.Move(Vector3.up + transform.forward);
     }
 
     public void Move()
