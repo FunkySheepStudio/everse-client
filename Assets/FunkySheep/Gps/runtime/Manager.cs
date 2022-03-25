@@ -16,7 +16,7 @@ namespace FunkySheep.Gps
         {
             // Let some time for the editor to get the services location
             #if UNITY_EDITOR
-			    yield return new WaitWhile(() => !UnityEditor.EditorApplication.isRemoteConnected);
+			        yield return new WaitWhile(() => !UnityEditor.EditorApplication.isRemoteConnected);
             #endif
 
             if (!Permission.HasUserAuthorizedPermission(Permission.FineLocation))
@@ -38,7 +38,7 @@ namespace FunkySheep.Gps
             // Wait until service initializes
             while (Input.location.status != LocationServiceStatus.Running)
             {
-                yield return new WaitForSeconds(1);
+              yield return new WaitForSeconds(1);
             }
 
             reset();
