@@ -1413,7 +1413,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 50
   curSpeed: 0
-  rotateSpeed: 1
+  rotateSpeed: 10
   characterController: {fileID: 0}
   animator: {fileID: 305512775}
   mobileController: {fileID: 6174094345984037225, guid: b5fdaaf071cc9b7478e47a1fa3e47e40, type: 3}
