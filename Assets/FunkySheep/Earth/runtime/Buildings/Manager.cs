@@ -43,7 +43,7 @@ namespace FunkySheep.Earth.Buildings
           buildings.Add(building);
         }
 
-        foreach (FunkySheep.OSM.Relation relation in parsedData.relations)
+        /*foreach (FunkySheep.OSM.Relation relation in parsedData.relations)
         {
           foreach (FunkySheep.OSM.Way way in relation.ways)
           {
@@ -58,7 +58,7 @@ namespace FunkySheep.Earth.Buildings
             building.Initialize();
             buildings.Add(building);
           }
-        }
+        }*/
       }
       catch (Exception e)
       {
