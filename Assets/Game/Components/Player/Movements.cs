@@ -15,7 +15,7 @@ namespace Game.Player
     
     private void Awake() {
       characterController = GetComponent<CharacterController>();
-      #if UNITY_ANDROID
+      #if !UNITY_EDITOR
         mobileController = GameObject.Instantiate(mobileController);
         mobileController.GetComponentInChildren<Game.Player.Joystick>().movements = this;
       #endif
