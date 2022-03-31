@@ -13,14 +13,16 @@ namespace Game.Terrain
         Vector2Int terrainPos = UnityEngine.Terrain.activeTerrains[i].GetComponent<FunkySheep.Earth.Terrain.Tile>().position;
         if (terrainPos == tile.mapPosition)
         {
-          TerrainLayer[] layers = new TerrainLayer[1];
+          //Uncomment to use a standart terrain shader
+          /*TerrainLayer[] layers = new TerrainLayer[1];
           layers[0] = new TerrainLayer();
           layers[0].diffuseTexture = tile.data.sprite.texture;
           layers[0].tileSize = new Vector2(
             UnityEngine.Terrain.activeTerrains[i].terrainData.size.x,
             UnityEngine.Terrain.activeTerrains[i].terrainData.size.z
           );
-          UnityEngine.Terrain.activeTerrains[i].terrainData.terrainLayers = layers;
+          UnityEngine.Terrain.activeTerrains[i].terrainData.terrainLayers = layers;*/
+          UnityEngine.Terrain.activeTerrains[i].materialTemplate.SetTexture("diffuse", tile.data.sprite.texture);
         }
       }
     }
