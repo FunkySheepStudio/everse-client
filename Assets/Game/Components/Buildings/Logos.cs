@@ -18,7 +18,15 @@ namespace Game.Buildings
       FunkySheep.OSM.Tag buildingType = floor.building.tags.Find(tag => tag.name == "amenity");
       if (buildingType != null)
       {
-        logosManager.Add(buildingType.value, building);
+        logosManager.Add(
+          buildingType.value,
+          building,
+          new Vector3(
+            floor.building.position.x,
+            floor.building.hightPoint.Value + 15,
+            floor.building.position.y
+          )
+        );
       }
     }
   }  

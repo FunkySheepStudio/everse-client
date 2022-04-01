@@ -9,7 +9,7 @@ namespace FunkySheep.Logos
   {
     public GameObject logos;
     
-    public void Add(string name, GameObject parentGo)
+    public GameObject Add(string name, GameObject parentGo)
     {
       Transform logo = logos.transform.Find(name + ".svg");
 
@@ -20,8 +20,14 @@ namespace FunkySheep.Logos
 
       GameObject go = GameObject.Instantiate(logo.gameObject, parentGo.transform);
       go.transform.rotation = Quaternion.Euler(Vector3.zero);
-      go.transform.position += Vector3.up * 5;
       go.transform.localScale *= 3;
+      return go;
+    }
+
+    public void Add(string name, GameObject parentGo, Vector3 position)
+    {
+      GameObject go = Add(name, parentGo);
+      go.transform.position = position;
     }
   }
 }

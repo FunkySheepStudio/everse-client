@@ -97,7 +97,7 @@ namespace FunkySheep.Earth.Buildings
     public void Create(Vector3 position)
     {
       Vector2 positionV2 = new Vector2(position.x, position.z);
-      List<Building> closeBuildings = buildings.FindAll(building => Vector2.Distance(building.position, positionV2) <= 100);
+      List<Building> closeBuildings = buildings.FindAll(building => Vector2.Distance(building.position, positionV2) <= 500);
 
       foreach (Building building in closeBuildings.ToList())
       {

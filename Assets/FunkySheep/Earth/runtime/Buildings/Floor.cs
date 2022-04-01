@@ -43,7 +43,7 @@ namespace FunkySheep.Earth.Buildings
         newPositions[i].z = building.points[i].y - building.position.y;
       }
       
-      mesh.CreateShapeFromPolygon(newPositions, building.hightPoint.Value - building.lowPoint.Value + 0.5f, false);
+      mesh.CreateShapeFromPolygon(newPositions, building.hightPoint.Value - building.lowPoint.Value + 15f, false);
       GetComponent<MeshRenderer>().material = material;
       transform.position = new Vector3(building.position.x, building.lowPoint.Value, building.position.y);
     }
@@ -88,8 +88,6 @@ namespace FunkySheep.Earth.Buildings
             pointBprime.y
           );
         }
-
-        Debug.DrawLine(pointBprime3D, pointBprime3D + Vector3.up * 2, Color.red, 600);
         
         building.innerPoints[iB] = pointBprime;
       }
