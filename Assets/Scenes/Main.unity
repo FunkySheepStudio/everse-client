@@ -310,6 +310,9 @@ GameObject:
   m_Component:
   - component: {fileID: 295731373}
   - component: {fileID: 295731374}
+  - component: {fileID: 295731375}
+  - component: {fileID: 295731377}
+  - component: {fileID: 295731376}
   m_Layer: 0
   m_Name: Buildings
   m_TagString: Untagged
@@ -347,6 +350,60 @@ MonoBehaviour:
   earthManager: {fileID: 1100245712}
   buildings: []
   floorMaterial: {fileID: 2100000, guid: 23055002f81e3d344b1a2158b1d85509, type: 2}
+  onBuildingCreation: {fileID: 11400000, guid: e88175acebc4c9648b6cecbc89d389c5, type: 2}
+--- !u!114 &295731375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295731372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef7e45e42abc494e8d5f95a4d0c85a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: e88175acebc4c9648b6cecbc89d389c5, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 295731376}
+        m_TargetAssemblyTypeName: Game.Buildings.Logos, Everse
+        m_MethodName: Add
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &295731376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295731372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821d150ba4bfde347a171f895a4f1265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &295731377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295731372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fcc443731ae2e40b6fa52191c97947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  logos: {fileID: 919132149155446097, guid: d6522302a5aea1b46963edf172e599d1, type: 3}
 --- !u!95 &305512775 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: -6057140222963153312, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}

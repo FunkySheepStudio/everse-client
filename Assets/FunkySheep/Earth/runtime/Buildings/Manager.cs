@@ -13,6 +13,7 @@ namespace FunkySheep.Earth.Buildings
     public FunkySheep.Earth.Manager earthManager;
     public List<Building> buildings = new List<Building>();
     public Material floorMaterial;
+    public FunkySheep.Events.GameObjectEvent onBuildingCreation;
     
     public void DownLoad(Vector2Int position)
     {
@@ -38,6 +39,8 @@ namespace FunkySheep.Earth.Buildings
             Vector2 point = earthManager.CalculatePosition(way.nodes[i].latitude, way.nodes[i].longitude);
             building.points.Add(point);
           }
+
+          building.tags = way.tags;
 
           building.Initialize();
           buildings.Add(building);
@@ -113,6 +116,10 @@ namespace FunkySheep.Earth.Buildings
         floor.material = floorMaterial;
         floor.Create();
         buildings.Remove(building);
+        if (onBuildingCreation != null)
+        {
+          onBuildingCreation.Raise(go);
+        }
       }
     }
   }

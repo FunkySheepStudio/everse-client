@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="152.51678mm"
+   height="152.7836mm"
+   viewBox="0 0 152.51678 152.7836"
+   version="1.1"
+   id="svg825"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   sodipodi:docname="parking.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview827"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="0.70911897"
+     inkscape:cx="758.68793"
+     inkscape:cy="492.86511"
+     inkscape:window-width="2880"
+     inkscape:window-height="1541"
+     inkscape:window-x="2869"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs822" />
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(96.03352,-18.006441)">
+    <path
+       id="path4896"
+       d="m -78.949292,18.023139 c -10.936552,0 -17.084228,5.654704 -17.084228,17.207735 V 154.3249 c 0,10.80558 5.527253,16.46514 16.454809,16.46514 H 40.020705 c 10.927292,0 16.46256,-5.37646 16.46256,-16.46514 V 35.230874 c 0,-11.27125 -5.534959,-17.207735 -16.806208,-17.207735 0,0 -118.662874,-0.03757 -118.625832,0 z m 24.910108,23.501924 h 44.0768942 c 19.2748956,0 33.4749588,17.245418 33.4749588,34.996313 0,19.957521 -16.8962917,34.867124 -34.395833,34.867124 h -23.121585 v 34.11523 h -20.034435 z m 20.266461,19.119763 v 31.435291 h 22.521624 c 8.1147707,0 15.0306059,-6.339149 15.0306059,-15.467274 0,-9.130771 -7.4241051,-15.968017 -14.7768759,-15.968017 z"
+       style="stroke-width:0.264583" />
+  </g>
+</svg>
