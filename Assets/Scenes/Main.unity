@@ -346,7 +346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15739d04016776749b48acf30cabac24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  urlTemplate: {fileID: 11400000, guid: 5451ba45bb3bc1f4191beda52b76b462, type: 2}
+  urlTemplate: {fileID: 11400000, guid: ee5c4a0740864c643a1944ee963d1a86, type: 2}
   earthManager: {fileID: 1100245712}
   buildings: []
   floorMaterial: {fileID: 2100000, guid: 23055002f81e3d344b1a2158b1d85509, type: 2}
