@@ -22,6 +22,8 @@ namespace Game.Terrain
             UnityEngine.Terrain.activeTerrains[i].terrainData.size.z
           );
           UnityEngine.Terrain.activeTerrains[i].terrainData.terrainLayers = layers;*/
+
+          
           UnityEngine.Terrain.activeTerrains[i].materialTemplate.SetTexture("diffuse", tile.data.sprite.texture);
         }
       }

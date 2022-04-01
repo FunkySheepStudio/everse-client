@@ -910,7 +910,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   earth: {fileID: 1100245712}
   addedTileEvent: {fileID: 11400000, guid: 7298d18c648a4614882739bf227ef025, type: 2}
-  material: {fileID: 2100000, guid: 4cb5493f26d785f4abb722098b4dd445, type: 2}
+  material: {fileID: 2100000, guid: bb7f407b4fc56154aa1843dd7ce42e7f, type: 2}
 --- !u!114 &1097300366
 MonoBehaviour:
   m_ObjectHideFlags: 0
