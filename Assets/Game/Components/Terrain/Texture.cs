@@ -1,4 +1,4 @@
-using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,27 +6,27 @@ namespace Game.Terrain
 {
   public class Texture : MonoBehaviour
   {
-    public void AddTexture(FunkySheep.Earth.Map.Tile tile)
-    {
-      for (int i = 0; i < UnityEngine.Terrain.activeTerrains.Length; i++)
-      {
-        Vector2Int terrainPos = UnityEngine.Terrain.activeTerrains[i].GetComponent<FunkySheep.Earth.Terrain.Tile>().position;
-        if (terrainPos == tile.mapPosition)
-        {
-          //Uncomment to use a standart terrain shader
-          /*TerrainLayer[] layers = new TerrainLayer[1];
-          layers[0] = new TerrainLayer();
-          layers[0].diffuseTexture = tile.data.sprite.texture;
-          layers[0].tileSize = new Vector2(
-            UnityEngine.Terrain.activeTerrains[i].terrainData.size.x,
-            UnityEngine.Terrain.activeTerrains[i].terrainData.size.z
-          );
-          UnityEngine.Terrain.activeTerrains[i].terrainData.terrainLayers = layers;*/
+    List<FunkySheep.Earth.Map.Tile> tiles = new List<FunkySheep.Earth.Map.Tile>();
 
-          
-          UnityEngine.Terrain.activeTerrains[i].materialTemplate.SetTexture("diffuse", tile.data.sprite.texture);
+    private void LateUpdate() {
+      foreach (FunkySheep.Earth.Map.Tile tile in tiles.ToArray())
+      {
+        for (int i = 0; i < UnityEngine.Terrain.activeTerrains.Length; i++)
+        {
+          Vector2Int terrainPos = UnityEngine.Terrain.activeTerrains[i].GetComponent<FunkySheep.Earth.Terrain.Tile>().position;
+          if (tile.mapPosition == terrainPos)
+          {
+            UnityEngine.Terrain.activeTerrains[i].materialTemplate.SetTexture("diffuse", tile.data.sprite.texture);
+            tiles.Remove(tile);
+          }
         }
       }
+    }
+
+
+    public void AddTexture(FunkySheep.Earth.Map.Tile tile)
+    {
+      tiles.Add(tile);
     }
   }
 }
