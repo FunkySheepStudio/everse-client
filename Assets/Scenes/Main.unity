@@ -404,6 +404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   logos: {fileID: 919132149155446097, guid: d6522302a5aea1b46963edf172e599d1, type: 3}
+  material: {fileID: 2100000, guid: 24358c38712d28c4c8646fe96438b0f8, type: 2}
 --- !u!95 &305512775 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: -6057140222963153312, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
@@ -853,7 +854,7 @@ Camera:
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
+  m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 --- !u!4 &963194228

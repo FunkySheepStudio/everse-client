@@ -8,6 +8,7 @@ namespace FunkySheep.Logos
   public class Manager : MonoBehaviour
   {
     public GameObject logos;
+    public Material material;
     
     public GameObject Add(string name, GameObject parentGo)
     {
@@ -20,7 +21,9 @@ namespace FunkySheep.Logos
 
       GameObject go = GameObject.Instantiate(logo.gameObject, parentGo.transform);
       go.transform.rotation = Quaternion.Euler(Vector3.zero);
-      go.transform.localScale *= 3;
+      go.transform.localScale *= 5;
+      go.AddComponent<Game.Logos.Rotate>();
+      go.GetComponent<MeshRenderer>().material = material;
       return go;
     }
 
