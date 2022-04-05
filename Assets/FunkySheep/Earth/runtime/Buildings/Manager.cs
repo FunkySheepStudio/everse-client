@@ -45,23 +45,6 @@ namespace FunkySheep.Earth.Buildings
           building.Initialize();
           buildings.Add(building);
         }
-
-        /*foreach (FunkySheep.OSM.Relation relation in parsedData.relations)
-        {
-          foreach (FunkySheep.OSM.Way way in relation.ways)
-          {
-            Building building = new Building(way.id);
-
-            for (int i = 0; i < way.nodes.Count - 1; i++)
-            {
-              Vector2 point = earthManager.CalculatePosition(way.nodes[i].latitude, way.nodes[i].longitude);
-              building.points.Add(point);
-            }
-
-            building.Initialize();
-            buildings.Add(building);
-          }
-        }*/
       }
       catch (Exception e)
       {
