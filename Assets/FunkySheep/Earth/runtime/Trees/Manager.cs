@@ -84,7 +84,7 @@ namespace FunkySheep.Earth.Trees
         List<Vector3> closeTrees = positions.FindAll(position => Vector3.Distance(
             position,
             playerPosition
-            ) < 500);
+            ) < 800);
         foreach (Vector3 treePosition in closeTrees.ToList())
         {
             float? height = Terrain.Manager.GetHeight(treePosition);
