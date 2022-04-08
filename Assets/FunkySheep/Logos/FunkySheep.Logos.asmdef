@@ -1,0 +1,16 @@
+{
+    "name": "FunkySheep.Logos",
+    "rootNamespace": "",
+    "references": [
+        "GUID:637e27173e317834faa8188cf1562b83"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

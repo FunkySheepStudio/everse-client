@@ -7,13 +7,13 @@ using FunkySheep.SimpleJSON;
 namespace FunkySheep.Network
 {
   [AddComponentMenu("FunkySheep/Network/Network manager")]
-  public class Manager : Types.Singleton<Manager>
+  public class Manager : FunkySheep.Types.Singleton<Manager>
   {
     public Connection connection;
     public FunkySheep.Events.SimpleEvent onConnect;
     public FunkySheep.Events.SimpleEvent onDisconnect;
     public List<Services.Service> services = new List<Services.Service>();
-    WebSocket webSocket;
+    public WebSocket webSocket;
 
     private void Start() {
       Connect();
