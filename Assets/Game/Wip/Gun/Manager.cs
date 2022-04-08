@@ -13,7 +13,7 @@ namespace Game.Guns
     }
 
     private void Update() {
-      gun.Shoot();
+      gun.Shoot(transform.position, transform.forward);
     }
   }  
 }

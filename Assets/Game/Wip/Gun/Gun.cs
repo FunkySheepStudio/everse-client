@@ -11,6 +11,6 @@ namespace Game.Guns
     public float cooldown = 0.1f;
     public float lastShot = 0;
 
-    public abstract void Shoot();
+    public abstract void Shoot(Vector3 from, Vector3 to);
   }
 }
