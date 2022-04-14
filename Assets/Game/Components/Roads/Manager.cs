@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Linq;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using UnityEngine;
 
 namespace Game.Roads
@@ -11,7 +12,8 @@ namespace Game.Roads
     public FunkySheep.Types.String urlTemplate;
     public FunkySheep.Earth.Manager earthManager;
     public Material material;
-    Queue<Road> roads = new Queue<Road>();
+    public GameObject player;
+    ConcurrentQueue<Road> roads = new ConcurrentQueue<Road>();
 
     public void AddTile(FunkySheep.Earth.Terrain.Tile terrainTile)
     {
@@ -80,7 +82,11 @@ namespace Game.Roads
     private void Update() {
       if (roads.Count != 0)
       {
-        Create(roads.Dequeue());
+        Road result;
+        if (roads.TryDequeue(out result))
+        {
+          Create(result);
+        }
       }
     }
 
@@ -89,6 +95,8 @@ namespace Game.Roads
       GameObject roadGo = new GameObject(road.id.ToString());
       roadGo.transform.parent = transform;
       LineRenderer roadline = roadGo.AddComponent<LineRenderer>();
+      PlayerDetection playerDetection = roadGo.AddComponent<PlayerDetection>();
+      playerDetection.player = player;
 
       List<Vector3> points = new List<Vector3>();
       foreach (Vector2 point in road.points)
@@ -101,6 +109,8 @@ namespace Game.Roads
         );
 
         points.Add(point3d);
+
+        playerDetection.points.Add(point3d);
       }    
 
       roadline.material = material;

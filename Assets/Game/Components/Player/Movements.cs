@@ -16,8 +16,8 @@ namespace Game.Player
     private void Awake() {
       characterController = GetComponent<CharacterController>();
       #if !UNITY_EDITOR
-        mobileController = GameObject.Instantiate(mobileController);
-        mobileController.GetComponentInChildren<Game.Player.Joystick>().movements = this;
+        //mobileController = GameObject.Instantiate(mobileController);
+        //mobileController.GetComponentInChildren<Game.Player.Joystick>().movements = this;
       #endif
     }
 
@@ -26,14 +26,12 @@ namespace Game.Player
     {
       curSpeed = 0;
 
-      #if UNITY_EDITOR
-        transform.Rotate(0, Input.GetAxis("Horizontal") * rotateSpeed, 0);
-        curSpeed += speed * Input.GetAxis("Vertical");
-        if (Input.GetKey("space"))
-        {
-          Jump();
-        }
-      #endif
+      transform.Rotate(0, Input.GetAxis("Horizontal") * rotateSpeed, 0);
+      curSpeed += speed * Input.GetAxis("Vertical");
+      if (Input.GetKey("space"))
+      {
+        Jump();
+      }
       Move();
     }
 

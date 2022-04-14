@@ -16,7 +16,7 @@ namespace FunkySheep.Earth.Roads
     Vector2 worldBoundaryEnd;
     float [,] heights;
 
-    public Graphs.Graph<Vector2> graph = new Graphs.Graph<Vector2>();
+    //public Graphs.Graph<Vector2> graph = new Graphs.Graph<Vector2>();
     public Tile(Vector2Int postition) : base(postition)
     {
     }
