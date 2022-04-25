@@ -16,7 +16,6 @@ namespace FunkySheep.Earth.Terrain
         Texture2D texture;
 
         public bool heightsCalculated = false;
-        public bool heightsAdded = false;
         public bool heightUpdated = false;
         int terrainResolution;
 
@@ -28,19 +27,12 @@ namespace FunkySheep.Earth.Terrain
         }
 
         private void Update() {
-            if (heightsCalculated)
+            if (heightsCalculated && !heightUpdated)
             {
               terrain.terrainData.SetHeightsDelayLOD(0, 0, heights);
               terrain.terrainData.SyncHeightmap();
-              heightsCalculated = false;
-              heightsAdded = true;
+              heightUpdated = true;
               addedTileEvent.Raise(this);
-            }
-
-            if (heightsAdded)
-            {
-              terrain.terrainData.SetHeightsDelayLOD(0, 0, heights);
-              terrain.terrainData.SyncHeightmap();
               gameObject.AddComponent<Connector>();
             }
         }
