@@ -46,10 +46,6 @@ namespace Game.Player
     {
       animator.SetBool("isGrounded", false);
       characterController.Move(Vector3.up + transform.forward);
-      if (GetComponent<OnTheRoad>() != null)
-      {
-        GetComponent<OnTheRoad>().enabled = false;
-      }
     }
 
     public void Move()

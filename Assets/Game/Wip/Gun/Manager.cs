@@ -13,7 +13,10 @@ namespace Game.Guns
     }
 
     private void Update() {
-      gun.Shoot(transform.position, transform.forward);
+      if (Input.GetButton("Fire1"))
+      {
+        gun.Shoot(transform.position, transform.forward);
+      }
     }
   }  
 }

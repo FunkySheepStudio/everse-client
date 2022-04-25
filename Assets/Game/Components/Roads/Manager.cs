@@ -94,9 +94,9 @@ namespace Game.Roads
     {
       GameObject roadGo = new GameObject(road.id.ToString());
       roadGo.transform.parent = transform;
+      roadGo.layer = 20;
       LineRenderer roadline = roadGo.AddComponent<LineRenderer>();
-      PlayerDetection playerDetection = roadGo.AddComponent<PlayerDetection>();
-      playerDetection.player = player;
+      MeshCollider lineCollider = roadGo.AddComponent<MeshCollider>();
 
       List<Vector3> points = new List<Vector3>();
       foreach (Vector2 point in road.points)
@@ -109,14 +109,15 @@ namespace Game.Roads
         );
 
         points.Add(point3d);
-
-        playerDetection.points.Add(point3d);
       }    
 
       roadline.material = material;
       roadline.startWidth = roadline.endWidth = 10;
       roadline.positionCount = points.Count;
       roadline.SetPositions(points.ToArray());
+      Mesh mesh = new Mesh();
+      roadline.BakeMesh(mesh, true);
+      lineCollider.sharedMesh = mesh;
     }
   }
 }
