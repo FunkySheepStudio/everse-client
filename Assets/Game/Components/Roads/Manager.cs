@@ -113,6 +113,7 @@ namespace Game.Roads
 
       roadline.material = material;
       roadline.startWidth = roadline.endWidth = 10;
+      roadline.numCapVertices = 4;
       roadline.positionCount = points.Count;
       roadline.SetPositions(points.ToArray());
       Mesh mesh = new Mesh();

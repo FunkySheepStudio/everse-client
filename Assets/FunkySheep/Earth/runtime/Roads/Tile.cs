@@ -78,7 +78,6 @@ namespace FunkySheep.Earth.Roads
 
         // Trigger the terrain update
         terrainTile.heights = heights;
-        terrainTile.roadsCalculated = true;
       }
       catch (Exception e)
       {

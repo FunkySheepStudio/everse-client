@@ -17,10 +17,7 @@ namespace FunkySheep.Earth.Terrain
 
         public bool heightsCalculated = false;
         public bool heightsAdded = false;
-        public bool roadsCalculated = false;
-        public bool roadsAdded = false;
         public bool heightUpdated = false;
-
         int terrainResolution;
 
 
@@ -40,13 +37,11 @@ namespace FunkySheep.Earth.Terrain
               addedTileEvent.Raise(this);
             }
 
-            if (heightsAdded && roadsCalculated)
+            if (heightsAdded)
             {
               terrain.terrainData.SetHeightsDelayLOD(0, 0, heights);
               terrain.terrainData.SyncHeightmap();
               gameObject.AddComponent<Connector>();
-              roadsCalculated = false;
-              roadsAdded = true;
             }
         }
         

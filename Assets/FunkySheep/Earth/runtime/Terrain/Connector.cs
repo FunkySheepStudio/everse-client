@@ -22,22 +22,21 @@ namespace FunkySheep.Earth.Terrain
     private void Update() {
       if (
         !topConnected &&
-        terrain.topNeighbor != null &&
-        terrain.topNeighbor.GetComponent<Tile>().roadsAdded
+        terrain.topNeighbor != null
       )
       {
         ConnectTop(terrain.topNeighbor);
       }
 
-      if (!leftConnected && terrain.leftNeighbor != null && terrain.leftNeighbor.GetComponent<Tile>().roadsAdded)
+      if (!leftConnected && terrain.leftNeighbor != null)
       {
         ConnectLeft(terrain.leftNeighbor);
       }
 
       if (!cornerConnected &&
-          terrain.leftNeighbor != null && terrain.leftNeighbor.GetComponent<Tile>().roadsAdded &&
-          terrain.topNeighbor != null && terrain.topNeighbor.GetComponent<Tile>().roadsAdded &&
-          terrain.leftNeighbor.topNeighbor != null && terrain.leftNeighbor.topNeighbor.GetComponent<Tile>().roadsAdded
+          terrain.leftNeighbor != null &&
+          terrain.topNeighbor != null &&
+          terrain.leftNeighbor.topNeighbor != null
           )
       {
         ConnectCorners();
