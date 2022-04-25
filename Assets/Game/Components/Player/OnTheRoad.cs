@@ -6,23 +6,29 @@ namespace Game.Player
 {
   public class OnTheRoad : MonoBehaviour
   {
-    public float speed = 40;
-    public Vector3 direction;
     CharacterController characterController;
+    Game.Player.Movements movements;
+    public float lastHit = 0;
 
     private void Awake() {
       characterController = GetComponent<CharacterController>();
+      movements = GetComponent<Game.Player.Movements>();
+    }
+
+    private void OnEnable() {
+      lastHit = 0;
+      movements.speed = 100;
     }
     
     // Update is called once per frame
     void Update()
     {
-      Move();
-    }
-
-    public void Move()
-    {
-      transform.position = Vector3.Lerp(transform.position, direction, Time.deltaTime);
+      lastHit += Time.deltaTime;
+      if (lastHit > 3)
+      {
+        movements.speed = 50;
+        this.enabled = false;
+      }
     }
   }
 }

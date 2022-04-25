@@ -30,12 +30,7 @@ namespace Game.Roads
             } else {
               player.GetComponent<Game.Player.OnTheRoad>().enabled = true;
             }
-            player.GetComponent<Game.Player.OnTheRoad>().direction = points[i];
-          } else {
-            if (player.GetComponent<Game.Player.OnTheRoad>() != null)
-            {
-              player.GetComponent<Game.Player.OnTheRoad>().enabled = false;
-            }
+            player.GetComponent<Game.Player.OnTheRoad>().lastHit = 0;
           }
         }
       }
