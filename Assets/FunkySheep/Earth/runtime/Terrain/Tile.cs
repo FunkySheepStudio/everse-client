@@ -32,8 +32,8 @@ namespace FunkySheep.Earth.Terrain
               terrain.terrainData.SetHeightsDelayLOD(0, 0, heights);
               terrain.terrainData.SyncHeightmap();
               heightUpdated = true;
-              addedTileEvent.Raise(this);
               gameObject.AddComponent<Connector>();
+              addedTileEvent.Raise(this);
             }
         }
         

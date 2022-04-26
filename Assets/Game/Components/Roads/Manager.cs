@@ -115,6 +115,7 @@ namespace Game.Roads
       roadline.startWidth = roadline.endWidth = 10;
       roadline.numCapVertices = 4;
       roadline.shadowBias = 1;
+      roadline.textureMode = LineTextureMode.RepeatPerSegment;
       roadline.positionCount = points.Count;
       roadline.SetPositions(points.ToArray());
       Mesh mesh = new Mesh();
