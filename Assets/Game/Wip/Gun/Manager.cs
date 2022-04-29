@@ -1,22 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Guns
 {
-  public class Manager : MonoBehaviour
-  {
-    public Gun gun;
+    public class Manager : MonoBehaviour
+    {
+        public Gun gun;
 
-    private void Start() {
-      GameObject.Instantiate(gun.Model);
-    }
+        private void Start()
+        {
+            GameObject.Instantiate(gun.Model);
+        }
 
-    private void Update() {
-      if (Input.GetButton("Fire1"))
-      {
-        gun.Shoot(transform.position, transform.forward);
-      }
+        private void Update()
+        {
+            if (Input.GetButton("Fire1"))
+            {
+                gun.Shoot(transform.position, transform.forward);
+            }
+        }
     }
-  }  
 }

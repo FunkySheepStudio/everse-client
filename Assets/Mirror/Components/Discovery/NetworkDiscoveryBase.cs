@@ -244,10 +244,10 @@ namespace Mirror.Discovery
         bool hasMulticastLock;
 #endif
         void BeginMulticastLock()
-		{
+        {
 #if UNITY_ANDROID
             if (hasMulticastLock) return;
-                
+
             if (Application.platform == RuntimePlatform.Android)
             {
                 using (AndroidJavaObject activity = new AndroidJavaClass("com.unity3d.player.UnityPlayer").GetStatic<AndroidJavaObject>("currentActivity"))
@@ -259,7 +259,7 @@ namespace Mirror.Discovery
                         hasMulticastLock = true;
                     }
                 }
-			}
+            }
 #endif
         }
 
@@ -267,13 +267,13 @@ namespace Mirror.Discovery
         {
 #if UNITY_ANDROID
             if (!hasMulticastLock) return;
-            
+
             multicastLock?.Call("release");
             hasMulticastLock = false;
 #endif
         }
 
-#endregion
+        #endregion
 
         #region Client
 

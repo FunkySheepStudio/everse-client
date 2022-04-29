@@ -39,35 +39,41 @@ namespace FunkySheep.Earth.Terrain
             terrainTile.SetHeights(mapTile);
         }
 
-        public static float GetHeight(Vector2 position)
+        public static float? GetHeight(Vector2 position)
         {
-          foreach (UnityEngine.Terrain terrain in UnityEngine.Terrain.activeTerrains)
-          {
-            UnityEngine.Bounds bounds = terrain.terrainData.bounds;
-            Vector2 terrainMin = new Vector2(
-              bounds.min.x + terrain.transform.position.x,
-              bounds.min.z + terrain.transform.position.z
-            );
-
-            Vector2 terrainMax = new Vector2(
-              bounds.max.x + terrain.transform.position.x,
-              bounds.max.z + terrain.transform.position.z
-            );
-            
-            if (position.x >= terrainMin.x && position.y >= terrainMin.y && position.x <= terrainMax.x && position.y <= terrainMax.y)
+            foreach (UnityEngine.Terrain terrain in UnityEngine.Terrain.activeTerrains)
             {
-              return terrain.terrainData.GetInterpolatedHeight(
-                (position.x - terrainMin.x) / (terrainMax.x - terrainMin.x),
-                (position.y - terrainMin.y) / (terrainMax.y - terrainMin.y)
-              );
+                UnityEngine.Bounds bounds = terrain.terrainData.bounds;
+                Vector2 terrainMin = new Vector2(
+                  bounds.min.x + terrain.transform.position.x,
+                  bounds.min.z + terrain.transform.position.z
+                );
+
+                Vector2 terrainMax = new Vector2(
+                  bounds.max.x + terrain.transform.position.x,
+                  bounds.max.z + terrain.transform.position.z
+                );
+
+                if (position.x >= terrainMin.x && position.y >= terrainMin.y && position.x <= terrainMax.x && position.y <= terrainMax.y)
+                {
+                    if (terrain.GetComponent<Tile>().heightUpdated == true)
+                    {
+                        return terrain.terrainData.GetInterpolatedHeight(
+                          (position.x - terrainMin.x) / (terrainMax.x - terrainMin.x),
+                          (position.y - terrainMin.y) / (terrainMax.y - terrainMin.y)
+                        );
+                    } else
+                    {
+                        return null;
+                    }
+                }
             }
-          }
-          return 0;
+            return null;
         }
 
-        public static float GetHeight(Vector3 position)
+        public static float? GetHeight(Vector3 position)
         {
-          return GetHeight(new Vector2(position.x, position.z));
+            return GetHeight(new Vector2(position.x, position.z));
         }
-    }    
+    }
 }

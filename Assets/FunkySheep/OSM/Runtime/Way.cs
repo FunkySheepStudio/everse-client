@@ -11,7 +11,7 @@ namespace FunkySheep.OSM
         public List<Tag> tags = new List<Tag>();
         public Way(int id)
         {
-          this.id = id;
+            this.id = id;
         }
     }
 }

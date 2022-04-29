@@ -10,18 +10,23 @@ namespace FunkySheep.Events
         /// </summary>
         private List<Listener<T>> eventListeners;
 
-        void Awake() {
-          if (eventListeners == null) {
-            eventListeners = new List<Listener<T>>();
-          }
+        void Awake()
+        {
+            if (eventListeners == null)
+            {
+                eventListeners = new List<Listener<T>>();
+            }
         }
 
         public void Raise(T value)
         {
-            for(int i = eventListeners.Count -1; i >= 0; i--)
-                if (eventListeners[i] != null) {
+            for (int i = eventListeners.Count - 1; i >= 0; i--)
+                if (eventListeners[i] != null)
+                {
                     eventListeners[i].OnEventRaised(value);
-                } else {
+                }
+                else
+                {
                     UnregisterListener(eventListeners[i]);
                 }
         }

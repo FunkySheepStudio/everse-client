@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace FunkySheep.Earth.Map
@@ -11,9 +9,9 @@ namespace FunkySheep.Earth.Map
         public UnityEngine.Tilemaps.Tile data;
         public Tile(Vector3Int tilemapPosition, Vector2Int mapPosition, UnityEngine.Tilemaps.Tile data)
         {
-        this.tilemapPosition = tilemapPosition;
-        this.mapPosition = mapPosition;
-        this.data = data;
+            this.tilemapPosition = tilemapPosition;
+            this.mapPosition = mapPosition;
+            this.data = data;
         }
-    }    
+    }
 }

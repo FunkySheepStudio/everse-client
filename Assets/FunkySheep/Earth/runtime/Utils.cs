@@ -27,7 +27,7 @@ namespace FunkySheep.Earth
 
         public static Vector2 toCartesianVector2(double lon, double lat)
         {
-            return new Vector2((float)lonToX(lon),(float)latToY(lat));
+            return new Vector2((float)lonToX(lon), (float)latToY(lat));
         }
 
         public static double[] toGps(double x, double y)
@@ -86,5 +86,5 @@ namespace FunkySheep.Earth
         {
             return deg * DEG2RAD;
         }
-    }    
+    }
 }

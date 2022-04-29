@@ -20,7 +20,7 @@ namespace Mirror.Examples.AdditiveScenes
             // Debug.Log($"Loading {subScene}");
 
             NetworkIdentity networkIdentity = other.gameObject.GetComponent<NetworkIdentity>();
-            SceneMessage message = new SceneMessage{ sceneName = subScene, sceneOperation = SceneOperation.LoadAdditive };
+            SceneMessage message = new SceneMessage { sceneName = subScene, sceneOperation = SceneOperation.LoadAdditive };
             networkIdentity.connectionToClient.Send(message);
         }
 
@@ -30,7 +30,7 @@ namespace Mirror.Examples.AdditiveScenes
             // Debug.Log($"Unloading {subScene}");
 
             NetworkIdentity networkIdentity = other.gameObject.GetComponent<NetworkIdentity>();
-            SceneMessage message = new SceneMessage{ sceneName = subScene, sceneOperation = SceneOperation.UnloadAdditive };
+            SceneMessage message = new SceneMessage { sceneName = subScene, sceneOperation = SceneOperation.UnloadAdditive };
             networkIdentity.connectionToClient.Send(message);
         }
     }

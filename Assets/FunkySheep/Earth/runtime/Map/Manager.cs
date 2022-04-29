@@ -15,14 +15,15 @@ namespace FunkySheep.Earth.Map
         public AddedTileEvent addedTileEvent;
         Tilemap tilemap;
 
-        private void Awake() {
-          transform.Rotate(new Vector3(90, 0, 0));
-          tilemap = GetComponent<Tilemap>();
-          GetComponent<Grid>().cellSize = new Vector3(
-              textureResolution.value.x,
-              textureResolution.value.y,
-              1
-          );
+        private void Awake()
+        {
+            transform.Rotate(new Vector3(90, 0, 0));
+            tilemap = GetComponent<Tilemap>();
+            GetComponent<Grid>().cellSize = new Vector3(
+                textureResolution.value.x,
+                textureResolution.value.y,
+                1
+            );
         }
 
         /// <summary>
@@ -51,7 +52,7 @@ namespace FunkySheep.Earth.Map
             // Set the default values
             if (!tilemap.HasTile(Vector3Int.zero))
             {
-              Reset();
+                Reset();
             }
 
             // Reverse mercator and grid positions
@@ -59,7 +60,7 @@ namespace FunkySheep.Earth.Map
             Vector3Int tileMapPosition = new Vector3Int(gridPosition.x, gridPosition.y, 0);
 
             if (!tilemap.HasTile(tileMapPosition))
-            {                
+            {
                 string url = InterpolatedUrl(mapPosition);
                 DownloadTile(tileMapPosition, mapPosition, url);
             }
@@ -67,7 +68,8 @@ namespace FunkySheep.Earth.Map
 
         public void DownloadTile(Vector3Int tileMapPosition, Vector2Int mapPosition, string url)
         {
-            StartCoroutine(FunkySheep.Network.Downloader.Download(url, (fileID, file) => {
+            StartCoroutine(FunkySheep.Network.Downloader.Download(url, (fileID, file) =>
+            {
                 Tile tile = new Tile(
                     tileMapPosition,
                     mapPosition,
@@ -95,7 +97,7 @@ namespace FunkySheep.Earth.Map
             texture.wrapMode = TextureWrapMode.Clamp;
             texture.filterMode = FilterMode.Point;
             tileData = ScriptableObject.CreateInstance<UnityEngine.Tilemaps.Tile>();
-            tileData.sprite = Sprite.Create((Texture2D) texture, new Rect(0.0f, 0.0f, texture.width, texture.height), Vector2.zero, 1);
+            tileData.sprite = Sprite.Create((Texture2D)texture, new Rect(0.0f, 0.0f, texture.width, texture.height), Vector2.zero, 1);
             return tileData;
         }
 
@@ -107,16 +109,16 @@ namespace FunkySheep.Earth.Map
         /// <returns>The interpolated Url</returns>
         public string InterpolatedUrl(Vector2Int mapPosition)
         {
-            string [] parameters = new string[3];
-            string [] parametersNames = new string[3];
+            string[] parameters = new string[3];
+            string[] parametersNames = new string[3];
 
             parameters[0] = earth.zoomLevel.value.ToString();
             parametersNames[0] = "zoom";
-            
-            parameters[1] =  mapPosition.x.ToString();
+
+            parameters[1] = mapPosition.x.ToString();
             parametersNames[1] = "position.x";
-            
-            parameters[2] =  mapPosition.y.ToString();
+
+            parameters[2] = mapPosition.y.ToString();
             parametersNames[2] = "position.y";
 
             return url.Interpolate(parameters, parametersNames);

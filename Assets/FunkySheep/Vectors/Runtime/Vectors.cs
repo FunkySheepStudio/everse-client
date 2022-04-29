@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace FunkySheep.Vectors
@@ -27,10 +25,12 @@ namespace FunkySheep.Vectors
             else if (angleOffset < 0)
             {
                 return -1;
-            } else {
+            }
+            else
+            {
                 return 0;
             }
-                    
+
         }
 
         /// <summary>
@@ -38,7 +38,8 @@ namespace FunkySheep.Vectors
         /// </summary>
         /// <param name="list"></param>
         /// <returns>Return a positif number if clockwise</returns>
-        public static int IsClockWise(Vector2[] list) {
+        public static int IsClockWise(Vector2[] list)
+        {
             float result = 0;
             for (int i = 0; i < list.Length; i++)
             {
@@ -56,7 +57,8 @@ namespace FunkySheep.Vectors
         /// </summary>
         /// <param name="list"></param>
         /// <returns>Return a positif number if clockwise</returns>
-        public static int IsClockWise(Vector2[] list, Vector2 origin) {
+        public static int IsClockWise(Vector2[] list, Vector2 origin)
+        {
             float result = 0;
             for (int i = 0; i < list.Length; i++)
             {

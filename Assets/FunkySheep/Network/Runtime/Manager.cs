@@ -1,84 +1,91 @@
-using System.Text;
-using System.Collections.Generic;
-using UnityEngine;
-using NativeWebSocket;
 using FunkySheep.SimpleJSON;
+using NativeWebSocket;
+using System.Collections.Generic;
+using System.Text;
+using UnityEngine;
 
 namespace FunkySheep.Network
 {
-  [AddComponentMenu("FunkySheep/Network/Network manager")]
-  public class Manager : FunkySheep.Types.Singleton<Manager>
-  {
-    public Connection connection;
-    public FunkySheep.Events.SimpleEvent onConnect;
-    public FunkySheep.Events.SimpleEvent onDisconnect;
-    public List<Services.Service> services = new List<Services.Service>();
-    public WebSocket webSocket;
-
-    private void Start() {
-      Connect();
-    }
-
-    private void Update() {
-      #if !UNITY_WEBGL || UNITY_EDITOR
-        webSocket.DispatchMessageQueue();
-      #endif
-    }
-    
-    public async void Connect()
+    [AddComponentMenu("FunkySheep/Network/Network manager")]
+    public class Manager : FunkySheep.Types.Singleton<Manager>
     {
-      webSocket = WebSocketFactory.CreateInstance(connection.address + ":" + connection.port);
-      //  Binding the events
-      webSocket.OnOpen += onConnectionOpen;
-      webSocket.OnClose += onConnectionClose;
-      webSocket.OnError += onConnectionError;
-      webSocket.OnMessage += onMessage;
-      await webSocket.Connect();
-    }
+        public Connection connection;
+        public FunkySheep.Events.SimpleEvent onConnect;
+        public FunkySheep.Events.SimpleEvent onDisconnect;
+        public List<Services.Service> services = new List<Services.Service>();
+        public WebSocket webSocket;
 
-    private void onConnectionOpen() {
-      if (onConnect != null)
-      {
-        onConnect.Raise();
-      }
-    }
+        private void Start()
+        {
+            Connect();
+        }
 
-    private void onConnectionClose(WebSocketCloseCode code) {
-      if (onDisconnect != null)
-      {
-        onDisconnect.Raise();
-      }
-    }
+        private void Update()
+        {
+#if !UNITY_WEBGL || UNITY_EDITOR
+            webSocket.DispatchMessageQueue();
+#endif
+        }
 
-    private void onConnectionError(string errMsg) {
-    }
+        public async void Connect()
+        {
+            webSocket = WebSocketFactory.CreateInstance(connection.address + ":" + connection.port);
+            //  Binding the events
+            webSocket.OnOpen += onConnectionOpen;
+            webSocket.OnClose += onConnectionClose;
+            webSocket.OnError += onConnectionError;
+            webSocket.OnMessage += onMessage;
+            await webSocket.Connect();
+        }
 
-    private void onMessage(byte[] msg)
-    {
-      string strMsg = Encoding.UTF8.GetString(msg);
-      JSONNode msgObject = JSON.Parse(strMsg);
-      string msgService = msgObject["service"];
-      string msgRequest = msgObject["request"];
-      
-      services.FindAll(service => service.apiPath == msgService)
-        .ForEach(service => {
-          //  Raise the event
-          if (service.onReceptionEvent) {
-            service.onReceptionEvent.Raise(msgObject);
-          }
-        });
+        private void onConnectionOpen()
+        {
+            if (onConnect != null)
+            {
+                onConnect.Raise();
+            }
+        }
 
-        //Debug.Log("Received message: " + strMsg + this);
-    }
+        private void onConnectionClose(WebSocketCloseCode code)
+        {
+            if (onDisconnect != null)
+            {
+                onDisconnect.Raise();
+            }
+        }
 
-    async void OnApplicationQuit()
-    {
-      await webSocket.Close();
-    }
+        private void onConnectionError(string errMsg)
+        {
+        }
 
-    public void Send(string message)
-    {
-      webSocket.SendText(message);
+        private void onMessage(byte[] msg)
+        {
+            string strMsg = Encoding.UTF8.GetString(msg);
+            JSONNode msgObject = JSON.Parse(strMsg);
+            string msgService = msgObject["service"];
+            string msgRequest = msgObject["request"];
+
+            services.FindAll(service => service.apiPath == msgService)
+              .ForEach(service =>
+              {
+                  //  Raise the event
+                  if (service.onReceptionEvent)
+                  {
+                      service.onReceptionEvent.Raise(msgObject);
+                  }
+              });
+
+            //Debug.Log("Received message: " + strMsg + this);
+        }
+
+        async void OnApplicationQuit()
+        {
+            await webSocket.Close();
+        }
+
+        public void Send(string message)
+        {
+            webSocket.SendText(message);
+        }
     }
-  }
 }
