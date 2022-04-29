@@ -32,8 +32,11 @@ namespace FunkySheep.Earth.Trees
         {
             try
             {
-                int lastX = -8;
-                int lastY = -8;
+                System.Random rnd = new System.Random();
+
+                int lastX = rnd.Next(-10, -5);
+                int lastY = rnd.Next(-10, -5);
+
                 for (int i = 0; i < pixels.Length; i++)
                 {
                     int x = i % 256;
@@ -41,13 +44,20 @@ namespace FunkySheep.Earth.Trees
 
                     if ((x - lastX >= 8 || y - lastY >= 8) && pixels[i].g - pixels[i].r > 10)
                     {
-                        positions.Add(
-                        new Vector3(
+                        Vector3 position = new Vector3(
                           earthManager.tilesManager.initialOffset.value.x * earthManager.tilesManager.tileSize.value + (mapPosition.x * tileScale.x * 256) + tileScale.x * x,
                           0,
                           earthManager.tilesManager.initialOffset.value.y * earthManager.tilesManager.tileSize.value + (mapPosition.y * tileScale.y * 256) + tileScale.y * y
-                          )
-                        );
+                          );
+
+                        position += new Vector3(
+                                rnd.Next(-10, 10),
+                                0,
+                                rnd.Next(-10, 10)
+                            ) * (float)rnd.NextDouble();
+
+                        positions.Add(position);
+
                         lastX = x;
                         lastY = y;
                     }
