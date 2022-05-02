@@ -7,6 +7,9 @@ namespace Game.Player
         //public FunkySheep.Types.Double calculatedLatitude;
         //public FunkySheep.Types.Double calculatedLongitude;
         public FunkySheep.Earth.Manager earth;
+
+        public FunkySheep.Types.Double calculatedLatitude;
+        public FunkySheep.Types.Double calculatedLongitude;
         public Vector2Int lastTilePosition;
         public Vector2Int tilePosition;
         public Vector2Int insideTileQuarterPosition;
@@ -23,6 +26,7 @@ namespace Game.Player
 
         private void Update()
         {
+            CalculateGPS();
             if (Vector3.Distance(lastPosition, transform.position) > 10)
             {
                 Calculate();
@@ -78,6 +82,19 @@ namespace Game.Player
                 earth.AddTile(tilePosition + insideTileQuarterPosition);
                 lastInsideTileQuarterPosition = insideTileQuarterPosition;
             }
+        }
+
+        public void CalculateGPS()
+        {
+            var calculatedGPS = FunkySheep.Earth.Utils.toGeoCoord(
+                    new Vector2(
+                        earth.initialMercatorPosition.value.x + transform.position.x / Mathf.Cos(Mathf.Deg2Rad * (float)earth.initialLatitude.value),
+                        earth.initialMercatorPosition.value.y + transform.position.z / Mathf.Cos(Mathf.Deg2Rad * (float)earth.initialLatitude.value)
+                        )
+                );
+            calculatedLatitude.value = calculatedGPS.latitude;
+            calculatedLongitude.value = calculatedGPS.longitude;
+            //calculatedMercatorPosition.value = FunkySheep.GPS.Utils.toCartesianVector(calculatedLatitude.value, calculatedLongitude.value);
         }
     }
 }

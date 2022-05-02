@@ -43,7 +43,7 @@ namespace FunkySheep.Earth
 
         public void Reset()
         {
-            initialMercatorPosition.value = Utils.toCartesianVector2(initialLatitude.value, initialLongitude.value);
+            initialMercatorPosition.value = Utils.toCartesianVector2(initialLongitude.value, initialLatitude.value);
             tilesManager.tileSize.value = (float)Map.Utils.TileSize(zoomLevel.value, initialLatitude.value);
             initialMapPosition.value = Map.Utils.GpsToMapReal(zoomLevel.value, initialLatitude.value, initialLongitude.value);
             tilesManager.initialOffset.value = new Vector2

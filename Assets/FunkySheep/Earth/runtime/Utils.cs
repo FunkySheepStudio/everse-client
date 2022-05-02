@@ -35,9 +35,9 @@ namespace FunkySheep.Earth
             return new double[] { xToLon(x), yToLat(y) };
         }
 
-        public static (double latitude, double longitude) toGeoCoord(Vector3 position)
+        public static (double latitude, double longitude) toGeoCoord(Vector2 position)
         {
-            return (yToLat(position.z), xToLon(position.x));
+            return (yToLat(position.y), xToLon(position.x));
         }
 
         public static double lonToX(double lon)

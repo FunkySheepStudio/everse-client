@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e518b414a243642469cc8edd3b2a1788, type: 3}
-  m_Name: earth-initial-mercator-position
+  m_Script: {fileID: 11500000, guid: 673c90cecf6497c4fb8854806e44ca96, type: 3}
+  m_Name: "gps-longitude Bel\xE9m"
   m_EditorClassIdentifier: 
   apiName: 
-  reset: 1
-  value: {x: 488706.8, y: 5531963}
+  reset: 0
+  value: -48.414664
