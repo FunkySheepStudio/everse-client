@@ -10,6 +10,10 @@ namespace Game.Authentication
         public FunkySheep.Network.Services.Create authenticate;
         public FunkySheep.Types.String login;
         public FunkySheep.Types.String password;
+
+        public FunkySheep.Types.String id;
+        public FunkySheep.Types.String nickname;
+
         Button btnLogin;
         TextField txtLogin;
         TextField txtPassword;
@@ -37,6 +41,8 @@ namespace Game.Authentication
         {
             if (authResponse["data"]["accessToken"] != null)
             {
+                id.value = authResponse["data"]["user"]["_id"];
+                nickname.value = authResponse["data"]["user"]["nickname"];
                 SceneManager.LoadSceneAsync("Scenes/Main", LoadSceneMode.Additive);
                 gameObject.SetActive(false);
             }

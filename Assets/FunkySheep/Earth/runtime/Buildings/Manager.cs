@@ -31,6 +31,7 @@ namespace FunkySheep.Earth.Buildings
             try
             {
                 FunkySheep.OSM.Data parsedData = FunkySheep.OSM.Parser.Parse(osmFile);
+                List<Building> newBuildings = new List<Building>();
                 foreach (FunkySheep.OSM.Way way in parsedData.ways)
                 {
                     Building building = new Building(way.id);
@@ -44,8 +45,10 @@ namespace FunkySheep.Earth.Buildings
                     building.tags = way.tags;
 
                     building.Initialize();
-                    buildings.Add(building);
+                    newBuildings.Add(building);
                 }
+
+                buildings.AddRange(newBuildings);
             }
             catch (Exception e)
             {

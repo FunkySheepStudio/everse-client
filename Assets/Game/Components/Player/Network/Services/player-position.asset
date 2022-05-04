@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31e54557dbe2f5148b93b53395f810f6, type: 3}
-  m_Name: marker-create
+  m_Name: player-position
   m_EditorClassIdentifier: 
-  apiPath: /api/game/markers
+  apiPath: /api/game/player_position
   onReceptionEvent: {fileID: 0}
   ack: 0
-  fields: []
+  fields:
+  - {fileID: 11400000, guid: e6189b1629da7ce418a97f188c6c405b, type: 2}
+  - {fileID: 11400000, guid: c2a2effd4a7189146987974805aeb53c, type: 2}
+  - {fileID: 11400000, guid: 643b43aae78fc134eb2c021ad724331d, type: 2}

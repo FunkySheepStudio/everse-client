@@ -15,6 +15,7 @@ namespace Game.Player
         public Vector2Int insideTileQuarterPosition;
         public Vector2Int lastInsideTileQuarterPosition;
         public FunkySheep.Events.Vector3Event onMove;
+        public FunkySheep.Network.Services.Create playerPosition;
         Vector3 lastPosition;
 
         private void Start()
@@ -32,6 +33,7 @@ namespace Game.Player
                 Calculate();
                 onMove.Raise(transform.position);
                 lastPosition = transform.position;
+                playerPosition.Execute();
             }
         }
 
@@ -54,6 +56,8 @@ namespace Game.Player
                       height.Value,
                       transform.position.z
                     );
+
+                    onMove.Raise(transform.position);
                 }
             }
         }

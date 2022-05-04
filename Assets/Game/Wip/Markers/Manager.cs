@@ -9,6 +9,7 @@ namespace Game.Markers
         public FunkySheep.Earth.Manager earth;
         public FunkySheep.Network.Services.Create createService;
         UnityEngine.UIElements.UIDocument UI;
+        bool creating = false;
 
         GameObject markerGo;
 
@@ -18,50 +19,64 @@ namespace Game.Markers
             UI.rootVisualElement.Q<UnityEngine.UIElements.Button>().clicked += Add;
         }
 
-        private void Start()
+        private void Update()
+        {
+            if (creating)
+            {
+                if (Physics.Linecast(transform.position + Vector3.up * 2 + transform.forward, transform.position + Vector3.up * 2 + transform.forward * 20, out RaycastHit hitInfo))
+                {
+                    markerGo.transform.position =
+                        new Vector3(
+                                hitInfo.point.x,
+                                transform.position.y,
+                                hitInfo.point.z
+                            ) - transform.forward;
+                }
+                else
+                {
+                    markerGo.transform.position = transform.position + transform.forward * 15;
+                }
+            }
+        }
+
+        public void Create()
         {
             markerGo = GameObject.Instantiate(markerAsset);
             markerGo.GetComponent<FunkySheep.Earth.Components.GeoCoordinates>().earth = earth;
             markerGo.transform.parent = transform;
             markerGo.transform.position += transform.forward * 15;
-        }
-
-        private void Update()
-        {
-            if (Physics.Linecast(transform.position + Vector3.up * 2 + transform.forward, transform.position + Vector3.up * 2 + transform.forward * 20, out RaycastHit hitInfo))
-            {
-                markerGo.transform.position =
-                    new Vector3(
-                            hitInfo.point.x,
-                            transform.position.y,
-                            hitInfo.point.z
-                        ) - transform.forward;
-            } else
-            {
-                markerGo.transform.position = transform.position + transform.forward * 15;
-            }
+            creating = true;
         }
 
         public void Add()
         {
-            FunkySheep.Types.Double latitude = ScriptableObject.CreateInstance<FunkySheep.Types.Double>();
-            latitude.apiName = "latitude";
-            createService.fields.Add(latitude);
-            latitude.value = markerGo.GetComponent<FunkySheep.Earth.Components.GeoCoordinates>().latitude;
+            if (!creating)
+            {
+                Create();
+            } else
+            {
+                markerGo.transform.parent = null;
 
-            FunkySheep.Types.Double longitude = ScriptableObject.CreateInstance<FunkySheep.Types.Double>();
-            longitude.apiName = "longitude";
-            createService.fields.Add(longitude);
-            longitude.value = markerGo.GetComponent<FunkySheep.Earth.Components.GeoCoordinates>().longitude;
+                FunkySheep.Types.Double latitude = ScriptableObject.CreateInstance<FunkySheep.Types.Double>();
+                latitude.apiName = "latitude";
+                createService.fields.Add(latitude);
+                latitude.value = markerGo.GetComponent<FunkySheep.Earth.Components.GeoCoordinates>().latitude;
 
-            FunkySheep.Types.Float height = ScriptableObject.CreateInstance<FunkySheep.Types.Float>();
-            height.apiName = "height";
-            createService.fields.Add(height);
-            height.value = transform.position.y;
+                FunkySheep.Types.Double longitude = ScriptableObject.CreateInstance<FunkySheep.Types.Double>();
+                longitude.apiName = "longitude";
+                createService.fields.Add(longitude);
+                longitude.value = markerGo.GetComponent<FunkySheep.Earth.Components.GeoCoordinates>().longitude;
 
-            
-            createService.Execute();
-            createService.fields.Clear();
+                FunkySheep.Types.Float height = ScriptableObject.CreateInstance<FunkySheep.Types.Float>();
+                height.apiName = "height";
+                createService.fields.Add(height);
+                height.value = transform.position.y;
+
+
+                createService.Execute();
+                createService.fields.Clear();
+                creating = false;
+            }
         }
     }
 }

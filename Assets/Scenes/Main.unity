@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.5
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.6488721, g: 0.5633059, b: 0.6476315, a: 0.5}
+  m_IndirectSpecularColor: {r: 0.6487418, g: 0.5597564, b: 0.6422873, a: 0.5}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -730,7 +730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   earth: {fileID: 1100245712}
-  url: {fileID: 11400000, guid: e3202dd2001dc584588490c876fe336b, type: 2}
+  url: {fileID: 11400000, guid: 2becd1822ca1287418a3d99d3e99f988, type: 2}
   textureResolution: {fileID: 11400000, guid: 0161f8f866a9f45418f06c8966021bc6, type: 2}
   addedTileEvent: {fileID: 11400000, guid: d6a6c259653afe048b80c2f46740d7a8, type: 2}
 --- !u!156049354 &396924183
@@ -1881,6 +1881,7 @@ MonoBehaviour:
   insideTileQuarterPosition: {x: 0, y: 0}
   lastInsideTileQuarterPosition: {x: 0, y: 0}
   onMove: {fileID: 11400000, guid: 6b6ddf10b4214234ebfe6641fc2631d8, type: 2}
+  playerPosition: {fileID: 11400000, guid: 37ce55737b1a96448a6e892ccec31493, type: 2}
 --- !u!143 &1778746588
 CharacterController:
   m_ObjectHideFlags: 0
