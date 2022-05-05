@@ -15,8 +15,8 @@ namespace Game.Player
         {
             characterController = GetComponent<CharacterController>();
 #if PLATFORM_ANDROID
-            mobileController = GameObject.Instantiate(mobileController);
-            mobileController.GetComponentInChildren<Game.Player.Joystick>().movements = this;
+            /*mobileController = GameObject.Instantiate(mobileController);
+            mobileController.GetComponentInChildren<Game.Player.Joystick>().movements = this;*/
 #endif
         }
 
@@ -44,8 +44,14 @@ namespace Game.Player
 
         public void Jump()
         {
-            animator.SetBool("isGrounded", false);
-            characterController.Move(Vector3.up + transform.forward);
+            if (characterController.isGrounded)  
+            {
+                animator.SetBool("isGrounded", false);
+                characterController.Move((Vector3.up + transform.forward) * Time.deltaTime * 100);
+            } else
+            {
+                Debug.Log("Not");
+            }
         }
 
         public void Move()

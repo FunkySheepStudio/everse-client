@@ -1,6 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="/Assets/Parameters/UI Toolkit/DefaultUSSFile.uss" />
-    <ui:TextField picking-mode="Ignore" label="Login :" name="txtLogin" />
-    <ui:TextField picking-mode="Ignore" label="Password :" name="txtPassword" password="true" />
-    <ui:Button text="Login" display-tooltip-when-elided="true" name="btnLogin" />
+    <Style src="project://database/Assets/Parameters/UI%20Toolkit/DefaultUSSFile.uss?fileID=7433441132597879392&amp;guid=ba84cee9281eb7844b6cd4103c3d04b0&amp;type=3#DefaultUSSFile" />
+    <ui:VisualElement>
+        <ui:TextField picking-mode="Ignore" label="Login :" name="txtLogin" />
+        <ui:TextField picking-mode="Ignore" label="Password :" name="txtPassword" password="true" />
+        <ui:Button text="Login" display-tooltip-when-elided="true" name="btnLogin" />
+    </ui:VisualElement>
 </ui:UXML>
