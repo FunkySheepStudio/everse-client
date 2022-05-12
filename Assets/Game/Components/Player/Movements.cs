@@ -15,8 +15,8 @@ namespace Game.Player
         {
             characterController = GetComponent<CharacterController>();
 #if PLATFORM_ANDROID
-            /*mobileController = GameObject.Instantiate(mobileController);
-            mobileController.GetComponentInChildren<Game.Player.Joystick>().movements = this;*/
+            mobileController = GameObject.Instantiate(mobileController);
+            mobileController.GetComponentInChildren<Game.Player.Joystick>().movements = this;
 #endif
         }
 
