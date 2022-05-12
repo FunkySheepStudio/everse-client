@@ -53,7 +53,7 @@ namespace Game.Player
                 {
                     this.transform.position = new Vector3(
                       transform.position.x,
-                      height.Value,
+                      height.Value + 20,
                       transform.position.z
                     );
 
