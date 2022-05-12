@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.5
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.6487418, g: 0.5597564, b: 0.6422873, a: 0.5}
+  m_IndirectSpecularColor: {r: 0.6488721, g: 0.5633059, b: 0.6476315, a: 0.5}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -390,6 +390,7 @@ GameObject:
   - component: {fileID: 160270451}
   - component: {fileID: 160270452}
   - component: {fileID: 160270453}
+  - component: {fileID: 160270454}
   m_Layer: 0
   m_Name: Markers
   m_TagString: Untagged
@@ -443,6 +444,35 @@ MonoBehaviour:
   markerAsset: {fileID: 8926426933982644740, guid: 192f52bcfc9401844b306b8c1e159bc6, type: 3}
   earth: {fileID: 1100245712}
   createService: {fileID: 11400000, guid: a912ccf9d64ce67408be21b61ecec43a, type: 2}
+  findService: {fileID: 11400000, guid: 6703f627780397142b387e73e8fc4ed4, type: 2}
+--- !u!114 &160270454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160270450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 579339eacebf0434386dd359e55add83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: abe4788ecf6a9b341baf59ba3dc2636f, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 160270453}
+        m_TargetAssemblyTypeName: Game.Markers.Manager, Game
+        m_MethodName: OnReceived
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &295731372
 GameObject:
   m_ObjectHideFlags: 0
@@ -1609,6 +1639,18 @@ MonoBehaviour:
       - m_Target: {fileID: 295731374}
         m_TargetAssemblyTypeName: FunkySheep.Earth.Buildings.Manager, Assembly-CSharp
         m_MethodName: DownLoad
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 160270453}
+        m_TargetAssemblyTypeName: Game.Markers.Manager, Game
+        m_MethodName: Download
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

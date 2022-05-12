@@ -8,6 +8,7 @@ namespace Game.Markers
         public GameObject markerAsset;
         public FunkySheep.Earth.Manager earth;
         public FunkySheep.Network.Services.Create createService;
+        public FunkySheep.Network.Services.Find findService;
         UnityEngine.UIElements.UIDocument UI;
         bool creating = false;
 
@@ -76,6 +77,39 @@ namespace Game.Markers
                 createService.Execute();
                 createService.fields.Clear();
                 creating = false;
+            }
+        }
+
+        public void Download(Vector2Int worldTile)
+        {
+            double[] boundaries = FunkySheep.Earth.Map.Utils.CaclulateGpsBoundaries(earth.zoomLevel.value, worldTile);
+            findService.query = FunkySheep.SimpleJSON.JSON.Parse("{}");
+            findService.query["latitude"]["$gte"] = boundaries[0];
+            findService.query["latitude"]["$lte"] = boundaries[2];
+
+            findService.query["longitude"]["$gte"] = boundaries[1];
+            findService.query["longitude"]["$lte"] = boundaries[3];
+
+            findService.Execute();
+        }
+
+        public void OnReceived(FunkySheep.SimpleJSON.JSONNode jsonMarkers)
+        {
+            FunkySheep.SimpleJSON.JSONArray markers = jsonMarkers["data"]["data"].AsArray;
+
+            for (int i = 0; i < markers.Count; i++)
+            {
+                GameObject marker = GameObject.Instantiate(markerAsset);
+                Destroy(marker.GetComponent<FunkySheep.Earth.Components.GeoCoordinates>());
+                Vector2 marker2DPosition = earth.CalculatePosition(markers[i]["latitude"].AsDouble, markers[i]["longitude"].AsDouble);
+
+                marker.transform.position = new Vector3(
+                    marker2DPosition.x,
+                    markers[i]["height"].AsFloat,
+                    marker2DPosition.y
+                );
+
+                //marker.transform.parent = transform;
             }
         }
     }
