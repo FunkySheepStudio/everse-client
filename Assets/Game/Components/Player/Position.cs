@@ -21,8 +21,7 @@ namespace Game.Player
         private void Start()
         {
             lastPosition = transform.position;
-            earth.Reset();
-            Calculate();
+            GetComponent<FunkySheep.Earth.Components.SetHeight>().offset = 20;
         }
 
         private void Update()
@@ -34,31 +33,6 @@ namespace Game.Player
                 onMove.Raise(transform.position);
                 lastPosition = transform.position;
                 playerPosition.Execute();
-            }
-        }
-
-        public void SetInitialHeight(FunkySheep.Earth.Terrain.Tile terrainTile)
-        {
-            if (
-              terrainTile.position ==
-              new Vector2Int(
-                (int)earth.initialMapPosition.value.x,
-                (int)earth.initialMapPosition.value.y
-              )
-            )
-            {
-                float? height = FunkySheep.Earth.Terrain.Manager.GetHeight(this.transform.position);
-
-                if (height != null)
-                {
-                    this.transform.position = new Vector3(
-                      transform.position.x,
-                      height.Value + 20,
-                      transform.position.z
-                    );
-
-                    onMove.Raise(transform.position);
-                }
             }
         }
 

@@ -11,7 +11,7 @@ namespace Game.Roads
         public FunkySheep.Types.String urlTemplate;
         public FunkySheep.Earth.Manager earthManager;
         public Material material;
-        public GameObject player;
+        //public GameObject player;
         ConcurrentQueue<Road> roads = new ConcurrentQueue<Road>();
 
         public void AddTile(FunkySheep.Earth.Terrain.Tile terrainTile)

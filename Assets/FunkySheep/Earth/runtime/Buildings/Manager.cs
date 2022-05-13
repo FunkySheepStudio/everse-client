@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading;
 using UnityEngine;
@@ -11,7 +11,7 @@ namespace FunkySheep.Earth.Buildings
     {
         public FunkySheep.Types.String urlTemplate;
         public FunkySheep.Earth.Manager earthManager;
-        public List<Building> buildings = new List<Building>();
+        public ConcurrentQueue<Building> buildings = new ConcurrentQueue<Building>();
         public Material floorMaterial;
         public FunkySheep.Events.GameObjectEvent onBuildingCreation;
 
@@ -26,12 +26,16 @@ namespace FunkySheep.Earth.Buildings
             }));
         }
 
+        private void Update()
+        {
+            Create();
+        }
+
         public void ExtractOsmData(byte[] osmFile)
         {
             try
             {
                 FunkySheep.OSM.Data parsedData = FunkySheep.OSM.Parser.Parse(osmFile);
-                List<Building> newBuildings = new List<Building>();
                 foreach (FunkySheep.OSM.Way way in parsedData.ways)
                 {
                     Building building = new Building(way.id);
@@ -45,10 +49,8 @@ namespace FunkySheep.Earth.Buildings
                     building.tags = way.tags;
 
                     building.Initialize();
-                    newBuildings.Add(building);
+                    buildings.Enqueue(building);
                 }
-
-                buildings.AddRange(newBuildings);
             }
             catch (Exception e)
             {
@@ -81,31 +83,33 @@ namespace FunkySheep.Earth.Buildings
             return urlTemplate.Interpolate(parameters, parametersNames);
         }
 
-        public void Create(Vector3 position)
+        public void Create()
         {
-            Vector2 positionV2 = new Vector2(position.x, position.z);
-            List<Building> closeBuildings = buildings.FindAll(building => Vector2.Distance(building.position, positionV2) <= 500);
-
-            foreach (Building building in closeBuildings.ToList())
+            for (int i = 0; i < buildings.Count; i++)
             {
-                Vector3 buildingPosition = new Vector3(
-                  building.position.x,
-                  0,
-                  building.position.y
-                );
-
-                GameObject go = new GameObject(building.id.ToString());
-                go.tag = "Floor";
-                go.transform.position = buildingPosition;
-                go.transform.parent = transform;
-                FunkySheep.Earth.Buildings.Floor floor = go.AddComponent<FunkySheep.Earth.Buildings.Floor>();
-                floor.building = building;
-                floor.material = floorMaterial;
-                floor.Create();
-                buildings.Remove(building);
-                if (onBuildingCreation != null)
+                Building building;
+                if (buildings.TryDequeue(out building))
                 {
-                    onBuildingCreation.Raise(go);
+                    Vector3 buildingPosition = new Vector3(
+                      building.position.x,
+                      0,
+                      building.position.y
+                    );
+
+                    GameObject go = new GameObject(building.id.ToString());
+                    go.tag = "Floor";
+                    go.transform.position = buildingPosition;
+                    go.transform.parent = transform;
+                    FunkySheep.Earth.Buildings.Floor floor = go.AddComponent<FunkySheep.Earth.Buildings.Floor>();
+                    FunkySheep.Earth.Components.SetHeight setHeight = go.AddComponent<FunkySheep.Earth.Components.SetHeight>();
+                    floor.building = building;
+                    floor.material = floorMaterial;
+
+                    setHeight.action = floor.Create;
+                    if (onBuildingCreation != null)
+                    {
+                        onBuildingCreation.Raise(go);
+                    }
                 }
             }
         }

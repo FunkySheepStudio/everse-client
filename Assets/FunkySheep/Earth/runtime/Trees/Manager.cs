@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading;
 using UnityEngine;
@@ -12,8 +12,14 @@ namespace FunkySheep.Earth.Trees
         public FunkySheep.Earth.Manager earthManager;
         public FunkySheep.Earth.Map.Manager mapManager;
         public GameObject tree;
-        public List<Vector3> positions = new List<Vector3>();
+        public ConcurrentQueue<Vector3> trees = new ConcurrentQueue<Vector3>();
         public int drawDistance = 100;
+
+        private void Update()
+        {
+            Create();
+        }
+
         public void AddedTreeTile(Map.Tile tile)
         {
             Color32[] pixels = tile.data.sprite.texture.GetPixels32();
@@ -34,15 +40,12 @@ namespace FunkySheep.Earth.Trees
             {
                 System.Random rnd = new System.Random();
 
-                int lastX = rnd.Next(-10, -5);
-                int lastY = rnd.Next(-10, -5);
-
                 for (int i = 0; i < pixels.Length; i++)
                 {
                     int x = i % 256;
                     int y = i / 256;
 
-                    if ((x - lastX >= 8 || y - lastY >= 8) && pixels[i].g - pixels[i].r > 10)
+                    if (pixels[i].g - pixels[i].r > 10 && x%8 == 0 && y% 8 == 0)
                     {
                         Vector3 position = new Vector3(
                           earthManager.tilesManager.initialOffset.value.x * earthManager.tilesManager.tileSize.value + (mapPosition.x * tileScale.x * 256) + tileScale.x * x,
@@ -50,16 +53,19 @@ namespace FunkySheep.Earth.Trees
                           earthManager.tilesManager.initialOffset.value.y * earthManager.tilesManager.tileSize.value + (mapPosition.y * tileScale.y * 256) + tileScale.y * y
                           );
 
-                        position += new Vector3(
-                                rnd.Next(-10, 10),
+                        if (x!=0 && y!=0)
+                        {
+                            int rndX = rnd.Next(-8, 8);
+                            int rndY = rnd.Next(-8, 8);
+
+                            position += new Vector3(
+                                rndX,
                                 0,
-                                rnd.Next(-10, 10)
-                            ) * (float)rnd.NextDouble();
+                                rndY
+                                );
+                        }
 
-                        positions.Add(position);
-
-                        lastX = x;
-                        lastY = y;
+                        trees.Enqueue(position);
                     }
                 }
             }
@@ -73,6 +79,7 @@ namespace FunkySheep.Earth.Trees
         {
             GameObject go = GameObject.Instantiate(tree);
             go.transform.position = position;
+            go.AddComponent<FunkySheep.Earth.Components.SetHeight>();
 
             go.transform.localScale = new Vector3(
                 UnityEngine.Random.Range(3, 5),
@@ -89,25 +96,19 @@ namespace FunkySheep.Earth.Trees
             go.transform.parent = transform;
         }
 
-        public void Create(Vector3 playerPosition)
+        public void Create()
         {
-            List<Vector3> closeTrees = positions.FindAll(position => Vector3.Distance(
-                position,
-                playerPosition
-                ) < 800);
-            foreach (Vector3 treePosition in closeTrees.ToList())
+            for (int i = 0; i < trees.Count; i++)
             {
-                float? height = Terrain.Manager.GetHeight(treePosition);
-                if (height != null)
+                Vector3 tree;
+                if (trees.TryDequeue(out tree))
                 {
                     AddTree(
-                        new Vector3(
-                            treePosition.x,
-                            height.Value,
-                            treePosition.z
-                        ));
-
-                    positions.Remove(treePosition);
+                    new Vector3(
+                        tree.x,
+                        0,
+                        tree.z
+                    ));
                 }
             }
         }
