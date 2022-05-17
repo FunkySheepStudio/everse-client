@@ -31,12 +31,12 @@ TagManager:
   - 
   - 
   - 
+  - Enemies
   - 
   - 
   - 
   - 
-  - 
-  - 
+  - Bullets
   - 
   m_SortingLayers:
   - name: Default
