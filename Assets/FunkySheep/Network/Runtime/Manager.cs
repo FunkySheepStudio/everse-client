@@ -23,19 +23,25 @@ namespace FunkySheep.Network
         private void Update()
         {
 #if !UNITY_WEBGL || UNITY_EDITOR
-            webSocket.DispatchMessageQueue();
+            if (webSocket != null && webSocket.State == WebSocketState.Open)
+            {
+                webSocket.DispatchMessageQueue();
+            }
 #endif
         }
 
         public async void Connect()
         {
-            webSocket = WebSocketFactory.CreateInstance(connection.address + ":" + connection.port);
-            //  Binding the events
-            webSocket.OnOpen += onConnectionOpen;
-            webSocket.OnClose += onConnectionClose;
-            webSocket.OnError += onConnectionError;
-            webSocket.OnMessage += onMessage;
-            await webSocket.Connect();
+            if (connection != null)
+            {
+                webSocket = WebSocketFactory.CreateInstance(connection.address + ":" + connection.port);
+                //  Binding the events
+                webSocket.OnOpen += onConnectionOpen;
+                webSocket.OnClose += onConnectionClose;
+                webSocket.OnError += onConnectionError;
+                webSocket.OnMessage += onMessage;
+                await webSocket.Connect();
+            }
         }
 
         private void onConnectionOpen()
@@ -80,12 +86,21 @@ namespace FunkySheep.Network
 
         async void OnApplicationQuit()
         {
-            await webSocket.Close();
+            if (webSocket != null && webSocket.State == WebSocketState.Open)
+            {
+                await webSocket.Close();
+            }
         }
 
         public void Send(string message)
         {
-            webSocket.SendText(message);
+            if (webSocket != null && webSocket.State == WebSocketState.Open)
+            {
+                webSocket.SendText(message);
+            } else
+            {
+                Debug.Log("Network not connected");
+            }
         }
     }
 }
