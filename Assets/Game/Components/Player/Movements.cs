@@ -25,7 +25,7 @@ namespace Game.Player
         {
             curSpeed = 0;
 
-            transform.Rotate(0, Input.GetAxis("Horizontal") * rotateSpeed, 0);
+            transform.Rotate(0, Input.GetAxis("Horizontal") * rotateSpeed * Time.deltaTime * 10, 0);
             curSpeed += speed * Input.GetAxis("Vertical");
             if (Input.GetKey("space"))
             {
@@ -47,10 +47,7 @@ namespace Game.Player
             if (characterController.isGrounded)  
             {
                 animator.SetBool("isGrounded", false);
-                characterController.Move((Vector3.up + transform.forward) * Time.deltaTime * 100);
-            } else
-            {
-                Debug.Log("Not");
+                characterController.Move((Vector3.up * 50 + transform.forward));
             }
         }
 

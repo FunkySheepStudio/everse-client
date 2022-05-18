@@ -11,7 +11,7 @@ namespace Game.Player
         {
             if (other.gameObject.layer == 20)
             {
-                movements.speed = 100;
+                movements.speed = 40;
                 lastHit = 0;
             }
         }
@@ -22,7 +22,7 @@ namespace Game.Player
             lastHit += Time.deltaTime;
             if (lastHit > 1)
             {
-                movements.speed = 50;
+                movements.speed = 10;
             }
         }
     }

@@ -126,8 +126,8 @@ namespace Game.Roads
             roadline.positionCount = points.Count;
             roadline.SetPositions(points.ToArray());
             Mesh mesh = new Mesh();
-            roadline.BakeMesh(mesh, true);
-            lineCollider.sharedMesh = mesh;
+            //roadline.BakeMesh(mesh, true);
+            //lineCollider.sharedMesh = mesh;
         }
     }
 }

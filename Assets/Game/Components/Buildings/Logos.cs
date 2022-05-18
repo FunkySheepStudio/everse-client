@@ -15,7 +15,7 @@ namespace Game.Buildings
         {
             FunkySheep.Earth.Buildings.Floor floor = building.GetComponent<FunkySheep.Earth.Buildings.Floor>();
             FunkySheep.OSM.Tag buildingType = floor.building.tags.Find(tag => tag.name == "amenity");
-            if (buildingType != null)
+            if (buildingType != null && floor.building.hightPoint != null)
             {
                 logosManager.Add(
                   buildingType.value,
