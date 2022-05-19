@@ -10,6 +10,7 @@ namespace Game.Player.Inputs
 		public Vector2 look;
 		public bool jump;
 		public bool sprint;
+		public bool shoot;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -41,6 +42,11 @@ namespace Game.Player.Inputs
 			SprintInput(value.isPressed);
 		}
 
+		public void OnShoot(InputValue value)
+		{
+			ShootInput(value.isPressed);
+		}
+
 		public void MoveInput(Vector2 newMoveDirection)
 		{
 			move = newMoveDirection;
@@ -59,6 +65,11 @@ namespace Game.Player.Inputs
 		public void SprintInput(bool newSprintState)
 		{
 			sprint = newSprintState;
+		}
+
+		public void ShootInput(bool newShootState)
+		{
+			shoot = newShootState;
 		}
 
 		private void OnApplicationFocus(bool hasFocus)

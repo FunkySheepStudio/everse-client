@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b941aa6ec59e0e04c992de8e1e68fb55, type: 3}
   m_Name: Uzi
   m_EditorClassIdentifier: 
-  Model: {fileID: 9180400762172372248, guid: 21dbee65c8f773f4d890a3f8b26dee42, type: 3}
+  Model: {fileID: 919132149155446097, guid: 039fa3b9ff417c844b880a0c3d3bdb3a, type: 3}
   Bullets: {fileID: 6402942830438113684, guid: d318a64fb55bba84baeab5288954679d, type: 3}
   cooldown: 0.09
-  lastShot: 0.0778225
+  lastShot: 0.0398404
