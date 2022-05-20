@@ -53,6 +53,8 @@ namespace FunkySheep.Earth.Buildings
             mesh.CreateShapeFromPolygon(newPositions, building.hightPoint.Value - building.lowPoint.Value + 15f, false);
             GetComponent<MeshRenderer>().material = material;
             transform.position = new Vector3(building.position.x, building.lowPoint.Value, building.position.y);
+
+            building.onBuildingCreation.Raise(gameObject);
         }
 
         public void GetInnerPoints()

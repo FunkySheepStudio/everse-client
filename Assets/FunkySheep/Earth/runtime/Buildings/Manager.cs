@@ -90,6 +90,8 @@ namespace FunkySheep.Earth.Buildings
                 Building building;
                 if (buildings.TryDequeue(out building))
                 {
+                    building.onBuildingCreation = onBuildingCreation;
+
                     Vector3 buildingPosition = new Vector3(
                       building.position.x,
                       0,
@@ -106,10 +108,6 @@ namespace FunkySheep.Earth.Buildings
                     floor.material = floorMaterial;
 
                     setHeight.action = floor.Create;
-                    if (onBuildingCreation != null)
-                    {
-                        onBuildingCreation.Raise(go);
-                    }
                 }
             }
         }

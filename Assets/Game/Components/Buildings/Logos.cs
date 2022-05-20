@@ -22,7 +22,7 @@ namespace Game.Buildings
                   building,
                   new Vector3(
                     floor.building.position.x,
-                    floor.building.hightPoint.Value + 15,
+                    floor.building.hightPoint.Value + 20,
                     floor.building.position.y
                   )
                 );

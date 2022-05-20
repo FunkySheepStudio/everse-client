@@ -16,6 +16,7 @@ namespace FunkySheep.Earth.Buildings
         public float? lowPoint = null;
         public float? hightPoint = null;
         public List<OSM.Tag> tags = new List<OSM.Tag>();
+        public FunkySheep.Events.GameObjectEvent onBuildingCreation;
 
         public Building(long id)
         {

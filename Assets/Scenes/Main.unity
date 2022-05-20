@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.5
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.6487418, g: 0.5597564, b: 0.6422873, a: 0.5}
+  m_IndirectSpecularColor: {r: 0.6488721, g: 0.5633059, b: 0.6476315, a: 0.5}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1059,6 +1059,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5381eb8d35b73e14a8039eac0feb919d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hand: {fileID: 0}
   gun: {fileID: 11400000, guid: e7498c1d44fdf03419919854aaa1a865, type: 2}
 --- !u!1 &728359322
 GameObject:
@@ -1867,7 +1868,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1778746586
 Transform:
   m_ObjectHideFlags: 0
