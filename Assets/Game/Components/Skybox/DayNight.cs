@@ -6,7 +6,7 @@ namespace Game.Environnement
 {
     public class DayNight : MonoBehaviour
     {
-        [Range(0, 1)]
+        [Range(-1, 1)]
         public float time = 1;
         public Material skybox;
         public Light sun;
@@ -15,20 +15,12 @@ namespace Game.Environnement
         // Update is called once per frame
         void Update()
         {
-            if (simulate)
-            {
-                Simulate();
-            }
-
-            sun.transform.localRotation = Quaternion.Euler(time * 360, 0, 0);
-            skybox.SetFloat("_DayNight", time);
+            float lightDay = (Mathf.Cos(Time.time / 5) + 1) * 0.5f;
+            float shaderDay = (Mathf.Sin(Time.time / 5) + 1) * 0.5f;
+            sun.transform.rotation = Quaternion.Euler(lightDay * 360, 0, 0);
+            skybox.SetFloat("_DayNight", shaderDay);
         }
 
-        public void Simulate()
-        {
-            time += Time.deltaTime / 24;
-            time %= 1;
-        }
     }
 
 }
