@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4664514999185952114
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 5
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Skybox
+  m_Shader: {fileID: -6465566751694194690, guid: e17f668dde1b93447aff686851ee18d3, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _CubemapAsset_22e82bf804fe4445b9f34f9311ec8d51_Out_0:
+        m_Texture: {fileID: 8900000, guid: 5a672cb61ef32734b9c28539c9c42494, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleCubemap_80c06c6e19a54d9ea5564d0661358bea_Cube_1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_4107abb72c74427286dba067c67d7e83_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 41894672eb07de742b0f5239387c8110, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_b84910d76b064c8ba5a2d7aaf8193e96_Texture_1:
+        m_Texture: {fileID: 2800000, guid: acfdaf7dba30d8843ace78d0c67fc800, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_f7147dfef7c74e00a1c730c671f6b0d6_Texture_1:
+        m_Texture: {fileID: 2800000, guid: fad9765a35536374695ea4ff22aca373, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Triplanar_66c22ea91d3c414396e46afcaf0b6bb6_Texture_1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Triplanar_8d109d7f6e8a4dd1a78a663ee96562b1_Texture_1:
+        m_Texture: {fileID: 2800000, guid: fad9765a35536374695ea4ff22aca373, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - Vector1_00dd6d37957a4797a03227be61abecc1: 0.76
+    - Vector1_69b422f392e646edb2cab29bc6a6462b: 0.49
+    - _AlphaClip: 1
+    - _Blend: 0
+    - _CastShadows: 1
+    - _Cull: 2
+    - _DayNight: 0.26333514
+    - _DstBlend: 0
+    - _Night: 1
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _SrcBlend: 1
+    - _Surface: 0
+    - _ZTest: 8
+    - _ZWrite: 1
+    - _ZWriteControl: 0
+    m_Colors:
+    - Color_064b1babac754316984880cc2cb9f39c: {r: 0, g: 0.5372548, b: 1, a: 0}
+    - Color_1aa26574715d4fc596980365eb086077: {r: 1, g: 0.56, b: 0, a: 0}
+    - Color_603b34fd53e24a3dae672e9a4f7b9615: {r: 1, g: 0.6761006, b: 0.6761006, a: 0}
+  m_BuildTextureStacks: []
