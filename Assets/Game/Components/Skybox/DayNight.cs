@@ -6,8 +6,7 @@ namespace Game.Environnement
 {
     public class DayNight : MonoBehaviour
     {
-        [Range(-1, 1)]
-        public float time = 1;
+        public FunkySheep.Types.Float timeOfDay;
         public Material skybox;
         public Light sun;
         public bool simulate;
@@ -15,10 +14,16 @@ namespace Game.Environnement
         // Update is called once per frame
         void Update()
         {
-            float lightDay = (Mathf.Cos(Time.time / 5) + 1) * 0.5f;
-            float shaderDay = (Mathf.Sin(Time.time / 5) + 1) * 0.5f;
-            sun.transform.rotation = Quaternion.Euler(lightDay * 360, 0, 0);
-            skybox.SetFloat("_DayNight", shaderDay);
+            timeOfDay.value %= 24;
+            if (timeOfDay.value < 0)
+            {
+                timeOfDay.value = 0;
+            }
+
+            float normalizedTimeOfDay = timeOfDay.value / 24;
+            sun.transform.rotation = Quaternion.Euler((normalizedTimeOfDay * 360) - 90, 0, 0);
+
+            skybox.SetFloat("_DayNight", (Mathf.Cos(normalizedTimeOfDay * 2 * Mathf.PI) + 1) / 2);
         }
 
     }
