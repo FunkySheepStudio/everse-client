@@ -14,6 +14,11 @@ namespace Game.Environnement
         // Update is called once per frame
         void Update()
         {
+            if (simulate)
+            {
+                timeOfDay.value += Time.deltaTime;
+            }
+
             timeOfDay.value %= 24;
             if (timeOfDay.value < 0)
             {

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.5
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.009871186, g: 0.28897527, b: 0.5153668, a: 0.5}
+  m_IndirectSpecularColor: {r: 0.46061122, g: 0.50518185, b: 0.648455, a: 0.5}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -582,7 +582,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   earth: {fileID: 1100245712}
-  url: {fileID: 11400000, guid: 2becd1822ca1287418a3d99d3e99f988, type: 2}
+  url: {fileID: 11400000, guid: e3202dd2001dc584588490c876fe336b, type: 2}
   textureResolution: {fileID: 11400000, guid: 0161f8f866a9f45418f06c8966021bc6, type: 2}
   addedTileEvent: {fileID: 11400000, guid: d6a6c259653afe048b80c2f46740d7a8, type: 2}
 --- !u!156049354 &396924183
@@ -1504,11 +1504,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2005883969}
-  m_LocalRotation: {x: 0, y: 0.95985436, z: -0, w: -0.280499}
-  m_LocalPosition: {x: 464.32, y: 275.7, z: 788.2}
+  m_LocalRotation: {x: 0.024586407, y: 0.9752376, z: -0.14575024, w: 0.1645115}
+  m_LocalPosition: {x: 464.32, y: 361.8, z: 788.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 212.58, z: 0}
+  m_LocalEulerAnglesHint: {x: 17, y: 160.85, z: 0}

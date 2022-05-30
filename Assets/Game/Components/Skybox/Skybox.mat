@@ -34,7 +34,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _CubemapAsset_22e82bf804fe4445b9f34f9311ec8d51_Out_0:
-        m_Texture: {fileID: 8900000, guid: 5a672cb61ef32734b9c28539c9c42494, type: 2}
+        m_Texture: {fileID: 8900000, guid: 41bd1f2c511c9f6428bc0f7efe330511, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleCubemap_80c06c6e19a54d9ea5564d0661358bea_Cube_1:
@@ -81,7 +81,7 @@ Material:
     - _Blend: 0
     - _CastShadows: 1
     - _Cull: 2
-    - _DayNight: -0.030102279
+    - _DayNight: 0.7479209
     - _DstBlend: 0
     - _Night: 1
     - _QueueControl: 0
