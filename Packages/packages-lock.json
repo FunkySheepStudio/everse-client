@@ -22,6 +22,16 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.collections": {
+      "version": "1.2.3",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.burst": "1.6.4",
+        "com.unity.test-framework": "1.1.31"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.ext.nunit": {
       "version": "1.0.6",
       "depth": 1,
@@ -61,6 +71,42 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.multiplayer.tools": {
+      "version": "1.0.0-pre.7",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.profiling.core": "1.0.0-pre.1",
+        "com.unity.nuget.newtonsoft-json": "2.0.0",
+        "com.unity.nuget.mono-cecil": "1.10.1",
+        "com.unity.collections": "1.1.0",
+        "com.unity.modules.uielements": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.netcode.gameobjects": {
+      "version": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Lib/com.unity.netcode.gameobjects-develop/com.unity.netcode.gameobjects",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.unity.nuget.mono-cecil": "1.10.1",
+        "com.unity.transport": "1.0.0"
+      }
+    },
+    "com.unity.nuget.mono-cecil": {
+      "version": "1.10.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.nuget.newtonsoft-json": {
+      "version": "2.0.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
     "com.unity.probuilder": {
       "version": "5.0.4",
       "depth": 0,
@@ -70,6 +116,13 @@
         "com.unity.modules.physics": "1.0.0",
         "com.unity.modules.imgui": "1.0.0"
       },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.profiling.core": {
+      "version": "1.0.2",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
       "url": "https://packages.unity.com"
     },
     "com.unity.recorder": {
@@ -166,6 +219,17 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.unity.transport": {
+      "version": "1.0.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.collections": "1.2.3",
+        "com.unity.burst": "1.6.4",
+        "com.unity.mathematics": "1.2.5"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.ugui": {
       "version": "1.0.0",
       "depth": 0,
@@ -246,6 +310,119 @@
         "com.unity.subsystemregistration": "1.0.6"
       },
       "url": "https://packages.unity.com"
+    },
+    "net.funkysheep.unity.crypto": {
+      "version": "0.1.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://registry.npmjs.org"
+    },
+    "net.funkysheep.unity.earth": {
+      "version": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Framework/Unity-Earth",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "net.funkysheep.unity.simplejson": "0.1.0",
+        "net.funkysheep.unity.events": "0.1.0",
+        "net.funkysheep.unity.types": "0.1.0",
+        "net.funkysheep.unity.osm": "0.1.0",
+        "net.funkysheep.unity.tiles": "0.1.0",
+        "net.funkysheep.unity.vectors": "0.1.0",
+        "net.funkysheep.unity.network": "0.1.0",
+        "com.unity.probuilder": "5.0.4"
+      }
+    },
+    "net.funkysheep.unity.effects": {
+      "version": "0.1.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://registry.npmjs.org"
+    },
+    "net.funkysheep.unity.events": {
+      "version": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Framework/Unity-Events",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "net.funkysheep.unity.simplejson": "0.1.0"
+      }
+    },
+    "net.funkysheep.unity.files": {
+      "version": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Framework/Unity-Files",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
+    "net.funkysheep.unity.gps": {
+      "version": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Framework/Unity-GPS",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
+    "net.funkysheep.unity.library": {
+      "version": "0.2.0",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://registry.npmjs.org"
+    },
+    "net.funkysheep.unity.logos": {
+      "version": "file:C:\\Users\\sjarde.69r\\Documents\\FunkySheep\\Framework\\Unity-Logos",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "net.funkysheep.unity.effects": "0.1.0"
+      }
+    },
+    "net.funkysheep.unity.network": {
+      "version": "0.1.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "net.funkysheep.unity.library": "0.2.0"
+      },
+      "url": "https://registry.npmjs.org"
+    },
+    "net.funkysheep.unity.osm": {
+      "version": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Framework/Unity-OSM",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
+    "net.funkysheep.unity.simplejson": {
+      "version": "file:C:\\Users\\sjarde.69r\\Documents\\FunkySheep\\Framework\\Unity-SimpleJSON",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
+    "net.funkysheep.unity.tiles": {
+      "version": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Framework/Unity-Tiles",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
+    "net.funkysheep.unity.time": {
+      "version": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Framework/Unity-Time",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "net.funkysheep.unity.simplejson": "0.1.0"
+      }
+    },
+    "net.funkysheep.unity.types": {
+      "version": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Framework/Unity-Types",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "net.funkysheep.unity.simplejson": "0.1.0"
+      }
+    },
+    "net.funkysheep.unity.vectors": {
+      "version": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Framework/Unity-Vectors",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",

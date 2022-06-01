@@ -4,6 +4,8 @@
     "com.unity.ide.visualstudio": "2.0.15",
     "com.unity.ide.vscode": "1.2.5",
     "com.unity.inputsystem": "1.3.0",
+    "com.unity.multiplayer.tools": "1.0.0-pre.7",
+    "com.unity.netcode.gameobjects": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Lib/com.unity.netcode.gameobjects-develop/com.unity.netcode.gameobjects",
     "com.unity.probuilder": "5.0.4",
     "com.unity.recorder": "3.0.3",
     "com.unity.render-pipelines.universal": "12.1.6",
@@ -14,6 +16,19 @@
     "com.unity.vectorgraphics": "2.0.0-preview.19",
     "com.unity.visualeffectgraph": "12.1.6",
     "com.unity.xr.arfoundation": "4.2.2",
+    "net.funkysheep.unity.crypto": "0.1.0",
+    "net.funkysheep.unity.earth": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Framework/Unity-Earth",
+    "net.funkysheep.unity.effects": "0.1.0",
+    "net.funkysheep.unity.events": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Framework/Unity-Events",
+    "net.funkysheep.unity.files": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Framework/Unity-Files",
+    "net.funkysheep.unity.gps": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Framework/Unity-GPS",
+    "net.funkysheep.unity.logos": "file:C:\\Users\\sjarde.69r\\Documents\\FunkySheep\\Framework\\Unity-Logos",
+    "net.funkysheep.unity.osm": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Framework/Unity-OSM",
+    "net.funkysheep.unity.simplejson": "file:C:\\Users\\sjarde.69r\\Documents\\FunkySheep\\Framework\\Unity-SimpleJSON",
+    "net.funkysheep.unity.tiles": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Framework/Unity-Tiles",
+    "net.funkysheep.unity.time": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Framework/Unity-Time",
+    "net.funkysheep.unity.types": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Framework/Unity-Types",
+    "net.funkysheep.unity.vectors": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Framework/Unity-Vectors",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
     "com.unity.modules.animation": "1.0.0",
@@ -45,5 +60,14 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
-  }
+  },
+  "scopedRegistries": [
+    {
+      "name": "FunkySheep",
+      "url": "https://registry.npmjs.org",
+      "scopes": [
+        "net.funkysheep"
+      ]
+    }
+  ]
 }
