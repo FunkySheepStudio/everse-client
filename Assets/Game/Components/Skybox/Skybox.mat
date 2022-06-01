@@ -81,7 +81,7 @@ Material:
     - _Blend: 0
     - _CastShadows: 1
     - _Cull: 2
-    - _DayNight: 0.0027229488
+    - _DayNight: 0.355776
     - _DstBlend: 0
     - _Night: 1
     - _QueueControl: 0

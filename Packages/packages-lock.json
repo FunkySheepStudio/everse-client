@@ -85,13 +85,14 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.netcode.gameobjects": {
-      "version": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Lib/com.unity.netcode.gameobjects-develop/com.unity.netcode.gameobjects",
+      "version": "1.0.0-pre.9",
       "depth": 0,
-      "source": "local",
+      "source": "registry",
       "dependencies": {
         "com.unity.nuget.mono-cecil": "1.10.1",
         "com.unity.transport": "1.0.0"
-      }
+      },
+      "url": "https://packages.unity.com"
     },
     "com.unity.nuget.mono-cecil": {
       "version": "1.10.1",
@@ -318,6 +319,21 @@
       "dependencies": {},
       "url": "https://registry.npmjs.org"
     },
+    "net.funkysheep.unity.earth": {
+      "version": "0.1.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "net.funkysheep.unity.simplejson": "0.1.0",
+        "net.funkysheep.unity.events": "0.1.0",
+        "net.funkysheep.unity.types": "0.1.0",
+        "net.funkysheep.unity.osm": "0.1.0",
+        "net.funkysheep.unity.tiles": "0.1.0",
+        "net.funkysheep.unity.vectors": "0.1.0",
+        "net.funkysheep.unity.network": "0.1.7"
+      },
+      "url": "https://registry.npmjs.org"
+    },
     "net.funkysheep.unity.effects": {
       "version": "0.1.0",
       "depth": 0,
@@ -347,6 +363,20 @@
       "source": "registry",
       "dependencies": {
         "net.funkysheep.unity.effects": "0.1.0"
+      },
+      "url": "https://registry.npmjs.org"
+    },
+    "net.funkysheep.unity.network": {
+      "version": "0.1.7",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "net.funkysheep.unity.simplejson": "0.1.0",
+        "net.funkysheep.unity.types": "0.1.0",
+        "net.funkysheep.unity.events": "0.1.0",
+        "net.funkysheep.unity.crypto": "0.1.0",
+        "net.funkysheep.unity.files": "0.1.0",
+        "net.funkysheep.unity.time": "0.1.0"
       },
       "url": "https://registry.npmjs.org"
     },
