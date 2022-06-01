@@ -357,6 +357,13 @@
       "dependencies": {},
       "url": "https://registry.npmjs.org"
     },
+    "net.funkysheep.unity.gps": {
+      "version": "0.1.7",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://registry.npmjs.org"
+    },
     "net.funkysheep.unity.logos": {
       "version": "0.1.0",
       "depth": 0,
