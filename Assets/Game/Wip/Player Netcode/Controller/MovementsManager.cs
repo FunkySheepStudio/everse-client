@@ -23,6 +23,8 @@ namespace Game.Player.Controller
         [Range(0.0f, 0.3f)]
         public float rotationSmoothTime = 0.12f;
 
+        public GameObject mainCamera;
+
         // player
         private float _speed;
         private float _targetRotation = 0.0f;
@@ -34,7 +36,6 @@ namespace Game.Player.Controller
         private int _animIDSpeed;
         private int _animIDMotionSpeed;
 
-        private GameObject _mainCamera;
         private Animator _animator;
         private CharacterController _characterController;
 
@@ -45,9 +46,9 @@ namespace Game.Player.Controller
             _characterController = GetComponent<CharacterController>();
 
             // get a reference to our main camera
-            if (_mainCamera == null)
+            if (mainCamera == null)
             {
-                _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+                mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
         }
 
@@ -59,6 +60,7 @@ namespace Game.Player.Controller
         public override void Simulate(int tick, float deltaTime)
         {
             Move(deltaTime);
+            Rotate(deltaTime);
         }
 
         private void Move(float deltaTime)
@@ -77,6 +79,17 @@ namespace Game.Player.Controller
             {
                 _characterController.Move(direction * (sprintSpeed * deltaTime));
             }
+        }
+
+        private void Rotate(float deltaTime)
+        {
+            _targetRotation = Mathf.Atan2(inputManager.Current.look.x, inputManager.Current.look.y) * Mathf.Rad2Deg +
+                                  mainCamera.transform.eulerAngles.y;
+            float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
+                rotationSmoothTime);
+
+            // rotate to face input direction relative to camera position
+            transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
         }
 
             private void MoveUpdate(float deltaTime)
@@ -124,7 +137,7 @@ namespace Game.Player.Controller
             if (inputManager.Current.movement != Vector2.zero)
             {
                 _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
-                                  _mainCamera.transform.eulerAngles.y;
+                                  mainCamera.transform.eulerAngles.y;
                 float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
                     rotationSmoothTime);
 

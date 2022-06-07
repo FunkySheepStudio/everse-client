@@ -14,12 +14,16 @@ namespace Game.Player.Inputs
         public struct State : INetworkSerializable
         {
             public Vector2 movement;
+            public Vector2 look;
             public bool sprint;
             public bool jump;
 
             public void Reset()
             {
                 movement = Vector2.zero;
+                look = Vector2.zero;
+                sprint = false;
+                jump = false;
             }
 
             public State AverageOver(int sampleCount)
@@ -29,6 +33,7 @@ namespace Game.Player.Inputs
                 return new State()
                 {
                     movement = this.movement / sampleCount,
+                    look = this.look / sampleCount,
                     sprint = this.sprint,
                     jump = this.jump
                 };
@@ -43,6 +48,7 @@ namespace Game.Player.Inputs
             public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
             {
                 serializer.SerializeValue(ref movement);
+                serializer.SerializeValue(ref look);
                 serializer.SerializeValue(ref sprint);
                 serializer.SerializeValue(ref jump);
             }
@@ -69,6 +75,7 @@ namespace Game.Player.Inputs
             if (IsOwn)
             {
                 cumulativeInput.movement = _playerInput.actions.FindAction("Move").ReadValue<Vector2>();
+                cumulativeInput.look = _playerInput.actions.FindAction("Look").ReadValue<Vector2>();
                 cumulativeInput.sprint = _playerInput.actions.FindAction("Sprint").IsPressed();
                 cumulativeInput.jump = _playerInput.actions.FindAction("Jump").IsPressed();
                 sampleCount++;

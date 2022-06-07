@@ -287,6 +287,7 @@ MonoBehaviour:
   sprintSpeed: 150
   speedChangeRate: 10
   rotationSmoothTime: 0.12
+  mainCamera: {fileID: 1198632244155907131}
 --- !u!114 &1455569025596834647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,10 +338,12 @@ MonoBehaviour:
   hasNewInput: 0
   currentInput:
     movement: {x: 0, y: 0}
+    look: {x: 0, y: 0}
     sprint: 0
     jump: 0
   cumulativeInput:
     movement: {x: 0, y: 0}
+    look: {x: 0, y: 0}
     sprint: 0
     jump: 0
   sampleCount: 0
