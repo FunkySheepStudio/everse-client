@@ -14,6 +14,8 @@ namespace Game.Player.Inputs
         public struct State : INetworkSerializable
         {
             public Vector2 movement;
+            public bool sprint;
+            public bool jump;
 
             public void Reset()
             {
@@ -26,7 +28,9 @@ namespace Game.Player.Inputs
 
                 return new State()
                 {
-                    movement = this.movement / sampleCount
+                    movement = this.movement / sampleCount,
+                    sprint = this.sprint,
+                    jump = this.jump
                 };
             }
 
@@ -39,6 +43,8 @@ namespace Game.Player.Inputs
             public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
             {
                 serializer.SerializeValue(ref movement);
+                serializer.SerializeValue(ref sprint);
+                serializer.SerializeValue(ref jump);
             }
             // ~INetworkSerializable
         }
@@ -50,9 +56,23 @@ namespace Game.Player.Inputs
         [SerializeField] private State cumulativeInput;
         [SerializeField] private int sampleCount;
 
+        [Header("Movement Settings")]
+        public bool analogMovement;
+
         private void Awake()
         {
             _playerInput = GetComponent<PlayerInput>();
+        }
+
+        private void FixedUpdate()
+        {
+            if (IsOwn)
+            {
+                cumulativeInput.movement = _playerInput.actions.FindAction("Move").ReadValue<Vector2>();
+                cumulativeInput.sprint = _playerInput.actions.FindAction("Sprint").IsPressed();
+                cumulativeInput.jump = _playerInput.actions.FindAction("Jump").IsPressed();
+                sampleCount++;
+            }
         }
 
         public void OnMove(InputValue value)
@@ -62,11 +82,24 @@ namespace Game.Player.Inputs
 
         public void MoveInput(Vector2 newMoveDirection)
         {
-            if (IsOwn)
-            {
-                cumulativeInput.movement += newMoveDirection;
-                sampleCount++;
-            }
+        }
+
+        public void OnSprint(InputValue value)
+        {
+            SprintInput(value.isPressed);
+        }
+
+        public void SprintInput(bool sprint)
+        {
+        }
+
+        public void OnJump(InputValue value)
+        {
+            JumptInput(value.isPressed);
+        }
+
+        public void JumptInput(bool jump)
+        {
         }
 
         protected override State CaptureInput()
