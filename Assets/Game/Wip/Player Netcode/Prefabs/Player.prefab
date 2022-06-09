@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7192123189738726340
 Transform:
   m_ObjectHideFlags: 0
@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 1455569025596834647}
   - component: {fileID: 1455569025596834644}
   - component: {fileID: 6437968456383070189}
+  - component: {fileID: 6936311113175214047}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -367,3 +368,16 @@ MonoBehaviour:
   latestReceivedState: 0
   hasNewState: 0
   isInterpolated: 1
+--- !u!114 &6936311113175214047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8096360628746819048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27d732fb6fee9034f9f0739950b17c6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 159166720658866451}

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.5
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.5603656, g: 0.5605575, b: 0.68738925, a: 0.5}
+  m_IndirectSpecularColor: {r: 0.471462, g: 0.5164995, b: 0.65947455, a: 0.5}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1378,7 +1378,7 @@ MonoBehaviour:
   timeOfDay: {fileID: 11400000, guid: 38d1155860b8f9b439ee879298cd20e7, type: 2}
   skybox: {fileID: 2100000, guid: db3eea50d1ad2864d96a7655861759c9, type: 2}
   sun: {fileID: 705507994}
-  simulate: 1
+  simulate: 0
 --- !u!4 &1726589046
 Transform:
   m_ObjectHideFlags: 0
