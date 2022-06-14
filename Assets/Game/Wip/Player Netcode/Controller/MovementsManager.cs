@@ -5,9 +5,10 @@ namespace Game.Player.Controller
 {
     [RequireComponent(typeof(RewindableTransformState))]
     [RequireComponent(typeof(CharacterController))]
+    [RequireComponent(typeof(Inputs.InputManager))]
     public class MovementsManager : EmptyStateBehaviour
     {
-        public Game.Player.Inputs.InputManager inputManager;
+        Game.Player.Inputs.InputManager _inputManager;
 
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
@@ -44,6 +45,7 @@ namespace Game.Player.Controller
         private void Awake()
         {
             _characterController = GetComponent<CharacterController>();
+            _inputManager = GetComponent<Inputs.InputManager>();
         }
 
         private void Start()
@@ -61,16 +63,16 @@ namespace Game.Player.Controller
         private void Move(float deltaTime)
         {
             // set target speed based on move speed, sprint speed and if sprint is pressed
-            float targetSpeed = inputManager.Current.sprint ? sprintSpeed : moveSpeed;
+            float targetSpeed = _inputManager.Current.sprint ? sprintSpeed : moveSpeed;
 
-            Vector3 direction = transform.forward * inputManager.Current.movement.y + transform.right * inputManager.Current.movement.x;
+            Vector3 direction = transform.forward * _inputManager.Current.movement.y + transform.right * _inputManager.Current.movement.x;
 
             _characterController.Move(direction * (targetSpeed * deltaTime));
         }
 
         private void Rotate(float deltaTime)
         {
-            _targetRotation = Mathf.Atan2(inputManager.Current.look.x, inputManager.Current.look.y) * Mathf.Rad2Deg +
+            _targetRotation = Mathf.Atan2(_inputManager.Current.look.x, _inputManager.Current.look.y) * Mathf.Rad2Deg +
                                   mainCamera.transform.eulerAngles.y;
             float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
                 rotationSmoothTime);

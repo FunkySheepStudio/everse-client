@@ -65,7 +65,7 @@ namespace Game.Player.Inputs
         [Header("Movement Settings")]
         public bool analogMovement;
 
-        private void Awake()
+        private void Start()
         {
             _playerInput = GetComponent<PlayerInput>();
         }
