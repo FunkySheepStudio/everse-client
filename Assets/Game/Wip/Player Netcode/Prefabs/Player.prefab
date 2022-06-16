@@ -134,10 +134,10 @@ GameObject:
   - component: {fileID: 1455569025596834634}
   - component: {fileID: 1455569025596834633}
   - component: {fileID: 1455569025596834639}
-  - component: {fileID: 1455569025596834638}
   - component: {fileID: 1455569025596834647}
   - component: {fileID: 1455569025596834644}
-  - component: {fileID: 6437968456383070189}
+  - component: {fileID: -2597771258493643639}
+  - component: {fileID: -5466681890642667997}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -285,23 +285,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1455569025596834638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8096360628746819048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62365d2826e08d34b8bfe75164660578, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 50
-  sprintSpeed: 150
-  speedChangeRate: 10
-  rotationSmoothTime: 0.12
-  mainCamera: {fileID: 1198632244155907131}
 --- !u!114 &1455569025596834647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,7 +345,24 @@ MonoBehaviour:
     jump: 0
   sampleCount: 0
   analogMovement: 0
---- !u!114 &6437968456383070189
+--- !u!114 &-2597771258493643639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8096360628746819048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62365d2826e08d34b8bfe75164660578, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 50
+  sprintSpeed: 500
+  speedChangeRate: 10
+  rotationSmoothTime: 0.12
+  mainCamera: {fileID: 1198632244155907131}
+--- !u!114 &-5466681890642667997
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

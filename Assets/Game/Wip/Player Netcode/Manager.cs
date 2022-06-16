@@ -13,6 +13,7 @@ namespace Game.Player
         private void Start()
         {
             _networkObject = GetComponent<NetworkObject>();
+
             if (_networkObject.IsOwner)
             {
                 playerCamera.gameObject.SetActive(true);
