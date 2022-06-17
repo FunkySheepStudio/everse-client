@@ -114,6 +114,24 @@ namespace Game.Player.Controller
 
         private void Start()
         {
+            _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
+
+            _hasAnimator = TryGetComponent(out _animator);
+
+            AssignAnimationIDs();
+
+            // reset our timeouts on start
+            _jumpTimeoutDelta = JumpTimeout;
+            _fallTimeoutDelta = FallTimeout;
+        }
+
+        private void AssignAnimationIDs()
+        {
+            _animIDSpeed = Animator.StringToHash("Speed");
+            _animIDGrounded = Animator.StringToHash("Grounded");
+            _animIDJump = Animator.StringToHash("Jump");
+            _animIDFreeFall = Animator.StringToHash("FreeFall");
+            _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
         }
 
         void FindInitialPosition()
@@ -126,6 +144,40 @@ namespace Game.Player.Controller
             }
         }
 
+        private void LateUpdate()
+        {
+            
+        }
+
+        private void CameraRotation()
+        {
+            // if there is an input and camera position is not fixed
+            if (_inputManager.Current.look.sqrMagnitude >= _threshold && !LockCameraPosition)
+            {
+                //Don't multiply mouse input by Time.deltaTime;
+                //float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
+                float deltaTimeMultiplier = 1.0f;
+
+                _cinemachineTargetYaw += _inputManager.Current.look.x * deltaTimeMultiplier;
+                _cinemachineTargetPitch += _inputManager.Current.look.y * deltaTimeMultiplier;
+            }
+
+            // clamp our rotations so our values are limited 360 degrees
+            _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
+            _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
+
+            // Cinemachine will follow this target
+            CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
+                _cinemachineTargetYaw, 0.0f);
+        }
+
+        private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
+        {
+            if (lfAngle < -360f) lfAngle += 360f;
+            if (lfAngle > 360f) lfAngle -= 360f;
+            return Mathf.Clamp(lfAngle, lfMin, lfMax);
+        }
+
         public override void Simulate(int tick, float deltaTime)
         {
             if (!_initialPosition)
@@ -133,12 +185,11 @@ namespace Game.Player.Controller
                 FindInitialPosition();
             } else
             {
-                _hasAnimator = TryGetComponent(out _animator);
-
                 JumpAndGravity(deltaTime);
                 GroundedCheck();
                 Move(deltaTime);
                 Rotate(deltaTime);
+                CameraRotation();
             }
         }
 
@@ -146,75 +197,17 @@ namespace Game.Player.Controller
         {
             // set target speed based on move speed, sprint speed and if sprint is pressed
             float targetSpeed = _inputManager.Current.sprint ? SprintSpeed : MoveSpeed;
+            if (_inputManager.Current.movement == Vector2.zero) targetSpeed = 0.0f;
 
             Vector3 direction = transform.forward * _inputManager.Current.movement.y + transform.right * _inputManager.Current.movement.x;
 
             _characterController.Move(direction * (targetSpeed * deltaTime) +
                              new Vector3(0.0f, _verticalVelocity, 0.0f) * deltaTime);
-        }
-
-
-
-        private void Move1(float deltaTime)
-        {
-            // set target speed based on move speed, sprint speed and if sprint is pressed
-            float targetSpeed = _inputManager.Current.sprint ? SprintSpeed : MoveSpeed;
-
-            // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
-
-            // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
-            // if there is no input, set the target speed to 0
-            if (_inputManager.Current.movement == Vector2.zero) targetSpeed = 0.0f;
-
-            // a reference to the players current horizontal velocity
-            float currentHorizontalSpeed = new Vector3(_characterController.velocity.x, 0.0f, _characterController.velocity.z).magnitude;
-
-            float speedOffset = 0.1f;
-            //float inputMagnitude = _inputManager.Current.analogMovement ? _inputManager.Current.magnitude : 1f;
-            float inputMagnitude = 1f;
-
-            // accelerate or decelerate to target speed
-            if (currentHorizontalSpeed < targetSpeed - speedOffset ||
-                currentHorizontalSpeed > targetSpeed + speedOffset)
-            {
-                // creates curved result rather than a linear one giving a more organic speed change
-                // note T in Lerp is clamped, so we don't need to clamp our speed
-                _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude,
-                    deltaTime * SpeedChangeRate);
-
-                // round speed to 3 decimal places
-                _speed = Mathf.Round(_speed * 1000f) / 1000f;
-            }
-            else
-            {
-                _speed = targetSpeed;
-            }
 
             _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, deltaTime * SpeedChangeRate);
             if (_animationBlend < 0.01f) _animationBlend = 0f;
 
-            // normalise input direction
-            Vector3 inputDirection = new Vector3(_inputManager.Current.movement.x, 0.0f, _inputManager.Current.movement.y).normalized;
-
-            // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
-            // if there is a move input rotate player when the player is moving
-            if (_inputManager.Current.movement != Vector2.zero)
-            {
-                _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
-                                  mainCamera.transform.eulerAngles.y;
-                float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
-                    RotationSmoothTime);
-
-                // rotate to face input direction relative to camera position
-                transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
-            }
-
-
-            Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
-
-            // move the player
-            _characterController.Move(targetDirection.normalized * (_speed * deltaTime) +
-                             new Vector3(0.0f, _verticalVelocity, 0.0f) * deltaTime);
+            float inputMagnitude = 1f;
 
             // update animator if using character
             if (_hasAnimator)
@@ -224,12 +217,29 @@ namespace Game.Player.Controller
             }
         }
 
+        private void OnFootstep(AnimationEvent animationEvent)
+        {
+            if (animationEvent.animatorClipInfo.weight > 0.5f)
+            {
+                if (FootstepAudioClips.Length > 0)
+                {
+                    var index = Random.Range(0, FootstepAudioClips.Length);
+                    AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(_characterController.center), FootstepAudioVolume);
+                }
+            }
+        }
 
+        private void OnLand(AnimationEvent animationEvent)
+        {
+            if (animationEvent.animatorClipInfo.weight > 0.5f)
+            {
+                AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_characterController.center), FootstepAudioVolume);
+            }
+        }
 
         private void Rotate(float deltaTime)
         {
-            _targetRotation = Mathf.Atan2(_inputManager.Current.look.x, _inputManager.Current.look.y) * deltaTime * Mathf.Rad2Deg +
-                                  mainCamera.transform.eulerAngles.y;
+            _targetRotation = Mathf.Atan2(_inputManager.Current.look.x, _inputManager.Current.look.y) * deltaTime * Mathf.Rad2Deg + mainCamera.transform.eulerAngles.y;
             float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
                 RotationSmoothTime);
 

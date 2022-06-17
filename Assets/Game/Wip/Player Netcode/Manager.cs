@@ -7,7 +7,7 @@ namespace Game.Player
     [RequireComponent(typeof(NetworkObject))]
     public class Manager : MonoBehaviour
     {
-        public Camera playerCamera;
+        public GameObject playerFollowCamera;
         public UnityEngine.InputSystem.InputActionAsset playerInputActionsAsset;
         NetworkObject _networkObject;
         private void Start()
@@ -16,7 +16,7 @@ namespace Game.Player
 
             if (_networkObject.IsOwner)
             {
-                playerCamera.gameObject.SetActive(true);
+                playerFollowCamera.SetActive(true);
                 GetComponent<UnityEngine.InputSystem.PlayerInput>().actions = playerInputActionsAsset;
             } else
             {
