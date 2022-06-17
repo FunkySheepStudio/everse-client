@@ -239,12 +239,13 @@ namespace Game.Player.Controller
 
         private void Rotate(float deltaTime)
         {
-            _targetRotation = Mathf.Atan2(_inputManager.Current.look.x, _inputManager.Current.look.y) * deltaTime * Mathf.Rad2Deg + mainCamera.transform.eulerAngles.y;
+            _targetRotation = Mathf.Atan2(_inputManager.Current.look.x, _inputManager.Current.look.y) * deltaTime * Mathf.Rad2Deg  ;// + mainCamera.transform.eulerAngles.y;
             float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
                 RotationSmoothTime);
 
             // rotate to face input direction relative to camera position
-            transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+            //transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+            transform.Rotate(new Vector3(0, _inputManager.Current.look.x, 0) * deltaTime * 180);
         }
 
         private void GroundedCheck()
