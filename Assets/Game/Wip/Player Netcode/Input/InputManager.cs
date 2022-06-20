@@ -70,7 +70,7 @@ namespace Game.Player.Inputs
             _playerInput = GetComponent<PlayerInput>();
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             if (IsOwn)
             {
