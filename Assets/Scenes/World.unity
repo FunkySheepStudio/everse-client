@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.5
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.471462, g: 0.5164995, b: 0.65947455, a: 0.5}
+  m_IndirectSpecularColor: {r: 0.10546283, g: 0.34540665, b: 0.56073785, a: 0.5}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -713,8 +713,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 728359324}
-        m_TargetAssemblyTypeName: FunkySheep.Earth.Trees.Manager, Assembly-CSharp
-        m_MethodName: AddedTreeTile
+        m_TargetAssemblyTypeName: FunkySheep.Earth.Trees.Manager, FunkySheep.Earth
+        m_MethodName: AddedSatelliteTile
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -886,7 +886,7 @@ MonoBehaviour:
   earthManager: {fileID: 1100245712}
   mapManager: {fileID: 396924182}
   tree: {fileID: 3726134474519596915, guid: 036450fc6b1350947a8f928c63d6862e, type: 3}
-  drawDistance: 100
+  authorizedColors: []
 --- !u!1 &939605764
 GameObject:
   m_ObjectHideFlags: 0
@@ -1074,8 +1074,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zoomLevel: {fileID: 11400000, guid: 3c67854377f8eff499cddc25ae9a481d, type: 2}
-  initialLatitude: {fileID: 11400000, guid: 1ccafd01e79cc9c4bbb58c488adde6fe, type: 2}
-  initialLongitude: {fileID: 11400000, guid: 31dd15ddd45ce1840949a4cdda2134b6, type: 2}
+  initialLatitude: {fileID: 11400000, guid: 19974709225fbe844a0ae357316d8fec, type: 2}
+  initialLongitude: {fileID: 11400000, guid: 407c759601fcc2f4995bfd869bacc7df, type: 2}
   initialMapPosition: {fileID: 11400000, guid: 225ded4de921a5b4f81526d848fcf829, type: 2}
   initialMercatorPosition: {fileID: 11400000, guid: eed82b21d5f7ca9469baabddd913b59a, type: 2}
   onStarted: {fileID: 11400000, guid: 3785cf3207a61ef41b7ea94111ce5aab, type: 2}
@@ -1186,7 +1186,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1171716213}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -500, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1209,6 +1209,7 @@ GameObject:
   - component: {fileID: 1568215729}
   - component: {fileID: 1568215728}
   - component: {fileID: 1568215727}
+  - component: {fileID: 1568215731}
   m_Layer: 0
   m_Name: Osm
   m_TagString: Untagged
@@ -1246,7 +1247,7 @@ MonoBehaviour:
   earth: {fileID: 1100245712}
   url: {fileID: 11400000, guid: d87f41d86d2a23b48844c0a020273d3e, type: 2}
   textureResolution: {fileID: 11400000, guid: 0161f8f866a9f45418f06c8966021bc6, type: 2}
-  addedTileEvent: {fileID: 0}
+  addedTileEvent: {fileID: 11400000, guid: 220c268eb0ab6334dbb0fa9cdf80ba70, type: 2}
 --- !u!156049354 &1568215728
 Grid:
   m_ObjectHideFlags: 0
@@ -1346,6 +1347,34 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1568215731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568215724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc199f0b08fcc2c488ec49760cc00aeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 220c268eb0ab6334dbb0fa9cdf80ba70, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 728359324}
+        m_TargetAssemblyTypeName: FunkySheep.Earth.Trees.Manager, FunkySheep.Earth
+        m_MethodName: AddedOSMTile
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1726589044
 GameObject:
   m_ObjectHideFlags: 0

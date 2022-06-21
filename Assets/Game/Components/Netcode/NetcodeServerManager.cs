@@ -16,7 +16,7 @@ namespace Game.Netcode
         // Start is called before the first frame update
         void Start()
         {
-            _networkManager.StartHost();
+            _networkManager.StartClient();
         }
     }
 }
