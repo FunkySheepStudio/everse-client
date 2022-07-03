@@ -144,11 +144,6 @@ namespace Game.Player.Controller
             }
         }
 
-        private void LateUpdate()
-        {
-            
-        }
-
         private void CameraRotation()
         {
             // if there is an input and camera position is not fixed
