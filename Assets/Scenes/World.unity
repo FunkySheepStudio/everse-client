@@ -1074,8 +1074,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zoomLevel: {fileID: 11400000, guid: 3c67854377f8eff499cddc25ae9a481d, type: 2}
-  initialLatitude: {fileID: 11400000, guid: 1ccafd01e79cc9c4bbb58c488adde6fe, type: 2}
-  initialLongitude: {fileID: 11400000, guid: 31dd15ddd45ce1840949a4cdda2134b6, type: 2}
+  initialLatitude: {fileID: 11400000, guid: 19974709225fbe844a0ae357316d8fec, type: 2}
+  initialLongitude: {fileID: 11400000, guid: 407c759601fcc2f4995bfd869bacc7df, type: 2}
   initialMapPosition: {fileID: 11400000, guid: 225ded4de921a5b4f81526d848fcf829, type: 2}
   initialMercatorPosition: {fileID: 11400000, guid: eed82b21d5f7ca9469baabddd913b59a, type: 2}
   onStarted: {fileID: 11400000, guid: 3785cf3207a61ef41b7ea94111ce5aab, type: 2}
