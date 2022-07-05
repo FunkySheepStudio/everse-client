@@ -75,10 +75,6 @@ namespace Game.Player.Controller
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
 
-        // cinemachine
-        private float _cinemachineTargetYaw;
-        private float _cinemachineTargetPitch;
-
         // player
         private float _speed;
         private float _animationBlend;
@@ -99,8 +95,6 @@ namespace Game.Player.Controller
         private int _animIDMotionSpeed;
 
         private Animator _animator;
-        //private CharacterController _controller;
-        //private GameObject _mainCamera;
 
         private const float _threshold = 0.01f;
 
@@ -114,7 +108,7 @@ namespace Game.Player.Controller
 
         private void Start()
         {
-            _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
+            //_cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
 
             _hasAnimator = TryGetComponent(out _animator);
 
@@ -144,35 +138,6 @@ namespace Game.Player.Controller
             }
         }
 
-        private void CameraRotation()
-        {
-            // if there is an input and camera position is not fixed
-            if (_inputManager.Current.look.sqrMagnitude >= _threshold && !LockCameraPosition)
-            {
-                //Don't multiply mouse input by Time.deltaTime;
-                //float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
-                float deltaTimeMultiplier = 1.0f;
-
-                _cinemachineTargetYaw += _inputManager.Current.look.x * deltaTimeMultiplier;
-                _cinemachineTargetPitch += _inputManager.Current.look.y * deltaTimeMultiplier;
-            }
-
-            // clamp our rotations so our values are limited 360 degrees
-            _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
-            _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
-
-            // Cinemachine will follow this target
-            CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
-                _cinemachineTargetYaw, 0.0f);
-        }
-
-        private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
-        {
-            if (lfAngle < -360f) lfAngle += 360f;
-            if (lfAngle > 360f) lfAngle -= 360f;
-            return Mathf.Clamp(lfAngle, lfMin, lfMax);
-        }
-
         public override void Simulate(int tick, float deltaTime)
         {
             if (!_initialPosition)
@@ -184,7 +149,6 @@ namespace Game.Player.Controller
                 GroundedCheck();
                 Move(deltaTime);
                 Rotate(deltaTime);
-                CameraRotation();
             }
         }
 
