@@ -1,7 +1,9 @@
+using System;
 using FunkySheep.SimpleJSON;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using Unity.Netcode;
 
 namespace Game.Authentication
 {
@@ -30,6 +32,23 @@ namespace Game.Authentication
             txtPassword.value = password.value;
         }
 
+        private void Start()
+        {
+#if UNITY_SERVER
+            AutoLogin();
+#endif
+        }
+
+#if UNITY_SERVER
+        void AutoLogin()
+        {
+            string[] arguments = Environment.GetCommandLineArgs();
+            login.value = arguments[1];
+            password.value = arguments[2];
+            authenticate.Execute();
+        }
+#endif
+
         void Login()
         {
             login.value = txtLogin.value;
@@ -43,7 +62,9 @@ namespace Game.Authentication
             {
                 id.value = authResponse["data"]["user"]["_id"];
                 nickname.value = authResponse["data"]["user"]["nickname"];
-                SceneManager.LoadSceneAsync("Scenes/Main", LoadSceneMode.Additive);
+#if UNITY_SERVER
+                    NetworkManager.Singleton.SceneManager.LoadScene("Scenes/World", LoadSceneMode.Additive);
+#endif
                 gameObject.SetActive(false);
             }
             else
