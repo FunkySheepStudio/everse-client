@@ -12,7 +12,7 @@ namespace Game.Netcode
         {
 #if UNITY_SERVER
             NetworkManager.Singleton.StartServer();
-            NetworkManager.Singleton.SceneManager.LoadScene("Scenes/Authentication", LoadSceneMode.Additive);
+            NetworkManager.Singleton.SceneManager.LoadScene("Scenes/World", LoadSceneMode.Additive);
 #else
             NetworkManager.Singleton.StartClient();
 #endif

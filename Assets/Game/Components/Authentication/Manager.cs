@@ -3,7 +3,6 @@ using FunkySheep.SimpleJSON;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
-using Unity.Netcode;
 
 namespace Game.Authentication
 {
@@ -62,9 +61,7 @@ namespace Game.Authentication
             {
                 id.value = authResponse["data"]["user"]["_id"];
                 nickname.value = authResponse["data"]["user"]["nickname"];
-#if UNITY_SERVER
-                    NetworkManager.Singleton.SceneManager.LoadScene("Scenes/World", LoadSceneMode.Additive);
-#endif
+                SceneManager.LoadScene("Scenes/NetCode", LoadSceneMode.Single);
                 gameObject.SetActive(false);
             }
             else

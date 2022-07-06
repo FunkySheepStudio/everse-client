@@ -4689,8 +4689,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 3889593241841043986}
-  MoveSpeed: 30
-  SprintSpeed: 60
+  MoveSpeed: 100
+  SprintSpeed: 300
   RotationSmoothTime: 0.12
   SpeedChangeRate: 10
   LandingAudioClip: {fileID: 8300000, guid: 72f526a6a9890f643a88e85a61c86c8a, type: 3}
