@@ -18,6 +18,7 @@ namespace Game.Player.Inputs
             public bool sprint;
             public bool jump;
             public bool shoot;
+            public bool vehicle;
 
             public void Reset()
             {
@@ -26,6 +27,7 @@ namespace Game.Player.Inputs
                 sprint = false;
                 jump = false;
                 shoot = false;
+                vehicle = false;
             }
 
             public State AverageOver(int sampleCount)
@@ -38,7 +40,8 @@ namespace Game.Player.Inputs
                     look = this.look / sampleCount,
                     sprint = this.sprint,
                     jump = this.jump,
-                    shoot = this.shoot
+                    shoot = this.shoot,
+                    vehicle = this.vehicle
                 };
             }
 
@@ -55,6 +58,7 @@ namespace Game.Player.Inputs
                 serializer.SerializeValue(ref sprint);
                 serializer.SerializeValue(ref jump);
                 serializer.SerializeValue(ref shoot);
+                serializer.SerializeValue(ref vehicle);
             }
             // ~INetworkSerializable
         }
@@ -83,6 +87,7 @@ namespace Game.Player.Inputs
                 cumulativeInput.sprint = _playerInput.actions.FindAction("Sprint").IsPressed();
                 cumulativeInput.jump = _playerInput.actions.FindAction("Jump").IsPressed();
                 cumulativeInput.shoot= _playerInput.actions.FindAction("Shoot").IsPressed();
+                cumulativeInput.vehicle = _playerInput.actions.FindAction("Vehicle").IsPressed();
                 sampleCount++;
             }
         }
@@ -128,7 +133,16 @@ namespace Game.Player.Inputs
             ShotInput(value.isPressed);
         }
 
-        public void ShotInput(bool jump)
+        public void ShotInput(bool shoot)
+        {
+        }
+
+        public void OnVehicle(InputValue value)
+        {
+            VehicleInput(value.isPressed);
+        }
+
+        public void VehicleInput(bool vehicle)
         {
         }
 
@@ -162,3 +176,4 @@ namespace Game.Player.Inputs
         public State Current => currentInput;
     }
 }
+

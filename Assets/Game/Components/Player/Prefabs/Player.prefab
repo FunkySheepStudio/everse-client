@@ -3058,6 +3058,7 @@ GameObject:
   - component: {fileID: 3062896458812646962}
   - component: {fileID: 4454704534610454664}
   - component: {fileID: 2254530347731277058}
+  - component: {fileID: 8634980868962681436}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3199,12 +3200,14 @@ MonoBehaviour:
     sprint: 0
     jump: 0
     shoot: 0
+    vehicle: 0
   cumulativeInput:
     movement: {x: 0, y: 0}
     look: {x: 0, y: 0}
     sprint: 0
     jump: 0
     shoot: 0
+    vehicle: 0
   sampleCount: 0
   analogMovement: 0
 --- !u!114 &-2597771258493643639
@@ -3320,6 +3323,20 @@ MonoBehaviour:
   lastInsideTileQuarterPosition: {x: 0, y: 0}
   onMove: {fileID: 11400000, guid: 6b6ddf10b4214234ebfe6641fc2631d8, type: 2}
   playerPosition: {fileID: 11400000, guid: 37ce55737b1a96448a6e892ccec31493, type: 2}
+--- !u!114 &8634980868962681436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8096360628746819048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b285771df948c446a1fddc8415c1a65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vehicles:
+  - {fileID: 6257709377553918066, guid: b9b959ca7a821b94492e3352f832d429, type: 3}
 --- !u!1 &8209351606011056612
 GameObject:
   m_ObjectHideFlags: 0

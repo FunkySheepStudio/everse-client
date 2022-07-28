@@ -15,9 +15,9 @@ namespace Game.Netcode
             NetworkManager.Singleton.SceneManager.LoadScene("Scenes/World", LoadSceneMode.Additive);
 
 #elif UNITY_EDITOR
-            NetworkManager.Singleton.StartClient();
-            //NetworkManager.Singleton.StartHost();
-            //NetworkManager.Singleton.SceneManager.LoadScene("Scenes/World", LoadSceneMode.Additive);
+            //NetworkManager.Singleton.StartClient();
+            NetworkManager.Singleton.StartHost();
+            NetworkManager.Singleton.SceneManager.LoadScene("Scenes/World", LoadSceneMode.Additive);
 #else
             NetworkManager.Singleton.StartClient();
 #endif

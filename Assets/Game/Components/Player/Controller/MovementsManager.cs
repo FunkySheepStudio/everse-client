@@ -147,10 +147,13 @@ namespace Game.Player.Controller
                 FindInitialPosition();
             } else
             {
-                JumpAndGravity(deltaTime);
-                GroundedCheck();
-                Move(deltaTime);
-                Rotate(deltaTime);
+                if (!_inputManager.Current.vehicle)
+                {
+                    JumpAndGravity(deltaTime);
+                    GroundedCheck();
+                    Move(deltaTime);
+                    Rotate(deltaTime);
+                }
             }
         }
 

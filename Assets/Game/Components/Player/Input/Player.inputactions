@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Vehicle",
+                    "type": "Button",
+                    "id": "174c57ce-d97f-46e2-b600-e54f6b931e3d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -236,6 +245,17 @@
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f19151c7-0297-445b-8e30-7414380a72e5",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "Vehicle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

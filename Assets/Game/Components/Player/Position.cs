@@ -23,7 +23,6 @@ namespace Game.Player
         private void Start()
         {
             lastPosition = transform.position;
-            GetComponent<FunkySheep.Earth.Components.SetHeight>().offset = 20;
         }
 
         private void Update()
