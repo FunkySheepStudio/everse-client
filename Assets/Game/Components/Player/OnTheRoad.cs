@@ -5,13 +5,19 @@ namespace Game.Player
     public class OnTheRoad : MonoBehaviour
     {
         public float lastHit = 0;
-        public Game.Player.Movements movements;
+        Game.Player.Controller.MovementsManager movements;
+
+        private void Awake()
+        {
+            movements = GetComponent<Game.Player.Controller.MovementsManager>();
+        }
 
         private void OnTriggerStay(Collider other)
         {
             if (other.gameObject.layer == 20)
             {
-                movements.speed = 40;
+                movements.MoveSpeed = 100;
+                movements.SprintSpeed = 200;
                 lastHit = 0;
             }
         }
@@ -22,7 +28,8 @@ namespace Game.Player
             lastHit += Time.deltaTime;
             if (lastHit > 1)
             {
-                movements.speed = 10;
+                movements.MoveSpeed = 50;
+                movements.SprintSpeed = 100;
             }
         }
     }

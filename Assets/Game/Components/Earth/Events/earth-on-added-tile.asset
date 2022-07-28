@@ -9,9 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3551a15056c8644b9dd03fd01daba70, type: 3}
-  m_Name: Skybox - Time of Day
+  m_Script: {fileID: 11500000, guid: dbd53c3826680d145b76440c7dfaf4ca, type: 3}
+  m_Name: earth-on-added-tile
   m_EditorClassIdentifier: 
-  apiName: 
-  reset: 0
-  value: 15.7

@@ -1,17 +1,18 @@
 using UnityEngine;
+using FunkySheep.NetWind;
 
 namespace Game.Guns
 {
-    public class Manager : MonoBehaviour
+    public class Manager : EmptyStateBehaviour
     {
         public GameObject hand;
         public Gun gun;
-        private Game.Player.Inputs.Manager _input;
+        private Game.Player.Inputs.InputManager _inputManager;
         private GameObject gunGo;
 
         private void Awake()
         {
-            _input = GetComponent<Game.Player.Inputs.Manager>();
+            _inputManager = GetComponent<Game.Player.Inputs.InputManager>();
         }
 
         private void Start()
@@ -21,9 +22,9 @@ namespace Game.Guns
             gunGo.transform.localRotation = Quaternion.Euler(new Vector3(-40, 90, -90));
         }
 
-        private void Update()
+        public override void Simulate(int tick, float deltaTime)
         {
-            if (_input.shoot)
+            if (_inputManager.Current.shoot)
             {
                 gun.Shoot(gunGo.transform.position + gunGo.transform.up * 0.20f, transform.forward);
             }

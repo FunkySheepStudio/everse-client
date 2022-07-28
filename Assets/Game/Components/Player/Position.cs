@@ -4,12 +4,14 @@ namespace Game.Player
 {
     public class Position : MonoBehaviour
     {
-        //public FunkySheep.Types.Double calculatedLatitude;
-        //public FunkySheep.Types.Double calculatedLongitude;
-        public FunkySheep.Earth.Manager earth;
+        public FunkySheep.Types.Double earthInitialLatitude;
 
+        public FunkySheep.Types.Vector2 earthInitialMercatorPosition;
+        public FunkySheep.Types.Vector2 initialOffset;
+        public FunkySheep.Types.Float tileSize;
         public FunkySheep.Types.Double calculatedLatitude;
         public FunkySheep.Types.Double calculatedLongitude;
+        public FunkySheep.Events.Event<Vector2Int> onEarthTilePositionChanged;
         public Vector2Int lastTilePosition;
         public Vector2Int tilePosition;
         public Vector2Int insideTileQuarterPosition;
@@ -38,26 +40,31 @@ namespace Game.Player
 
         public void Calculate()
         {
-            tilePosition = earth.tilesManager.TilePosition(
+            tilePosition = FunkySheep.Tiles.Utils.TilePosition(
               new Vector2(
                 transform.position.x,
                 transform.position.z
-              )
+              ),
+              tileSize.value,
+              initialOffset.value
             );
 
-            insideTileQuarterPosition = earth.tilesManager.InsideTileQuarterPosition(
+            insideTileQuarterPosition = FunkySheep.Tiles.Utils.InsideTileQuarterPosition(
               new Vector2(
                 transform.position.x,
                 transform.position.z
-              )
+              ),
+              tileSize.value,
+              initialOffset.value
             );
 
             if (insideTileQuarterPosition != lastInsideTileQuarterPosition)
             {
-                earth.AddTile(tilePosition);
-                earth.AddTile(tilePosition + insideTileQuarterPosition.y * Vector2Int.up);
-                earth.AddTile(tilePosition + insideTileQuarterPosition.x * Vector2Int.right);
-                earth.AddTile(tilePosition + insideTileQuarterPosition);
+                onEarthTilePositionChanged.Raise(tilePosition);
+                onEarthTilePositionChanged.Raise(tilePosition + insideTileQuarterPosition.y * Vector2Int.up);
+                onEarthTilePositionChanged.Raise(tilePosition + insideTileQuarterPosition.x * Vector2Int.right);
+                onEarthTilePositionChanged.Raise(tilePosition + insideTileQuarterPosition);
+
                 lastInsideTileQuarterPosition = insideTileQuarterPosition;
             }
         }
@@ -66,8 +73,8 @@ namespace Game.Player
         {
             var calculatedGPS = FunkySheep.Earth.Utils.toGeoCoord(
                     new Vector2(
-                        earth.initialMercatorPosition.value.x + transform.position.x / Mathf.Cos(Mathf.Deg2Rad * (float)earth.initialLatitude.value),
-                        earth.initialMercatorPosition.value.y + transform.position.z / Mathf.Cos(Mathf.Deg2Rad * (float)earth.initialLatitude.value)
+                        earthInitialMercatorPosition.value.x + transform.position.x / Mathf.Cos(Mathf.Deg2Rad * (float)earthInitialLatitude.value),
+                        earthInitialMercatorPosition.value.y + transform.position.z / Mathf.Cos(Mathf.Deg2Rad * (float)earthInitialLatitude.value)
                         )
                 );
             calculatedLatitude.value = calculatedGPS.latitude;
