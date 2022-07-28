@@ -69,7 +69,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1920
+    width: 1280
     height: 30
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
@@ -206,12 +206,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: GameView
+  m_Name: SceneView
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 394
+    x: 262.66666
     y: 0
     width: 1086
     height: 644
@@ -265,7 +265,7 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1480
+    x: 986.6667
     y: 0
     width: 440
     height: 939
@@ -535,8 +535,8 @@ MonoBehaviour:
       floating: 1
       collapsed: 0
       displayed: 0
-      snapOffset: {x: -165.66663, y: -99.33334}
-      snapOffsetDelta: {x: 0, y: -0.000030517578}
+      snapOffset: {x: -165.66663, y: -100.66666}
+      snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 3
       id: Scene View/Camera
       index: 1
@@ -740,9 +740,9 @@ MonoBehaviour:
     speed: 2
     m_Value: 1215.7526
   m_Ortho:
-    m_Target: 0
+    m_Target: 1
     speed: 2
-    m_Value: 0
+    m_Value: 1
   m_CameraSettings:
     m_Speed: 1
     m_SpeedNormalized: 0.5
@@ -804,15 +804,15 @@ MonoBehaviour:
     m_SkipHidden: 1
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Mini-Games/Zombies/Tower/Vfx
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Mini-Games/Zombies/Tower/Vfx
   m_LastFoldersGridSize: 16
-  m_LastProjectPath: C:\Users\Kaas\Documents\FunkySheep\Games\everse-client
+  m_LastProjectPath: C:\Users\sjarde.69r\Documents\FunkySheep\Games\everse-client
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
@@ -874,7 +874,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c62300006e8100007281000086810000f66e0000967000001a7300003a7400004e8b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
