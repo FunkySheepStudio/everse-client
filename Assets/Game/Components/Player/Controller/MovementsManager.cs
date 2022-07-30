@@ -203,10 +203,11 @@ namespace Game.Player.Controller
 
         private void Rotate(float deltaTime)
         {
+            var _targetRotationY = Mathf.Lerp(0, _inputManager.Current.look.normalized.x, deltaTime);
+            transform.Rotate(new Vector3(0, _targetRotationY, 0) * RotationVelocity);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, transform.eulerAngles.y, 0), deltaTime);
 
-            _targetRotation = Mathf.Lerp(transform.rotation.x, _inputManager.Current.look.normalized.x, deltaTime);
 
-            transform.Rotate(new Vector3(0, _targetRotation, 0) * RotationVelocity);
         }
 
         private void GroundedCheck()

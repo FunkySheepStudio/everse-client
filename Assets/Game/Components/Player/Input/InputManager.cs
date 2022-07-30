@@ -27,7 +27,7 @@ namespace Game.Player.Inputs
                 sprint = false;
                 jump = false;
                 shoot = false;
-                vehicle = false;
+                //vehicle = false;
             }
 
             public State AverageOver(int sampleCount)
@@ -87,7 +87,11 @@ namespace Game.Player.Inputs
                 cumulativeInput.sprint = _playerInput.actions.FindAction("Sprint").IsPressed();
                 cumulativeInput.jump = _playerInput.actions.FindAction("Jump").IsPressed();
                 cumulativeInput.shoot= _playerInput.actions.FindAction("Shoot").IsPressed();
-                cumulativeInput.vehicle = _playerInput.actions.FindAction("Vehicle").IsPressed();
+                _playerInput.actions.FindAction("Vehicle").performed += context =>
+                    {
+                        currentInput.vehicle = !currentInput.vehicle;
+                    };
+                cumulativeInput.vehicle = currentInput.vehicle;
                 sampleCount++;
             }
         }
