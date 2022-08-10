@@ -1,11 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 using FunkySheep.NetWind;
 
 namespace Game.Vehicles
 {
     public class Manager : EmptyStateBehaviour
     {
+        public NetworkVariable<bool> loaded = new NetworkVariable<bool>();
+        private bool lastLoaded = false;
+        public NetworkVariable<int> currentIndex = new NetworkVariable<int>();
         public List<GameObject> vehicles;
         GameObject current;
         Game.Player.Inputs.InputManager inputManager;
@@ -16,6 +20,22 @@ namespace Game.Vehicles
             inputManager = GetComponent<Game.Player.Inputs.InputManager>();
         }
 
+        private void Update()
+        {
+            if (!IsOwner && lastLoaded != loaded.Value)
+            {
+                if (loaded.Value)
+                {
+                    Load(currentIndex.Value);
+                } else
+                {
+                    UnLoad();
+                }
+
+                lastLoaded = loaded.Value;
+            }
+        }
+
         public void Load(int index)
         {
             if (current == null)
@@ -24,6 +44,11 @@ namespace Game.Vehicles
                 current = GameObject.Instantiate(vehicles[index], transform);
                 current.GetComponent<Game.Vehicles.Movements>().characterController = GetComponent<CharacterController>();
                 current.GetComponent<Game.Vehicles.Movements>().inputManager = inputManager;
+                if (IsServer)
+                {
+                    loaded.Value = true;
+                    currentIndex.Value = index;
+                }
             }
         }
 
@@ -32,6 +57,10 @@ namespace Game.Vehicles
             DestroyImmediate(current);
             current = null;
             GetComponent<Game.Player.Controller.MovementsManager>().enabled = true;
+            if (IsServer)
+            {
+                loaded.Value = false;
+            }
         }
 
         public override void Simulate(int tick, float deltaTime)
