@@ -5,8 +5,11 @@ namespace Game.Markers
 {
     public class Manager : MonoBehaviour
     {
+        public FunkySheep.Types.Int32 zoomLevel;
+        public FunkySheep.Types.Vector2 initialMapPosition;
+        public FunkySheep.Types.Float tileSize;
+        public GameObject player;
         public GameObject markerAsset;
-        public FunkySheep.Earth.Manager earth;
         public FunkySheep.Network.Services.Create createService;
         public FunkySheep.Network.Services.Find findService;
         UnityEngine.UIElements.UIDocument UI;
@@ -43,7 +46,6 @@ namespace Game.Markers
         public void Create()
         {
             markerGo = GameObject.Instantiate(markerAsset);
-            markerGo.GetComponent<FunkySheep.Earth.Components.GeoCoordinates>().earth = earth;
             markerGo.transform.parent = transform;
             markerGo.transform.position += transform.forward * 15;
             creating = true;
@@ -61,12 +63,12 @@ namespace Game.Markers
                 FunkySheep.Types.Double latitude = ScriptableObject.CreateInstance<FunkySheep.Types.Double>();
                 latitude.apiName = "latitude";
                 createService.fields.Add(latitude);
-                latitude.value = markerGo.GetComponent<FunkySheep.Earth.Components.GeoCoordinates>().latitude;
+                latitude.value = player.GetComponent<Game.Player.Position>().calculatedLatitude.value;
 
                 FunkySheep.Types.Double longitude = ScriptableObject.CreateInstance<FunkySheep.Types.Double>();
                 longitude.apiName = "longitude";
                 createService.fields.Add(longitude);
-                longitude.value = markerGo.GetComponent<FunkySheep.Earth.Components.GeoCoordinates>().longitude;
+                longitude.value = player.GetComponent<Game.Player.Position>().calculatedLongitude.value;
 
                 FunkySheep.Types.Float height = ScriptableObject.CreateInstance<FunkySheep.Types.Float>();
                 height.apiName = "height";
@@ -82,7 +84,7 @@ namespace Game.Markers
 
         public void Download(Vector2Int worldTile)
         {
-            double[] boundaries = FunkySheep.Earth.Map.Utils.CaclulateGpsBoundaries(earth.zoomLevel.value, worldTile);
+            double[] boundaries = FunkySheep.Earth.Map.Utils.CaclulateGpsBoundaries(zoomLevel.value, worldTile);
             findService.query = FunkySheep.SimpleJSON.JSON.Parse("{}");
             findService.query["latitude"]["$gte"] = boundaries[0];
             findService.query["latitude"]["$lte"] = boundaries[2];
@@ -100,8 +102,7 @@ namespace Game.Markers
             for (int i = 0; i < markers.Count; i++)
             {
                 GameObject marker = GameObject.Instantiate(markerAsset);
-                Destroy(marker.GetComponent<FunkySheep.Earth.Components.GeoCoordinates>());
-                Vector2 marker2DPosition = earth.CalculatePosition(markers[i]["latitude"].AsDouble, markers[i]["longitude"].AsDouble);
+                Vector2 marker2DPosition = CalculatePosition(markers[i]["latitude"].AsDouble, markers[i]["longitude"].AsDouble);
 
                 marker.transform.position = new Vector3(
                     marker2DPosition.x,
@@ -111,6 +112,21 @@ namespace Game.Markers
 
                 //marker.transform.parent = transform;
             }
+        }
+
+        public Vector2 CalculatePosition(double latitude, double longitude)
+        {
+            Vector2 position = FunkySheep.Earth.Map.Utils.GpsToMapReal(
+              zoomLevel.value,
+              latitude,
+              longitude,
+              initialMapPosition.value
+            );
+
+            position.y = -position.y;
+            position *= tileSize.value;
+
+            return position;
         }
     }
 }

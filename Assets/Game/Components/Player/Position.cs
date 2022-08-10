@@ -12,13 +12,16 @@ namespace Game.Player
         public FunkySheep.Types.Double calculatedLatitude;
         public FunkySheep.Types.Double calculatedLongitude;
         public FunkySheep.Events.Event<Vector2Int> onEarthTilePositionChanged;
-        public Vector2Int lastTilePosition;
+
+        public Vector2 earthInitialTilePosition;
         public Vector2Int tilePosition;
         public Vector2Int insideTileQuarterPosition;
         public Vector2Int lastInsideTileQuarterPosition;
         public FunkySheep.Events.Vector3Event onMove;
         public FunkySheep.Network.Services.Create playerPosition;
+
         Vector3 lastPosition;
+        Vector2Int lastTilePosition;
 
         private void Start()
         {
