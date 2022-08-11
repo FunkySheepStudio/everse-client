@@ -3230,6 +3230,7 @@ GameObject:
   - component: {fileID: 4454704534610454664}
   - component: {fileID: 2254530347731277058}
   - component: {fileID: 8634980868962681436}
+  - component: {fileID: 3372860629964888108}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3513,6 +3514,20 @@ MonoBehaviour:
     m_InternalValue: 0
   vehicles:
   - {fileID: 6257709377553918066, guid: b9b959ca7a821b94492e3352f832d429, type: 3}
+--- !u!114 &3372860629964888108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8096360628746819048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a319e1562e97b1047b57526c75f27da1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  position: {fileID: 11400000, guid: b6c7558ba337ac04e95f7e59f19e6688, type: 2}
+  rotation: {fileID: 11400000, guid: 2b6b137eacd82864988c341e8b98412c, type: 2}
 --- !u!1 &8209351606011056612
 GameObject:
   m_ObjectHideFlags: 0

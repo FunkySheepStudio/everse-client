@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Unity.Netcode;
 using FunkySheep.NetWind;
 
@@ -49,6 +50,7 @@ namespace Game.Vehicles
                     loaded.Value = true;
                     currentIndex.Value = index;
                 }
+                SceneManager.LoadScene("Scenes/Wip/Mini games/Plane Race", LoadSceneMode.Additive);
             }
         }
 
@@ -61,6 +63,8 @@ namespace Game.Vehicles
             {
                 loaded.Value = false;
             }
+
+            SceneManager.UnloadSceneAsync("Scenes/Wip/Mini games/Plane Race");
         }
 
         public override void Simulate(int tick, float deltaTime)
