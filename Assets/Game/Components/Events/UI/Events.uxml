@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="AddEvent" src="project://database/Assets/Game/Components/Events/UI/AddEvent.uxml?fileID=9197481963319205126&amp;guid=10d02d9822e55904ba787ae0086732b9&amp;type=3#AddEvent" />
+    <Style src="project://database/Assets/Parameters/UI%20Toolkit/DefaultUSSFile.uss?fileID=7433441132597879392&amp;guid=ba84cee9281eb7844b6cd4103c3d04b0&amp;type=3#DefaultUSSFile" />
+    <ui:VisualElement style="width: 100%; height: 100%; flex-direction: row; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0;">
+        <ui:VisualElement style="width: 100px;">
+            <ui:VisualElement name="Add" style="border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; background-image: url(&apos;project://database/Assets/Game/Images/UI/add.svg?fileID=7388822144124034973&amp;guid=c0b8a9dfed2444749bd21546b0f83ece&amp;type=3#add&apos;); -unity-background-scale-mode: scale-to-fit; height: 15%;" />
+        </ui:VisualElement>
+        <ui:VisualElement style="width: 100%;">
+            <ui:Instance template="AddEvent" name="AddEvent" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

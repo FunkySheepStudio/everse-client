@@ -169,4 +169,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPosition: {fileID: 11400000, guid: b6c7558ba337ac04e95f7e59f19e6688, type: 2}
   playerRotation: {fileID: 11400000, guid: 2b6b137eacd82864988c341e8b98412c, type: 2}
-  gate: {fileID: 919132149155446097, guid: 7a11f84d6343c4040ae36518daee9979, type: 3}
+  gate: {fileID: 6866219960039566944, guid: a48347b620cd37c47ad06e060a8cfc6f, type: 3}
