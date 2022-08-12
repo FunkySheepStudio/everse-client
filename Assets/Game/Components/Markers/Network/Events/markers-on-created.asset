@@ -9,10 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31e54557dbe2f5148b93b53395f810f6, type: 3}
-  m_Name: markers-create
+  m_Script: {fileID: 11500000, guid: 8b07b6236a1b57342b94dd2120981b6b, type: 3}
+  m_Name: markers-on-created
   m_EditorClassIdentifier: 
-  apiPath: /api/game/markers
-  onReceptionEvent: {fileID: 11400000, guid: c06b8e586767c9842a969446ae1d744a, type: 2}
-  ack: 1
-  fields: []

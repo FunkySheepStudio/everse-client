@@ -1679,7 +1679,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2680783692358586038}
         m_TargetAssemblyTypeName: Game.Markers.Manager, Game
-        m_MethodName: OnReceived
+        m_MethodName: OnServiceReception
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

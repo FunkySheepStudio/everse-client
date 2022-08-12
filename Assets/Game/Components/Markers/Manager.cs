@@ -78,7 +78,7 @@ namespace Game.Markers
 
                 createService.Execute();
                 createService.fields.Clear();
-                creating = false;
+                
             }
         }
 
@@ -95,22 +95,34 @@ namespace Game.Markers
             findService.Execute();
         }
 
-        public void OnReceived(FunkySheep.SimpleJSON.JSONNode jsonMarkers)
+        public void OnServiceReception(FunkySheep.SimpleJSON.JSONNode jsonMarkers)
         {
-            FunkySheep.SimpleJSON.JSONArray markers = jsonMarkers["data"]["data"].AsArray;
-
-            for (int i = 0; i < markers.Count; i++)
+            switch ((string)jsonMarkers["method"])
             {
-                GameObject marker = GameObject.Instantiate(markerAsset);
-                Vector2 marker2DPosition = CalculatePosition(markers[i]["latitude"].AsDouble, markers[i]["longitude"].AsDouble);
+                case "create":
+                    markerGo.name = jsonMarkers["data"]["_id"];
+                    markerGo.GetComponent<CapsuleCollider>().enabled = true;
+                    creating = false;
+                    break;
+                case "find":
+                    FunkySheep.SimpleJSON.JSONArray markers = jsonMarkers["data"]["data"].AsArray;
 
-                marker.transform.position = new Vector3(
-                    marker2DPosition.x,
-                    markers[i]["height"].AsFloat,
-                    marker2DPosition.y
-                );
+                    for (int i = 0; i < markers.Count; i++)
+                    {
+                        GameObject marker = GameObject.Instantiate(markerAsset);
+                        marker.name = markers[i]["_id"];
+                        Vector2 marker2DPosition = CalculatePosition(markers[i]["latitude"].AsDouble, markers[i]["longitude"].AsDouble);
 
-                //marker.transform.parent = transform;
+                        marker.transform.position = new Vector3(
+                            marker2DPosition.x,
+                            markers[i]["height"].AsFloat,
+                            marker2DPosition.y
+                        );
+                        marker.GetComponent<CapsuleCollider>().enabled = true;
+                    }
+                    break;
+                default:
+                    break;
             }
         }
 
