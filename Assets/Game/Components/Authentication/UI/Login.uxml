@@ -4,7 +4,7 @@
         <ui:VisualElement style="flex-direction: row; border-left-color: rgba(204, 132, 0, 0); border-right-color: rgba(204, 132, 0, 0); border-top-color: rgba(204, 132, 0, 0); border-bottom-color: rgba(204, 132, 0, 0); justify-content: center;">
             <ui:VisualElement style="background-image: url(&apos;project://database/Assets/Game/Images/Planet_E_logo%20rgb.svg?fileID=7388822144124034973&amp;guid=3619369e6adadd344aa1bccb921f303e&amp;type=3#Planet_E_logo rgb&apos;); border-left-color: rgba(204, 132, 0, 0); border-right-color: rgba(204, 132, 0, 0); border-top-color: rgba(204, 132, 0, 0); border-bottom-color: rgba(204, 132, 0, 0); width: 100px; height: 100px;" />
             <ui:VisualElement style="border-left-color: rgba(204, 132, 0, 0); border-right-color: rgba(204, 132, 0, 0); border-top-color: rgba(204, 132, 0, 0); border-bottom-color: rgba(204, 132, 0, 0);">
-                <ui:Label text="Everse" display-tooltip-when-elided="true" style="background-image: none; font-size: 50px; -unity-font-style: bold;" />
+                <ui:Label text="Everse" display-tooltip-when-elided="true" style="background-image: none; font-size: 50%; -unity-font-style: bold; color: rgba(0, 0, 0, 255);" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement style="border-left-width: 5px; border-right-width: 5px; border-top-width: 5px; border-bottom-width: 5px; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; margin-left: 10%; margin-right: 10%; margin-top: 10%; margin-bottom: 10%;">
