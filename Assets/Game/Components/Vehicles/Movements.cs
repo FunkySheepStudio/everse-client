@@ -6,6 +6,7 @@ namespace Game.Vehicles
     {
         public CharacterController characterController;
         public Game.Player.Inputs.InputManager inputManager;
+        public float speed;
 
         public abstract void Move(float detlatime);
     }

@@ -1,4 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="AddEvent" src="project://database/Assets/Game/Components/Events/UI/AddEvent.uxml?fileID=9197481963319205126&amp;guid=10d02d9822e55904ba787ae0086732b9&amp;type=3#AddEvent" />
-    <ui:Instance template="AddEvent" name="AddEvent" />
-</ui:UXML>

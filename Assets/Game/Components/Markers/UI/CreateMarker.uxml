@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Parameters/UI%20Toolkit/DefaultUSSFile.uss?fileID=7433441132597879392&amp;guid=ba84cee9281eb7844b6cd4103c3d04b0&amp;type=3#DefaultUSSFile" />
+    <ui:TextField picking-mode="Ignore" label="Name" value="filler text" name="Name" />
+    <ui:TextField picking-mode="Ignore" label="Date" text=" " name="Date" />
+    <ui:TextField picking-mode="Ignore" label="Time" text=" " name="Time" />
+    <ui:DropdownField label="Type" index="0" choices="Game - Plane,Music,Sport" name="Type" />
+    <ui:Button text="Create" display-tooltip-when-elided="true" name="markers-btn-create" />
+</ui:UXML>

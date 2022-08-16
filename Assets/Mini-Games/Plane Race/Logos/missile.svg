@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Svg Vector Icons : http://www.onlinewebfonts.com/icon -->
+
+<svg
+   version="1.1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 48 48"
+   enable-background="new 0 0 1000 1000"
+   xml:space="preserve"
+   id="svg16"
+   sodipodi:docname="missile.svg"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   width="48"
+   height="48"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs20" /><sodipodi:namedview
+   id="namedview18"
+   pagecolor="#505050"
+   bordercolor="#eeeeee"
+   borderopacity="1"
+   inkscape:showpageshadow="0"
+   inkscape:pageopacity="0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#505050"
+   showgrid="false"
+   inkscape:zoom="6.632"
+   inkscape:cx="-17.038601"
+   inkscape:cy="65.741858"
+   inkscape:window-width="1920"
+   inkscape:window-height="1009"
+   inkscape:window-x="-8"
+   inkscape:window-y="-8"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="svg16" />
+<metadata
+   id="metadata2"> Svg Vector Icons : http://www.onlinewebfonts.com/icon </metadata>
+<path
+   id="path4"
+   d="m 47.804849,0.01582023 c -0.166652,0.02229 -0.471696,0.09039 -1.025405,0.22165 -4.316524,0.99476397 -8.60515,3.44426797 -12.264865,7.00994297 -1.14513,1.116722 -2.468087,2.58995 -2.468087,2.749622 0,0.1126508 5.836874,5.9495248 5.949526,5.9495248 0.253222,0 2.95592,-2.580748 4.035419,-3.847346 C 44.349126,9.3779382 46.207411,6.1497122 47.202176,3.1281942 47.42748,2.4620792 48,0.24729223 48,0.06900923 c -2.45e-4,-0.05192 -0.0285,-0.07547 -0.195151,-0.05319 z M 30.99545,11.066252 c -0.03722,4.9e-4 -2.317713,2.336773 -5.076703,5.180497 -2.749685,2.85254 -7.713681,7.994928 -11.026134,11.429829 l -6.024429,6.240435 2.55227,2.552271 2.561645,2.561645 0.703788,-0.694604 c 0.384975,-0.37518 5.545925,-5.320613 11.476799,-10.979164 5.921568,-5.65855 10.763636,-10.322323 10.763636,-10.360037 0,-0.08473 -5.846138,-5.930872 -5.930872,-5.930872 z M 9.008233,22.984342 4.504165,27.488984 0,31.993052 h 4.504165 4.504068 l 4.438444,-4.438444 c 2.430341,-2.43034 4.429261,-4.457623 4.429261,-4.504642 0,-0.03771 -1.998894,-0.06562 -4.43854,-0.06562 z m 15.925096,7.13239 c -0.03722,-4.9e-4 -2.064517,1.998308 -4.504164,4.438444 L 16,38.984341 v 4.504164 4.504069 l 4.504164,-4.504069 4.504069,-4.504164 v -4.429165 c 0,-2.439646 -0.02788,-4.438444 -0.0749,-4.438444 z"
+   style="stroke-width:0.0048979" />
+</svg>

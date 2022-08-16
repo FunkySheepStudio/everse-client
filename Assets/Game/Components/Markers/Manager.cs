@@ -12,16 +12,9 @@ namespace Game.Markers
         public GameObject markerAsset;
         public FunkySheep.Network.Services.Create createService;
         public FunkySheep.Network.Services.Find findService;
-        UnityEngine.UIElements.UIDocument UI;
         bool creating = false;
 
         GameObject markerGo;
-
-        private void Awake()
-        {
-            UI = GetComponent<UnityEngine.UIElements.UIDocument>();
-            UI.rootVisualElement.Q<UnityEngine.UIElements.Button>().clicked += Add;
-        }
 
         private void Update()
         {
@@ -78,7 +71,9 @@ namespace Game.Markers
 
                 createService.Execute();
                 createService.fields.Clear();
-                
+                creating = false;
+
+
             }
         }
 

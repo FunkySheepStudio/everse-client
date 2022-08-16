@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3708984, g: 0.37837017, b: 0.35722524, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 579316043}
   - component: {fileID: 579316044}
+  - component: {fileID: 579316045}
   m_Layer: 0
   m_Name: Race
   m_TagString: Untagged
@@ -170,3 +171,30 @@ MonoBehaviour:
   playerPosition: {fileID: 11400000, guid: b6c7558ba337ac04e95f7e59f19e6688, type: 2}
   playerRotation: {fileID: 11400000, guid: 2b6b137eacd82864988c341e8b98412c, type: 2}
   gate: {fileID: 6866219960039566944, guid: a48347b620cd37c47ad06e060a8cfc6f, type: 3}
+  gates: []
+  laps: 2
+  UI: {fileID: 579316045}
+  powersImages:
+  - {fileID: 7388822144124034973, guid: 3adadef82228e7a4db731eb1b448f916, type: 3}
+  - {fileID: 7388822144124034973, guid: e560e9e9921e2164eb7bc5bedaeaa28c, type: 3}
+  - {fileID: 7388822144124034973, guid: d17c6b6b12beac446982db2d7501e69f, type: 3}
+  - {fileID: 7388822144124034973, guid: 6852e524b01ebfc40923ee5b89e9c850, type: 3}
+  - {fileID: 7388822144124034973, guid: 9039f24f191d8ea4d9027bc508b9598a, type: 3}
+  - {fileID: 7388822144124034973, guid: 5fb266b1aa1fe8c48846a9a3016a95b2, type: 3}
+  - {fileID: 7388822144124034973, guid: b5712a2773e6fe444925db31190ab96e, type: 3}
+--- !u!114 &579316045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579316042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 364f68f41213f7d4da75362eaa2c3d1e, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: c091f21be96ae71419c9f38ff4f8c6d0, type: 3}
+  m_SortingOrder: 0

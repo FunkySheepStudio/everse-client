@@ -19,6 +19,9 @@ namespace Game.Player.Inputs
             public bool jump;
             public bool shoot;
             public bool vehicle;
+            public bool keyboard1;
+            public bool keyboard2;
+            public bool keyboard3;
 
             public void Reset()
             {
@@ -41,7 +44,10 @@ namespace Game.Player.Inputs
                     sprint = this.sprint,
                     jump = this.jump,
                     shoot = this.shoot,
-                    vehicle = this.vehicle
+                    vehicle = this.vehicle,
+                    keyboard1 = this.keyboard1,
+                    keyboard2 = this.keyboard2,
+                    keyboard3 = this.keyboard3
                 };
             }
 
@@ -59,6 +65,9 @@ namespace Game.Player.Inputs
                 serializer.SerializeValue(ref jump);
                 serializer.SerializeValue(ref shoot);
                 serializer.SerializeValue(ref vehicle);
+                serializer.SerializeValue(ref keyboard1);
+                serializer.SerializeValue(ref keyboard2);
+                serializer.SerializeValue(ref keyboard3);
             }
             // ~INetworkSerializable
         }
@@ -87,11 +96,32 @@ namespace Game.Player.Inputs
                 cumulativeInput.sprint = _playerInput.actions.FindAction("Sprint").IsPressed();
                 cumulativeInput.jump = _playerInput.actions.FindAction("Jump").IsPressed();
                 cumulativeInput.shoot= _playerInput.actions.FindAction("Shoot").IsPressed();
+
                 _playerInput.actions.FindAction("Vehicle").performed += context =>
                     {
                         currentInput.vehicle = !currentInput.vehicle;
                     };
                 cumulativeInput.vehicle = currentInput.vehicle;
+
+                _playerInput.actions.FindAction("Keyboard1").performed += context =>
+                {
+                    currentInput.keyboard1 = !currentInput.keyboard1;
+                };
+                cumulativeInput.keyboard1 = currentInput.keyboard1;
+
+                _playerInput.actions.FindAction("Keyboard2").performed += context =>
+                {
+                    currentInput.keyboard2 = !currentInput.keyboard2;
+                };
+                cumulativeInput.keyboard2 = currentInput.keyboard2;
+
+                _playerInput.actions.FindAction("Keyboard3").performed += context =>
+                {
+                    currentInput.keyboard3 = !currentInput.keyboard3;
+                };
+                cumulativeInput.keyboard3 = currentInput.keyboard3;
+
+
                 sampleCount++;
             }
         }
@@ -147,6 +177,33 @@ namespace Game.Player.Inputs
         }
 
         public void VehicleInput(bool vehicle)
+        {
+        }
+
+        public void OnKeyboard1(InputValue value)
+        {
+            Keyboard1Input(value.isPressed);
+        }
+
+        public void Keyboard1Input(bool keyboard1)
+        {
+        }
+
+        public void OnKeyboard2(InputValue value)
+        {
+            Keyboard2Input(value.isPressed);
+        }
+
+        public void Keyboard2Input(bool keyboard2)
+        {
+        }
+
+        public void OnKeyboard3(InputValue value)
+        {
+            Keyboard3Input(value.isPressed);
+        }
+
+        public void Keyboard3Input(bool keyboard1)
         {
         }
 

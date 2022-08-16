@@ -1,0 +1,196 @@
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
+
+namespace Game.PlaneRace
+{
+    public enum Status
+    {
+        Creation,
+        Testing,
+        Playing,
+        Over
+    }
+
+    public class PlayerPowers
+    {
+        public int power1 = 0;
+        public int power2 = 0;
+        public int power3 = 0;
+    }
+
+    public class Manager : MonoBehaviour
+    {
+        public FunkySheep.Types.Vector3 playerPosition;
+        public FunkySheep.Types.Quaternion playerRotation;
+        public GameObject gate;
+        public List<GameObject> gates = new List<GameObject>();
+        public int laps = 2;
+        public UIDocument UI;
+        public List<VectorImage> powersImages;
+
+        public Dictionary<int, string> powerNames = new Dictionary<int, string>()
+        {
+            { 0, "none"},
+            { 1, "slow" },
+            { 2, "shield" },
+            { 3, "next"},
+            { 4, "mine" },
+            { 5, "missile" },
+            { 6, "speed"}
+        };
+
+        public Dictionary<int, Color> powerColors = new Dictionary<int, Color>()
+        {
+            { 0, Color.green},
+            { 1, Color.yellow },
+            { 2, Color.blue },
+            { 3, Color.cyan},
+            { 4, Color.red },
+            { 5, Color.black },
+            { 6, Color.green}
+        };
+
+        Dictionary<ulong, int> playersGatesCount = new Dictionary<ulong, int>();
+        Dictionary<ulong, int> playerLaps = new Dictionary<ulong, int>();
+        Dictionary<ulong, PlayerPowers> playersPowers = new Dictionary<ulong, PlayerPowers>();
+
+        Status status = Status.Creation;
+
+        Vector3 _lastPosition;
+        // Start is called before the first frame update
+        void Start()
+        {
+            _lastPosition = playerPosition.value;
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if (Vector3.Distance(_lastPosition, playerPosition.value) >= 500 && status == Status.Creation)
+            {
+                SpawnGate();
+                _lastPosition = playerPosition.value;
+            }
+        }
+
+        void SpawnGate()
+        {
+            GameObject gateGo = GameObject.Instantiate(gate, transform);
+            gateGo.transform.position = playerPosition.value;
+            gateGo.transform.rotation = playerRotation.value;
+            gates.Add(gateGo);
+            gateGo.GetComponent<GateManager>().id = gates.Count - 1;
+        }
+
+        public void passGate(GameObject gate, GameObject player)
+        {
+            GateManager gateManager = gate.GetComponent<GateManager>();
+            ulong playerId = player.GetComponent<Unity.Netcode.NetworkObject>().NetworkObjectId;
+
+            if (gate == gates[0] && status == Status.Creation && gates.Count > 1)
+            {
+                status = Status.Testing;
+            } else if (gate == gates[0] && status == Status.Creation)
+            {
+                gate.GetComponent<MeshRenderer>().material.color = Color.yellow;
+            }
+            
+            if (status == Status.Testing)
+            {
+                // Set the default parameters
+                if (!playersGatesCount.ContainsKey(playerId))
+                {
+                    playersGatesCount.Add(playerId, 0);
+                    playerLaps.Add(playerId, 1);
+                }
+
+
+                gate.GetComponent<MeshRenderer>().material.color = Color.blue;
+
+                if (!gateManager.count.ContainsKey(playerId))
+                {
+                    gateManager.count.Add(playerId, 0);
+                }
+
+                if (!playersGatesCount.ContainsKey(playerId))
+                {
+                    playersGatesCount.Add(playerId, 0);
+                }
+
+                if (!playerLaps.ContainsKey(playerId))
+                {
+                    playerLaps.Add(playerId, 1);
+                }
+
+                // Add a gate if the current laps
+                if (gateManager.count[playerId] < playerLaps[playerId])
+                {
+                    gateManager.count[playerId] += 1;
+                    playersGatesCount[playerId] += 1;
+
+                    gateManager.textComponent.text = gateManager.count[playerId].ToString();
+                }
+
+                // If all the gates have been passed
+                if (playersGatesCount[playerId] == gates.Count)
+                {
+                    playersGatesCount[playerId] = 0;
+                    if (playerLaps[playerId] != laps)
+                    {
+                        playerLaps[playerId] += 1;
+                    } else
+                    {
+                        foreach (GameObject gateGo in gates)
+                        {
+                            gateGo.GetComponent<MeshRenderer>().material.color = Color.green;
+                        }
+
+                        status = Status.Over;
+                        SceneManager.UnloadSceneAsync("Scenes/Wip/Mini games/Plane Race");
+                    }
+                }
+
+                UI.rootVisualElement.Q<Label>("Gates").text = playersGatesCount[playerId] + " / " + gates.Count;
+                UI.rootVisualElement.Q<Label>("Laps").text = playerLaps[playerId] + " / " + laps;
+            }
+        }
+
+        public void AddPower(GameObject player, int powerIndex)
+        {
+            ulong playerId = player.GetComponent<Unity.Netcode.NetworkObject>().NetworkObjectId;
+            if (!playersPowers.ContainsKey(playerId))
+            {
+                PlayerPowers playerPowers = new PlayerPowers();
+                playersPowers.Add(playerId, playerPowers);
+            }
+
+            if (playersPowers[playerId].power1 == 0)
+            {
+                playersPowers[playerId].power1 = powerIndex;
+                UI.rootVisualElement.Q<Button>("Power1").style.backgroundImage = new StyleBackground(powersImages[powerIndex]);
+            }
+            else if (playersPowers[playerId].power2 == 0)
+            {
+                playersPowers[playerId].power2 = powerIndex;
+                UI.rootVisualElement.Q<Button>("Power2").style.backgroundImage = new StyleBackground(powersImages[powerIndex]);
+            }
+            else if (playersPowers[playerId].power3 == 0)
+            {
+                playersPowers[playerId].power3 = powerIndex;
+                UI.rootVisualElement.Q<Button>("Power3").style.backgroundImage = new StyleBackground(powersImages[powerIndex]);
+            } else
+            {
+                playersPowers[playerId].power3 = playersPowers[playerId].power2;
+                playersPowers[playerId].power2 = playersPowers[playerId].power1;
+                playersPowers[playerId].power1 = powerIndex;
+
+                UI.rootVisualElement.Q<Button>("Power3").style.backgroundImage = UI.rootVisualElement.Q<Button>("Power2").style.backgroundImage;
+                UI.rootVisualElement.Q<Button>("Power2").style.backgroundImage = UI.rootVisualElement.Q<Button>("Power1").style.backgroundImage;
+                UI.rootVisualElement.Q<Button>("Power1").style.backgroundImage = new StyleBackground(powersImages[powerIndex]);
+            }
+        }
+    }
+}
+
