@@ -1083,8 +1083,8 @@ GameObject:
   - component: {fileID: 1351555601062129281}
   - component: {fileID: 4294725498364701615}
   - component: {fileID: 859186824928173690}
-  - component: {fileID: 3179994277889775866}
-  - component: {fileID: 3001566545687184331}
+  - component: {fileID: 4305922388037775107}
+  - component: {fileID: 259482813388222126}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -1137,7 +1137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   markersAdd: {fileID: 11400000, guid: bb3801373d86b7b429ae16f47976f87e, type: 2}
   markersCreate: {fileID: 11400000, guid: afeaa39dc45a0bc46b044257031ebb0a, type: 2}
---- !u!114 &3179994277889775866
+--- !u!114 &4305922388037775107
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1146,17 +1146,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 3635472122544793889}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea6fa645e603fbd4eb304db51cebd76c, type: 3}
+  m_Script: {fileID: 11500000, guid: aef7e45e42abc494e8d5f95a4d0c85a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 732f3ef7234e33d41aef760f503c21aa, type: 2}
+  Event: {fileID: 11400000, guid: fc6a94a6e6cc4624abd601ca0d006200, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 859186824928173690}
         m_TargetAssemblyTypeName: UIManager, Game
         m_MethodName: ShowMarkerWindow
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1165,7 +1165,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &3001566545687184331
+--- !u!114 &259482813388222126
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1174,17 +1174,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 3635472122544793889}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea6fa645e603fbd4eb304db51cebd76c, type: 3}
+  m_Script: {fileID: 11500000, guid: aef7e45e42abc494e8d5f95a4d0c85a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 65941a3e90787134995a4b9bac67de23, type: 2}
+  Event: {fileID: 11400000, guid: 0fc2bca1281d4f84f9ef358e63b899b3, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 859186824928173690}
         m_TargetAssemblyTypeName: UIManager, Game
         m_MethodName: HideMarkerWindow
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

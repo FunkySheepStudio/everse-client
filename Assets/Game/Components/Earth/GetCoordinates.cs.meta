@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 1b255d642d999264f9170b262ec22289
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - earthInitialLatitude: {fileID: 11400000, guid: 1ccafd01e79cc9c4bbb58c488adde6fe, type: 2}
+  - earthInitialMercatorPosition: {fileID: 11400000, guid: eed82b21d5f7ca9469baabddd913b59a, type: 2}
+  - initialOffset: {fileID: 11400000, guid: 14667fbe75ba069409a56428e39dff15, type: 2}
+  - tileSize: {fileID: 11400000, guid: 4b0c99defd41a84458e71f6a7656fbf4, type: 2}
+  - calculatedLatitude: {instanceID: 0}
+  - calculatedLongitude: {instanceID: 0}
+  - onEarthTilePositionChanged: {instanceID: 0}
+  - onMove: {instanceID: 0}
+  - playerPosition: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

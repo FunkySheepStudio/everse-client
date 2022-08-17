@@ -9,6 +9,7 @@ namespace Game.PlaneRace
         public int id;
         public Dictionary<ulong, int> count = new Dictionary<ulong, int>();
         public TMPro.TextMeshProUGUI textComponent;
+        public GameObject gateModel;
 
         private void OnTriggerEnter(Collider player)
         {

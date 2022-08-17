@@ -172,7 +172,7 @@ MonoBehaviour:
   playerRotation: {fileID: 11400000, guid: 2b6b137eacd82864988c341e8b98412c, type: 2}
   gate: {fileID: 6866219960039566944, guid: a48347b620cd37c47ad06e060a8cfc6f, type: 3}
   gates: []
-  laps: 2
+  laps: 4
   UI: {fileID: 579316045}
   powersImages:
   - {fileID: 7388822144124034973, guid: 3adadef82228e7a4db731eb1b448f916, type: 3}

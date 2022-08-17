@@ -9,6 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72392ed00fcb6574c82086cf941cd316, type: 3}
-  m_Name: markers-edit-start
+  m_Script: {fileID: 11500000, guid: 31e54557dbe2f5148b93b53395f810f6, type: 3}
+  m_Name: planes-gates-create
   m_EditorClassIdentifier: 
+  apiPath: 
+  onReceptionEvent: {fileID: 0}
+  ack: 0
+  fields: []

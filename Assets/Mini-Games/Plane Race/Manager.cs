@@ -26,7 +26,7 @@ namespace Game.PlaneRace
         public FunkySheep.Types.Quaternion playerRotation;
         public GameObject gate;
         public List<GameObject> gates = new List<GameObject>();
-        public int laps = 2;
+        public int laps = 4;
         public UIDocument UI;
         public List<VectorImage> powersImages;
 
@@ -94,7 +94,10 @@ namespace Game.PlaneRace
                 status = Status.Testing;
             } else if (gate == gates[0] && status == Status.Creation)
             {
-                gate.GetComponent<MeshRenderer>().material.color = Color.yellow;
+                for (int i = 0; i < 12; i++)
+                {
+                    gate.GetComponent<GateManager>().gateModel.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.yellow * 10;
+                }
             }
             
             if (status == Status.Testing)
@@ -106,8 +109,6 @@ namespace Game.PlaneRace
                     playerLaps.Add(playerId, 1);
                 }
 
-
-                gate.GetComponent<MeshRenderer>().material.color = Color.blue;
 
                 if (!gateManager.count.ContainsKey(playerId))
                 {
@@ -133,6 +134,11 @@ namespace Game.PlaneRace
                     gateManager.textComponent.text = gateManager.count[playerId].ToString();
                 }
 
+                for (int i = (playerLaps[playerId] - 1) * 12 / laps; i < 12 / laps * (playerLaps[playerId]) ; i++)
+                {
+                    gate.GetComponent<GateManager>().gateModel.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.red * 10;
+                }
+
                 // If all the gates have been passed
                 if (playersGatesCount[playerId] == gates.Count)
                 {
@@ -144,11 +150,14 @@ namespace Game.PlaneRace
                     {
                         foreach (GameObject gateGo in gates)
                         {
-                            gateGo.GetComponent<MeshRenderer>().material.color = Color.green;
+                            for (int i = 0; i < 12; i++)
+                            {
+                                gateGo.GetComponent<GateManager>().gateModel.transform.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.green * 10;
+                            }
                         }
 
                         status = Status.Over;
-                        SceneManager.UnloadSceneAsync("Scenes/Wip/Mini games/Plane Race");
+                        //SceneManager.UnloadSceneAsync("Scenes/Wip/Mini games/Plane Race");
                     }
                 }
 

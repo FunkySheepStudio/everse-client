@@ -725,7 +725,7 @@ VisualEffect:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: -65.7, y: 62.5, z: 0}
+      - m_Value: {x: -77.2, y: 37.6, z: 0}
         m_Name: Pos 2
         m_Overridden: 1
       - m_Value: {x: -39.8, y: 61.8, z: 0}
@@ -921,7 +921,7 @@ VisualEffect:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: 97.4, y: 15.8, z: 0}
+      - m_Value: {x: 93.1, y: -8.3, z: 0}
         m_Name: Pos 2
         m_Overridden: 1
       - m_Value: {x: 63.38, y: 35, z: 0}
@@ -1202,13 +1202,13 @@ VisualEffect:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: 97.4, y: 15.8, z: 0}
+      - m_Value: {x: 90.3, y: -3.8, z: 0}
         m_Name: Pos 2
         m_Overridden: 1
       - m_Value: {x: 63.38, y: 35, z: 0}
         m_Name: Pos 4
         m_Overridden: 1
-      - m_Value: {x: 66.4, y: 40, z: 0}
+      - m_Value: {x: 66.4, y: 39.8, z: 0}
         m_Name: Pos 3
         m_Overridden: 1
       - m_Value: {x: 71.56, y: 0.1, z: 0}
@@ -1520,13 +1520,13 @@ VisualEffect:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: 40.64, y: 84.78, z: 0}
+      - m_Value: {x: 45, y: 76, z: 0}
         m_Name: Pos 2
         m_Overridden: 1
       - m_Value: {x: 1.8, y: 70.3, z: 0}
         m_Name: Pos 4
         m_Overridden: 1
-      - m_Value: {x: 0.7, y: 78.2, z: 0}
+      - m_Value: {x: 2.4, y: 75.36, z: 0}
         m_Name: Pos 3
         m_Overridden: 1
       - m_Value: {x: 37.3, y: 62.4, z: 0}
@@ -1642,13 +1642,13 @@ VisualEffect:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: 97.4, y: 15.8, z: 0}
+      - m_Value: {x: 88.6, y: -13, z: 0}
         m_Name: Pos 2
         m_Overridden: 1
       - m_Value: {x: 63.38, y: 35, z: 0}
         m_Name: Pos 4
         m_Overridden: 1
-      - m_Value: {x: 66.4, y: 40, z: 0}
+      - m_Value: {x: 61.7, y: 61.2, z: 0}
         m_Name: Pos 3
         m_Overridden: 1
       - m_Value: {x: 71.56, y: 0.1, z: 0}
@@ -1886,7 +1886,7 @@ VisualEffect:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: -43.5, y: 80.96, z: 0}
+      - m_Value: {x: -52.1, y: 65.8, z: 0}
         m_Name: Pos 2
         m_Overridden: 1
       - m_Value: {x: -3.1, y: 71.9, z: 0}
@@ -1965,6 +1965,7 @@ GameObject:
   - component: {fileID: 8456838300197769341}
   - component: {fileID: 4613159851853803299}
   - component: {fileID: 8042738087285055407}
+  - component: {fileID: 242586963623049104}
   m_Layer: 0
   m_Name: Gate
   m_TagString: Untagged
@@ -2018,6 +2019,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   textComponent: {fileID: 799359643092790582}
+  gateModel: {fileID: 2699505237239476736}
+--- !u!114 &242586963623049104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6866219960039566944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b255d642d999264f9170b262ec22289, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  earthInitialLatitude: {fileID: 11400000, guid: 1ccafd01e79cc9c4bbb58c488adde6fe, type: 2}
+  earthInitialMercatorPosition: {fileID: 11400000, guid: eed82b21d5f7ca9469baabddd913b59a, type: 2}
+  initialOffset: {fileID: 11400000, guid: 14667fbe75ba069409a56428e39dff15, type: 2}
+  tileSize: {fileID: 11400000, guid: 4b0c99defd41a84458e71f6a7656fbf4, type: 2}
+  calculatedLatitude: 0
+  calculatedLongitude: 0
+  calculatedLatitudeSO: {fileID: 0}
+  calculatedLongitudeSO: {fileID: 0}
+  onEarthTilePositionChanged: {fileID: 0}
+  earthInitialTilePosition: {x: 0, y: 0}
+  tilePosition: {x: 0, y: 0}
+  insideTileQuarterPosition: {x: 0, y: 0}
+  lastInsideTileQuarterPosition: {x: 0, y: 0}
 --- !u!1 &7535801038014737100
 GameObject:
   m_ObjectHideFlags: 0
