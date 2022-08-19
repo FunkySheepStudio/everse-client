@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31e54557dbe2f5148b93b53395f810f6, type: 3}
-  m_Name: planes-sessions-create
+  m_Script: {fileID: 11500000, guid: 5ff291875b785f1429e4a0516dad599b, type: 3}
+  m_Name: markers.patch
   m_EditorClassIdentifier: 
-  apiPath: '/api/minigames/planes/sessions '
-  onReceptionEvent: {fileID: 11400000, guid: d7c831416e0d6634ab029edc33661097, type: 2}
-  ack: 1
+  apiPath: /api/game/markers
+  onReceptionEvent: {fileID: 0}
+  id: {fileID: 0}
   fields: []
+  ack: 0

@@ -27,8 +27,13 @@ namespace Game.PlaneRace
         public GameObject gate;
         public List<GameObject> gates = new List<GameObject>();
         public int laps = 4;
-        public UIDocument UI;
         public List<VectorImage> powersImages;
+
+        public VisualTreeAsset scoreUI;
+        public VisualTreeAsset iconsUI;
+
+        TemplateContainer scoreUIContainer;
+        TemplateContainer iconUIContainer;
 
         public Dictionary<int, string> powerNames = new Dictionary<int, string>()
         {
@@ -59,6 +64,17 @@ namespace Game.PlaneRace
         Status status = Status.Creation;
 
         Vector3 _lastPosition;
+
+        private void Awake()
+        {
+            iconUIContainer = iconsUI.Instantiate();
+            scoreUIContainer = scoreUI.Instantiate();
+
+            Game.UI.Manager.Instance.rootDocument.rootVisualElement.Q<VisualElement>("Top").Add(scoreUIContainer);
+            Game.UI.Manager.Instance.rootDocument.rootVisualElement.Q<VisualElement>("CenterRight").Add(iconUIContainer);
+        }
+
+
         // Start is called before the first frame update
         void Start()
         {
@@ -161,8 +177,8 @@ namespace Game.PlaneRace
                     }
                 }
 
-                UI.rootVisualElement.Q<Label>("Gates").text = playersGatesCount[playerId] + " / " + gates.Count;
-                UI.rootVisualElement.Q<Label>("Laps").text = playerLaps[playerId] + " / " + laps;
+                scoreUIContainer.Q<Label>("Gates").text = playersGatesCount[playerId] + " / " + gates.Count;
+                scoreUIContainer.Q<Label>("Laps").text = playerLaps[playerId] + " / " + laps;
             }
         }
 
@@ -178,26 +194,26 @@ namespace Game.PlaneRace
             if (playersPowers[playerId].power1 == 0)
             {
                 playersPowers[playerId].power1 = powerIndex;
-                UI.rootVisualElement.Q<Button>("Power1").style.backgroundImage = new StyleBackground(powersImages[powerIndex]);
+                iconUIContainer.Q<Button>("Power1").style.backgroundImage = new StyleBackground(powersImages[powerIndex]);
             }
             else if (playersPowers[playerId].power2 == 0)
             {
                 playersPowers[playerId].power2 = powerIndex;
-                UI.rootVisualElement.Q<Button>("Power2").style.backgroundImage = new StyleBackground(powersImages[powerIndex]);
+                iconUIContainer.Q<Button>("Power2").style.backgroundImage = new StyleBackground(powersImages[powerIndex]);
             }
             else if (playersPowers[playerId].power3 == 0)
             {
                 playersPowers[playerId].power3 = powerIndex;
-                UI.rootVisualElement.Q<Button>("Power3").style.backgroundImage = new StyleBackground(powersImages[powerIndex]);
+                iconUIContainer.Q<Button>("Power3").style.backgroundImage = new StyleBackground(powersImages[powerIndex]);
             } else
             {
                 playersPowers[playerId].power3 = playersPowers[playerId].power2;
                 playersPowers[playerId].power2 = playersPowers[playerId].power1;
                 playersPowers[playerId].power1 = powerIndex;
 
-                UI.rootVisualElement.Q<Button>("Power3").style.backgroundImage = UI.rootVisualElement.Q<Button>("Power2").style.backgroundImage;
-                UI.rootVisualElement.Q<Button>("Power2").style.backgroundImage = UI.rootVisualElement.Q<Button>("Power1").style.backgroundImage;
-                UI.rootVisualElement.Q<Button>("Power1").style.backgroundImage = new StyleBackground(powersImages[powerIndex]);
+                iconUIContainer.Q<Button>("Power3").style.backgroundImage = iconUIContainer.Q<Button>("Power2").style.backgroundImage;
+                iconUIContainer.Q<Button>("Power2").style.backgroundImage = iconUIContainer.Q<Button>("Power1").style.backgroundImage;
+                iconUIContainer.Q<Button>("Power1").style.backgroundImage = new StyleBackground(powersImages[powerIndex]);
             }
         }
     }

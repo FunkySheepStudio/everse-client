@@ -15,17 +15,23 @@ namespace Game.Authentication
         public FunkySheep.Types.String id;
         public FunkySheep.Types.String nickname;
 
+        public VisualTreeAsset loginUI;
+
         Button btnLogin;
         TextField txtLogin;
         TextField txtPassword;
 
+        TemplateContainer loginUIContainer;
+
         private void Awake()
         {
-            UIDocument UI = GetComponent<UIDocument>();
-            btnLogin = UI.rootVisualElement.Q<Button>("btnLogin");
+            loginUIContainer = loginUI.Instantiate();
+            Game.UI.Manager.Instance.rootDocument.rootVisualElement.Q<VisualElement>("CenterCenter").Add(loginUIContainer);
+            
+            btnLogin = loginUIContainer.Q<Button>("btnLogin");
             btnLogin.clicked += Login;
-            txtLogin = UI.rootVisualElement.Q<TextField>("txtLogin");
-            txtPassword = UI.rootVisualElement.Q<TextField>("txtPassword");
+            txtLogin = loginUIContainer.Q<TextField>("txtLogin");
+            txtPassword = loginUIContainer.Q<TextField>("txtPassword");
 
             txtLogin.value = login.value;
             txtPassword.value = password.value;
@@ -62,6 +68,7 @@ namespace Game.Authentication
                 id.value = authResponse["data"]["user"]["_id"];
                 nickname.value = authResponse["data"]["user"]["nickname"];
                 SceneManager.LoadScene("Scenes/NetCode", LoadSceneMode.Single);
+                Game.UI.Manager.Instance.rootDocument.rootVisualElement.Q<VisualElement>("CenterCenter").Remove(loginUIContainer);
                 gameObject.SetActive(false);
             }
             else

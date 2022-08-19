@@ -6,17 +6,16 @@ namespace Game.Markers
 
     public class Marker : MonoBehaviour
     {
-        public FunkySheep.Events.GameObjectEvent markerEditStart;
-        public FunkySheep.Events.GameObjectEvent markerEditStop;
+        public Manager markersManager;
 
         private void OnTriggerEnter(Collider other)
         {
-            markerEditStart.Raise(gameObject);
+            markersManager.Open(this);
         }
 
         private void OnTriggerExit(Collider other)
         {
-            markerEditStop.Raise(gameObject);
+            markersManager.Close(this);
         }
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 namespace Game.Markers
@@ -12,9 +13,26 @@ namespace Game.Markers
         public GameObject markerAsset;
         public FunkySheep.Network.Services.Create createService;
         public FunkySheep.Network.Services.Find findService;
+        public FunkySheep.Network.Services.Patch patchService;
         bool creating = false;
 
+        public VisualTreeAsset iconUI;
+        public VisualTreeAsset createUI;
+
+        TemplateContainer iconUIContainer;
+        TemplateContainer createUIContainer;
+
         GameObject markerGo;
+
+        private void Awake()
+        {
+            iconUIContainer = iconUI.Instantiate();
+            iconUIContainer.Q<Button>("markers-btn-add").clicked += Create;
+            Game.UI.Manager.Instance.rootDocument.rootVisualElement.Q<VisualElement>("Top").Add(iconUIContainer);
+
+            createUIContainer = createUI.Instantiate();
+            createUIContainer.Q<Button>("markers-btn-create").clicked += Patch;
+        }
 
         private void Update()
         {
@@ -36,22 +54,50 @@ namespace Game.Markers
             }
         }
 
-        public void Create()
+        public void Open(Marker marker)
         {
-            markerGo = GameObject.Instantiate(markerAsset);
-            markerGo.transform.parent = transform;
-            markerGo.transform.position += transform.forward * 15;
-            creating = true;
+            createUIContainer.Q<Label>("MarkerId").text = marker.name;
+            Game.UI.Manager.Instance.rootDocument.rootVisualElement.Q<VisualElement>("CenterCenter").Add(createUIContainer);
         }
 
-        public void Add()
+        public void Close(Marker marker)
+        {
+            createUIContainer.Q<Label>("MarkerId").text = "";
+            Game.UI.Manager.Instance.rootDocument.rootVisualElement.Q<VisualElement>("CenterCenter").Remove(createUIContainer);
+        }
+
+        public void Create()
         {
             if (!creating)
             {
-                Create();
-            } else
+                markerGo = GameObject.Instantiate(markerAsset, transform);
+                markerGo.GetComponent<Marker>().markersManager = this;
+                markerGo.transform.position += transform.forward * 15;
+                creating = true;
+            }
+            else
             {
                 markerGo.transform.parent = null;
+
+                FunkySheep.Types.String name = ScriptableObject.CreateInstance<FunkySheep.Types.String>();
+                name.apiName = "name";
+                createService.fields.Add(name);
+                name.value = createUIContainer.Q<TextField>("MarkerName").value;
+
+                FunkySheep.Types.String date = ScriptableObject.CreateInstance<FunkySheep.Types.String>();
+                date.apiName = "date";
+                createService.fields.Add(date);
+                date.value = createUIContainer.Q<TextField>("MarkerDate").value;
+
+                FunkySheep.Types.String time = ScriptableObject.CreateInstance<FunkySheep.Types.String>();
+                time.apiName = "time";
+                createService.fields.Add(time);
+                time.value = createUIContainer.Q<TextField>("MarkerTime").value;
+
+                FunkySheep.Types.String type = ScriptableObject.CreateInstance<FunkySheep.Types.String>();
+                type.apiName = "type";
+                createService.fields.Add(type);
+                type.value = createUIContainer.Q<DropdownField>("MarkerType").value;
 
                 FunkySheep.Types.Double latitude = ScriptableObject.CreateInstance<FunkySheep.Types.Double>();
                 latitude.apiName = "latitude";
@@ -72,9 +118,43 @@ namespace Game.Markers
                 createService.Execute();
                 createService.fields.Clear();
                 creating = false;
-
-
             }
+        }
+
+
+        public void Patch()
+        {
+            FunkySheep.Types.String _id = ScriptableObject.CreateInstance<FunkySheep.Types.String>();
+            _id.apiName = "_id";
+            patchService.fields.Add(_id);
+            _id.value = createUIContainer.Q<Label>("MarkerId").text;
+            patchService.id = _id;
+
+            FunkySheep.Types.String name = ScriptableObject.CreateInstance<FunkySheep.Types.String>();
+            name.apiName = "name";
+            patchService.fields.Add(name);
+            name.value = createUIContainer.Q<TextField>("MarkerName").value;
+
+            FunkySheep.Types.String date = ScriptableObject.CreateInstance<FunkySheep.Types.String>();
+            date.apiName = "date";
+            patchService.fields.Add(date);
+            date.value = createUIContainer.Q<TextField>("MarkerDate").value;
+
+            FunkySheep.Types.String time = ScriptableObject.CreateInstance<FunkySheep.Types.String>();
+            time.apiName = "time";
+            patchService.fields.Add(time);
+            time.value = createUIContainer.Q<TextField>("MarkerTime").value;
+
+            FunkySheep.Types.String type = ScriptableObject.CreateInstance<FunkySheep.Types.String>();
+            type.apiName = "type";
+            patchService.fields.Add(type);
+            type.value = createUIContainer.Q<DropdownField>("MarkerType").value;
+
+            patchService.Execute();
+            patchService.fields.Clear();
+
+            SceneManager.LoadSceneAsync("Scenes/Wip/Mini games/Plane Race", LoadSceneMode.Additive);
+
         }
 
         public void Download(Vector2Int worldTile)
@@ -113,6 +193,7 @@ namespace Game.Markers
                             markers[i]["height"].AsFloat,
                             marker2DPosition.y
                         );
+                        marker.GetComponent<Marker>().markersManager = this;
                         marker.GetComponent<CapsuleCollider>().enabled = true;
                     }
                     break;
@@ -137,3 +218,4 @@ namespace Game.Markers
         }
     }
 }
+

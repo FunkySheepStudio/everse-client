@@ -1,5 +1,6 @@
 Label {
-    color: white;
+    color: rgb(26, 0, 0);
+    background-color: rgb(255, 165, 0);
 }
 
 Button {
