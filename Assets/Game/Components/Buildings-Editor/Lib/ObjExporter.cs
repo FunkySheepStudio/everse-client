@@ -69,20 +69,12 @@ public class ObjExporterScript
 	}
 }
 
-public class ObjExporter : MonoBehaviour
+public class ObjExporter
 {
-
-	public GameObject gameObjectToExport;
-
-    private void Start()
-    {
-		DoExport(gameObjectToExport, false);
-	}
-
-    public void DoExport(GameObject gameObjectToExport, bool makeSubmeshes)
+    public string DoExport(GameObject gameObjectToExport, bool makeSubmeshes)
 	{
 		string meshName = gameObjectToExport.name;
-		string fileName = meshName + ".obj";
+		string fileName = Application.persistentDataPath + "/" + meshName + ".obj";
 
 		ObjExporterScript.Start();
 
@@ -110,7 +102,7 @@ public class ObjExporter : MonoBehaviour
 		t.position = originalPosition;
 
 		ObjExporterScript.End();
-		Debug.Log("Exported Mesh: " + fileName);
+		return fileName;
 	}
 
 	static string ProcessTransform(Transform t, bool makeSubmeshes)
