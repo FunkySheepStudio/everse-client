@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31e54557dbe2f5148b93b53395f810f6, type: 3}
-  m_Name: buildings-editor-create
+  m_Script: {fileID: 11500000, guid: a08bc9caeb8e7014c9310846f20e9e43, type: 3}
+  m_Name: buildings-editor-find
   m_EditorClassIdentifier: 
-  apiPath: '/api/game/buildings '
-  onReceptionEvent: {fileID: 0}
-  ack: 0
-  fields: []
+  type: 1
+  apiPath: /api/game/buildings
+  onReceptionEvent: {fileID: 11400000, guid: 629408fd2a6c41247ad27ec738feffc9, type: 2}

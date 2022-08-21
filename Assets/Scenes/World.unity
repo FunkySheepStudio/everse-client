@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.5
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.7086991, g: 0.6247135, b: 0.72223264, a: 0.5}
+  m_IndirectSpecularColor: {r: 0.44649172, g: 0.5087807, b: 0.65819246, a: 0.5}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -353,6 +353,7 @@ MonoBehaviour:
   earthManager: {fileID: 1100245712}
   floorMaterial: {fileID: 2100000, guid: 23055002f81e3d344b1a2158b1d85509, type: 2}
   onBuildingCreation: {fileID: 11400000, guid: e88175acebc4c9648b6cecbc89d389c5, type: 2}
+  buildingPrefab: {fileID: 7372831627541930268, guid: fb49f4bf5344d194999923a6ebe8ab17, type: 3}
 --- !u!114 &295731375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1036,7 +1037,6 @@ GameObject:
   - component: {fileID: 1100245715}
   - component: {fileID: 1100245714}
   - component: {fileID: 1100245713}
-  - component: {fileID: 1100245716}
   m_Layer: 0
   m_Name: Earth
   m_TagString: Untagged
@@ -1192,18 +1192,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1100245716
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1100245710}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0533d8f22c09067468134a2861f4b8a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1171716213
 GameObject:
   m_ObjectHideFlags: 0

@@ -365,7 +365,7 @@
       "url": "https://registry.npmjs.org"
     },
     "net.funkysheep.unity.earth": {
-      "version": "0.1.3",
+      "version": "0.1.4",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -426,7 +426,7 @@
       "url": "https://registry.npmjs.org"
     },
     "net.funkysheep.unity.network": {
-      "version": "0.1.8",
+      "version": "0.1.9",
       "depth": 0,
       "source": "registry",
       "dependencies": {

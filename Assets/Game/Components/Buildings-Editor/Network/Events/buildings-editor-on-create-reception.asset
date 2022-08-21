@@ -9,9 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a08bc9caeb8e7014c9310846f20e9e43, type: 3}
-  m_Name: markers-find
+  m_Script: {fileID: 11500000, guid: 8b07b6236a1b57342b94dd2120981b6b, type: 3}
+  m_Name: buildings-editor-on-create-reception
   m_EditorClassIdentifier: 
-  type: 1
-  apiPath: /api/game/markers
-  onReceptionEvent: {fileID: 11400000, guid: abe4788ecf6a9b341baf59ba3dc2636f, type: 2}

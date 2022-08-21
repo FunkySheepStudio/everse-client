@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff291875b785f1429e4a0516dad599b, type: 3}
   m_Name: markers.patch
   m_EditorClassIdentifier: 
+  type: 2
   apiPath: /api/game/markers
   onReceptionEvent: {fileID: 0}
   id: {fileID: 0}
