@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: buildings-editor-latitude
   m_EditorClassIdentifier: 
   apiName: latitude
-  reset: 0
-  value: 0
+  reset: 1
+  value: 44.620819032919314

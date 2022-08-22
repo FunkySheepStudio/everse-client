@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7372831627541930336}
   - component: {fileID: 7372831627541930337}
   - component: {fileID: 7372831627541930339}
+  - component: {fileID: 3251162011269809893}
   m_Layer: 0
   m_Name: building-prefab
   m_TagString: Untagged
@@ -64,6 +65,7 @@ MonoBehaviour:
   osm_ID: {fileID: 11400000, guid: 95bcf3e429a900e4ea03138974b8a5ae, type: 2}
   latitude: {fileID: 11400000, guid: cce4111740c48404dae27431dd5a1255, type: 2}
   longitude: {fileID: 11400000, guid: ecd94fb54a6ef9a409f39a0a38bfc450, type: 2}
+  height: {fileID: 11400000, guid: 58f6640f621d6524faaea3d7744a5b7a, type: 2}
 --- !u!114 &7372831627541930337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,3 +122,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3251162011269809893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7372831627541930268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b255d642d999264f9170b262ec22289, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  earthInitialLatitude: {fileID: 11400000, guid: 1ccafd01e79cc9c4bbb58c488adde6fe, type: 2}
+  earthInitialMercatorPosition: {fileID: 11400000, guid: eed82b21d5f7ca9469baabddd913b59a, type: 2}
+  initialOffset: {fileID: 11400000, guid: 14667fbe75ba069409a56428e39dff15, type: 2}
+  tileSize: {fileID: 11400000, guid: 4b0c99defd41a84458e71f6a7656fbf4, type: 2}
+  calculatedLatitude: 0
+  calculatedLongitude: 0
+  calculatedLatitudeSO: {fileID: 0}
+  calculatedLongitudeSO: {fileID: 0}
+  earthInitialTilePosition: {x: 0, y: 0}
+  tilePosition: {x: 0, y: 0}
+  insideTileQuarterPosition: {x: 0, y: 0}
+  lastInsideTileQuarterPosition: {x: 0, y: 0}

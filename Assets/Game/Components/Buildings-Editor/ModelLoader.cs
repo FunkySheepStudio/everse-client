@@ -6,11 +6,13 @@ namespace Game.Buildings.Editor
 {
     public class ModelLoader : MonoBehaviour
     {
+        public FunkySheep.Network.Services.Find buildingsModelFind;
         // Start is called before the first frame update
         void Start()
         {
-            string fileName = Application.persistentDataPath + "/" + "New" + ".obj";
-            new Dummiesman.OBJLoader().Load(fileName);
+            string ObjfileName = Application.persistentDataPath + "/" + "New" + ".obj";
+            string MtlfileName = Application.persistentDataPath + "/" + "New" + ".mtl";
+            new FunkySheep.Obj.OBJLoader().Load(ObjfileName, MtlfileName);
         }
     }
 

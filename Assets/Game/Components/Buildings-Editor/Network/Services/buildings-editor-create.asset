@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31e54557dbe2f5148b93b53395f810f6, type: 3}
   m_Name: buildings-editor-create
   m_EditorClassIdentifier: 
+  type: 0
   apiPath: /api/game/buildings
   onReceptionEvent: {fileID: 11400000, guid: 0f28586cbee7e204ba80e8e335ccc01f, type: 2}
   ack: 1
@@ -19,3 +20,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 95bcf3e429a900e4ea03138974b8a5ae, type: 2}
   - {fileID: 11400000, guid: cce4111740c48404dae27431dd5a1255, type: 2}
   - {fileID: 11400000, guid: ecd94fb54a6ef9a409f39a0a38bfc450, type: 2}
+  - {fileID: 11400000, guid: 58f6640f621d6524faaea3d7744a5b7a, type: 2}

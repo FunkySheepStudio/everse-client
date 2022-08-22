@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using FunkySheep.SimpleJSON;
+using FunkySheep.Obj;
 
 namespace Game.Buildings.Editor
 {
@@ -15,6 +16,7 @@ namespace Game.Buildings.Editor
         public FunkySheep.Types.String osm_ID;
         public FunkySheep.Types.Double latitude;
         public FunkySheep.Types.Double longitude;
+        public FunkySheep.Types.Float height;
 
         private void Start()
         {
@@ -41,6 +43,9 @@ namespace Game.Buildings.Editor
         public void Create()
         {
             osm_ID.value = gameObject.name;
+            latitude.value = GetComponent<GetCoordinates>().calculatedLatitude;
+            longitude.value = GetComponent<GetCoordinates>().calculatedLongitude;
+            height.value = transform.position.y;
 
             createService.Execute();
         }

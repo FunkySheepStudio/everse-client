@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: buildings-editor-longitude
   m_EditorClassIdentifier: 
   apiName: longitude
-  reset: 0
-  value: 0
+  reset: 1
+  value: 4.390608028450783
