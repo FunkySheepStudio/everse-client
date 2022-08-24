@@ -7,7 +7,7 @@ namespace Game.Terrain
     {
         List<FunkySheep.Earth.Map.Tile> tiles = new List<FunkySheep.Earth.Map.Tile>();
 
-        private void LateUpdate()
+        private void Update()
         {
             foreach (FunkySheep.Earth.Map.Tile tile in tiles.ToArray())
             {
@@ -16,7 +16,7 @@ namespace Game.Terrain
                     Vector2Int terrainPos = UnityEngine.Terrain.activeTerrains[i].GetComponent<FunkySheep.Earth.Terrain.Tile>().position;
                     if (tile.mapPosition == terrainPos)
                     {
-                        UnityEngine.Terrain.activeTerrains[i].materialTemplate.SetTexture("diffuse", tile.data.sprite.texture);
+                        UnityEngine.Terrain.activeTerrains[i].materialTemplate.SetTexture("_Color", tile.data.sprite.texture);
                         tiles.Remove(tile);
                     }
                 }
