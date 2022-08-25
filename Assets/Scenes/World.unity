@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.5
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.10258088, g: 0.34292814, b: 0.55805355, a: 0.5}
+  m_IndirectSpecularColor: {r: 0.054818578, g: 0.31962535, b: 0.5463429, a: 0.5}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -351,7 +351,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   urlTemplate: {fileID: 11400000, guid: 5451ba45bb3bc1f4191beda52b76b462, type: 2}
   earthManager: {fileID: 1100245712}
-  floorMaterial: {fileID: 2100000, guid: 23055002f81e3d344b1a2158b1d85509, type: 2}
+  floorMaterial: {fileID: 2100000, guid: 6c50b91d51f1c7847b363cf0b52c1223, type: 2}
   onBuildingCreation: {fileID: 11400000, guid: e88175acebc4c9648b6cecbc89d389c5, type: 2}
   buildingPrefab: {fileID: 7372831627541930268, guid: fb49f4bf5344d194999923a6ebe8ab17, type: 3}
 --- !u!114 &295731375
