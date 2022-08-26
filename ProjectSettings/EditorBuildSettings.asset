@@ -17,5 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Wip/Mini games/Plane Race.unity
     guid: cb3691e0cab60ac43b5709e25be4ba14
+  - enabled: 1
+    path: Assets/Game/Components/UI Menu/ui-menu.unity
+    guid: 0ee66a92efd22b74f9066e1ef17a162e
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}
