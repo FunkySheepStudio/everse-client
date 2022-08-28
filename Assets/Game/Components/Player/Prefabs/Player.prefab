@@ -1602,14 +1602,14 @@ GameObject:
   - component: {fileID: 2381762516567349009}
   - component: {fileID: 2680783692358586038}
   - component: {fileID: 4267727371831310214}
-  - component: {fileID: 2917253689224361335}
+  - component: {fileID: 518565082758630476}
   m_Layer: 0
   m_Name: Markers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2381762516567349009
 Transform:
   m_ObjectHideFlags: 0
@@ -1642,6 +1642,7 @@ MonoBehaviour:
   tileSize: {fileID: 11400000, guid: 4b0c99defd41a84458e71f6a7656fbf4, type: 2}
   player: {fileID: 8096360628746819048}
   markerAsset: {fileID: 8926426933982644740, guid: 192f52bcfc9401844b306b8c1e159bc6, type: 3}
+  currentMarkers: []
   createService: {fileID: 11400000, guid: a912ccf9d64ce67408be21b61ecec43a, type: 2}
   findService: {fileID: 11400000, guid: 6703f627780397142b387e73e8fc4ed4, type: 2}
   patchService: {fileID: 11400000, guid: 5b119f69c55d1a64482a3bf3539aa176, type: 2}
@@ -1675,7 +1676,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2917253689224361335
+--- !u!114 &518565082758630476
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3214,8 +3215,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27d732fb6fee9034f9f0739950b17c6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerFollowCamera: {fileID: 3889593241841043986}
-  UImenu: {fileID: 0}
+  NetworkOwnerComponents:
+  - {fileID: 3889593241841043986}
+  - {fileID: 4340959343044050016}
+  - {fileID: 9027495150927787330}
   playerInputActionsAsset: {fileID: -944628639613478452, guid: 4419d82f33d36e848b3ed5af4c8da37e, type: 3}
 --- !u!114 &702208103242777553
 MonoBehaviour:
@@ -4022,7 +4025,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6277471353749134459
 Transform:
   m_ObjectHideFlags: 0

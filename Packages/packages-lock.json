@@ -94,12 +94,12 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.netcode.gameobjects": {
-      "version": "1.0.0",
+      "version": "1.0.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.nuget.mono-cecil": "1.10.1",
-        "com.unity.transport": "1.1.0"
+        "com.unity.transport": "1.2.0"
       },
       "url": "https://packages.unity.com"
     },
@@ -266,7 +266,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.transport": {
-      "version": "1.1.0",
+      "version": "1.2.0",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -365,9 +365,9 @@
       "url": "https://registry.npmjs.org"
     },
     "net.funkysheep.unity.earth": {
-      "version": "file:C:/Users/Kaas/Documents/FunkySheep/Framework/Unity-Earth",
+      "version": "0.1.5",
       "depth": 0,
-      "source": "local",
+      "source": "registry",
       "dependencies": {
         "net.funkysheep.unity.simplejson": "0.1.0",
         "net.funkysheep.unity.events": "0.1.0",
@@ -376,7 +376,8 @@
         "net.funkysheep.unity.tiles": "0.1.0",
         "net.funkysheep.unity.vectors": "0.1.0",
         "net.funkysheep.unity.network": "0.1.7"
-      }
+      },
+      "url": "https://registry.npmjs.org"
     },
     "net.funkysheep.unity.effects": {
       "version": "0.1.0",
@@ -409,7 +410,7 @@
       "url": "https://registry.npmjs.org"
     },
     "net.funkysheep.unity.logos": {
-      "version": "0.1.1",
+      "version": "0.1.2",
       "depth": 0,
       "source": "registry",
       "dependencies": {

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -11,6 +12,7 @@ namespace Game.Markers
         public FunkySheep.Types.Float tileSize;
         public GameObject player;
         public GameObject markerAsset;
+        public List<GameObject> currentMarkers = new List<GameObject>();
         public FunkySheep.Network.Services.Create createService;
         public FunkySheep.Network.Services.Find findService;
         public FunkySheep.Network.Services.Patch patchService;
@@ -32,6 +34,20 @@ namespace Game.Markers
 
             createUIContainer = createUI.Instantiate();
             createUIContainer.Q<Button>("markers-btn-create").clicked += Patch;
+        }
+
+        private void Start()
+        {
+            Vector2Int mapPosition = new Vector2Int((int)initialMapPosition.value.x, (int)initialMapPosition.value.y);
+            Download(mapPosition);
+            Download(mapPosition + Vector2Int.up);
+            Download(mapPosition + Vector2Int.up + Vector2Int.right);
+            Download(mapPosition + Vector2Int.right);
+            Download(mapPosition + Vector2Int.down + Vector2Int.right);
+            Download(mapPosition + Vector2Int.down);
+            Download(mapPosition + Vector2Int.down + Vector2Int.left);
+            Download(mapPosition + Vector2Int.left);
+            Download(mapPosition + Vector2Int.up + Vector2Int.left);
         }
 
         private void Update()
@@ -77,8 +93,6 @@ namespace Game.Markers
             }
             else
             {
-                markerGo.transform.parent = null;
-
                 FunkySheep.Types.String name = ScriptableObject.CreateInstance<FunkySheep.Types.String>();
                 name.apiName = "name";
                 createService.fields.Add(name);
@@ -117,6 +131,7 @@ namespace Game.Markers
 
                 createService.Execute();
                 createService.fields.Clear();
+                DestroyImmediate(markerGo);
                 creating = false;
             }
         }
@@ -184,6 +199,8 @@ namespace Game.Markers
 
                     for (int i = 0; i < markers.Count; i++)
                     {
+                        if (currentMarkers.Find(item => item.name == markers[i]["_id"]))
+                            break;
                         GameObject marker = GameObject.Instantiate(markerAsset);
                         marker.name = markers[i]["_id"];
                         Vector2 marker2DPosition = CalculatePosition(markers[i]["latitude"].AsDouble, markers[i]["longitude"].AsDouble);
@@ -195,6 +212,7 @@ namespace Game.Markers
                         );
                         marker.GetComponent<Marker>().markersManager = this;
                         marker.GetComponent<CapsuleCollider>().enabled = true;
+                        currentMarkers.Add(marker);
                     }
                     break;
                 default:

@@ -12,12 +12,12 @@ namespace Game.Netcode
         {
 #if UNITY_SERVER
             NetworkManager.Singleton.StartServer();
-            NetworkManager.Singleton.SceneManager.LoadScene("Scenes/World", LoadSceneMode.Additive);
+            NetworkManager.Singleton.SceneManager.LoadScene("Game/Components/World/World", LoadSceneMode.Additive);
 
 #elif UNITY_EDITOR
-            //NetworkManager.Singleton.StartClient();
-            NetworkManager.Singleton.StartHost();
-            NetworkManager.Singleton.SceneManager.LoadScene("Scenes/World", LoadSceneMode.Additive);
+            NetworkManager.Singleton.StartClient();
+            /*NetworkManager.Singleton.StartHost();
+            NetworkManager.Singleton.SceneManager.LoadScene("Game/Components/World/World", LoadSceneMode.Additive);*/
 #else
             NetworkManager.Singleton.StartClient();
 #endif

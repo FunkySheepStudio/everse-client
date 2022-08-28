@@ -10,12 +10,18 @@ namespace Game.Markers
 
         private void OnTriggerEnter(Collider other)
         {
-            markersManager.Open(this);
+            if (other.GetComponent<Unity.Netcode.NetworkObject>().IsOwner)
+            {
+                markersManager.Open(this);
+            }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            markersManager.Close(this);
+            if (other.GetComponent<Unity.Netcode.NetworkObject>().IsOwner)
+            {
+                markersManager.Close(this);
+            }
         }
     }
 }

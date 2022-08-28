@@ -22,21 +22,30 @@ namespace Game.Player
 
         Vector3 lastPosition;
         Vector2Int lastTilePosition;
+        Unity.Netcode.NetworkObject netObject;
 
         private void Start()
         {
             lastPosition = transform.position;
+            netObject = GetComponent<Unity.Netcode.NetworkObject>();
         }
 
         private void Update()
         {
-            CalculateGPS();
-            if (Vector3.Distance(lastPosition, transform.position) > 10)
+         
+            if (netObject.IsOwner || Unity.Netcode.NetworkManager.Singleton.IsServer)
             {
-                Calculate();
-                onMove.Raise(transform.position);
-                lastPosition = transform.position;
-                playerPosition.Execute();
+                CalculateGPS();
+                if (Vector3.Distance(lastPosition, transform.position) > 10)
+                {
+                    Calculate();
+                    onMove.Raise(transform.position);
+                    lastPosition = transform.position;
+                    if (!Unity.Netcode.NetworkManager.Singleton.IsServer)
+                    {
+                        playerPosition.Execute();
+                    }
+                }
             }
         }
 
@@ -63,9 +72,18 @@ namespace Game.Player
             if (insideTileQuarterPosition != lastInsideTileQuarterPosition)
             {
                 onEarthTilePositionChanged.Raise(tilePosition);
-                onEarthTilePositionChanged.Raise(tilePosition + insideTileQuarterPosition.y * Vector2Int.up);
+                onEarthTilePositionChanged.Raise(tilePosition + Vector2Int.up);
+                onEarthTilePositionChanged.Raise(tilePosition + Vector2Int.up + Vector2Int.right);
+                onEarthTilePositionChanged.Raise(tilePosition + Vector2Int.right);
+                onEarthTilePositionChanged.Raise(tilePosition + Vector2Int.down + Vector2Int.right);
+                onEarthTilePositionChanged.Raise(tilePosition + Vector2Int.down);
+                onEarthTilePositionChanged.Raise(tilePosition + Vector2Int.down + Vector2Int.left);
+                onEarthTilePositionChanged.Raise(tilePosition + Vector2Int.left);
+                onEarthTilePositionChanged.Raise(tilePosition + Vector2Int.up + Vector2Int.left);
+                
+                /*onEarthTilePositionChanged.Raise(tilePosition + insideTileQuarterPosition.y * Vector2Int.up);
                 onEarthTilePositionChanged.Raise(tilePosition + insideTileQuarterPosition.x * Vector2Int.right);
-                onEarthTilePositionChanged.Raise(tilePosition + insideTileQuarterPosition);
+                onEarthTilePositionChanged.Raise(tilePosition + insideTileQuarterPosition);*/
 
                 lastInsideTileQuarterPosition = insideTileQuarterPosition;
             }

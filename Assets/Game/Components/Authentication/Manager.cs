@@ -26,7 +26,8 @@ namespace Game.Authentication
         private void Awake()
         {
             loginUIContainer = loginUI.Instantiate();
-            Game.UI.Manager.Instance.rootDocument.rootVisualElement.Q<VisualElement>("CenterCenter").Add(loginUIContainer);
+            if (Game.UI.Manager.Instance.rootDocument)
+                Game.UI.Manager.Instance.rootDocument.rootVisualElement.Q<VisualElement>("CenterCenter").Add(loginUIContainer);
             
             btnLogin = loginUIContainer.Q<Button>("btnLogin");
             btnLogin.clicked += Login;
@@ -40,19 +41,23 @@ namespace Game.Authentication
         private void Start()
         {
 #if UNITY_SERVER
-            AutoLogin();
+#if !UNITY_EDITOR
+        ServerAutoLogin();
+#else
+        Login();
+#endif
 #endif
         }
 
-#if UNITY_SERVER
-        void AutoLogin()
+        void ServerAutoLogin()
         {
             string[] arguments = Environment.GetCommandLineArgs();
             login.value = arguments[1];
             password.value = arguments[2];
+            Debug.Log("Login" + login.value);
+            Debug.Log("Password" + password.value);
             authenticate.Execute();
         }
-#endif
 
         void Login()
         {
@@ -67,8 +72,9 @@ namespace Game.Authentication
             {
                 id.value = authResponse["data"]["user"]["_id"];
                 nickname.value = authResponse["data"]["user"]["nickname"];
-                SceneManager.LoadScene("Scenes/NetCode", LoadSceneMode.Single);
-                Game.UI.Manager.Instance.rootDocument.rootVisualElement.Q<VisualElement>("CenterCenter").Remove(loginUIContainer);
+                SceneManager.LoadScene("Game/Components/Netcode/Netcode", LoadSceneMode.Single);
+                if (Game.UI.Manager.Instance.rootDocument)
+                    Game.UI.Manager.Instance.rootDocument.rootVisualElement.Q<VisualElement>("CenterCenter").Remove(loginUIContainer);
                 gameObject.SetActive(false);
             }
             else

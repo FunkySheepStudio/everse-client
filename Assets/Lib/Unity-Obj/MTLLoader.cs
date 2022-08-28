@@ -142,8 +142,6 @@ namespace FunkySheep.Obj
             Dictionary<string, Material> mtlDict = new Dictionary<string, Material>();
             Material currentMaterial = null;
 
-            int i = 0;
-
             for (string line = reader.ReadLine(); line != null; line = reader.ReadLine())
             {
                 if (string.IsNullOrWhiteSpace(line))
