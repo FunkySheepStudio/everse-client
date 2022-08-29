@@ -1,19 +1,37 @@
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
-using UnityEngine.SceneManagement;
-using FunkySheep.Types;
+using UnityEngine.EventSystems;
 
 namespace Game.UI
 {
     [AddComponentMenu("Game/UI/Manager")]
-    public class Manager : Singleton<Manager>
+    public class Manager : MonoBehaviour
     {
-        public UIDocument rootDocument;
+        public Camera cam;
+        public List<GameObject> loadedUis = new List<GameObject>();
 
-        public override void Awake()
+        public void Awake()
         {
-            base.Awake();
-            rootDocument = GetComponent<UIDocument>();
+            Game.Manager.Instance.UIManager = this;
+        }
+
+        public GameObject Load(GameObject ui)
+        {
+            GameObject instanciatedUI = loadedUis.Find(item => item == ui);
+            if (!instanciatedUI)
+            {
+                instanciatedUI = GameObject.Instantiate(ui, transform);
+                loadedUis.Add(instanciatedUI);
+            } else
+            {
+                instanciatedUI.SetActive(true);
+            }
+            return instanciatedUI;
+        }
+
+        public void UnLoad(GameObject ui)
+        {
+            ui.SetActive(false);
         }
     }
 }

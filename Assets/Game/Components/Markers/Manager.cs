@@ -17,23 +17,24 @@ namespace Game.Markers
         public FunkySheep.Network.Services.Find findService;
         public FunkySheep.Network.Services.Patch patchService;
         bool creating = false;
+        public GameObject UI;
 
-        public VisualTreeAsset iconUI;
+        /*public VisualTreeAsset iconUI;
         public VisualTreeAsset createUI;
 
         TemplateContainer iconUIContainer;
-        TemplateContainer createUIContainer;
+        TemplateContainer createUIContainer;*/
 
         GameObject markerGo;
 
         private void Awake()
         {
-            iconUIContainer = iconUI.Instantiate();
+            /*iconUIContainer = iconUI.Instantiate();
             iconUIContainer.Q<Button>("markers-btn-add").clicked += Create;
             Game.UI.Manager.Instance.rootDocument.rootVisualElement.Q<VisualElement>("Top").Add(iconUIContainer);
 
             createUIContainer = createUI.Instantiate();
-            createUIContainer.Q<Button>("markers-btn-create").clicked += Patch;
+            createUIContainer.Q<Button>("markers-btn-create").clicked += Patch;*/
         }
 
         private void Start()
@@ -72,14 +73,16 @@ namespace Game.Markers
 
         public void Open(Marker marker)
         {
-            createUIContainer.Q<Label>("MarkerId").text = marker.name;
-            Game.UI.Manager.Instance.rootDocument.rootVisualElement.Q<VisualElement>("CenterCenter").Add(createUIContainer);
+            UI = Game.Manager.Instance.UIManager.Load(UI);
+            /*createUIContainer.Q<Label>("MarkerId").text = marker.name;
+            Game.UI.Manager.Instance.rootDocument.rootVisualElement.Q<VisualElement>("CenterCenter").Add(createUIContainer);*/
         }
 
         public void Close(Marker marker)
         {
-            createUIContainer.Q<Label>("MarkerId").text = "";
-            Game.UI.Manager.Instance.rootDocument.rootVisualElement.Q<VisualElement>("CenterCenter").Remove(createUIContainer);
+            Game.Manager.Instance.UIManager.UnLoad(UI);
+            /*createUIContainer.Q<Label>("MarkerId").text = "";
+            Game.UI.Manager.Instance.rootDocument.rootVisualElement.Q<VisualElement>("CenterCenter").Remove(createUIContainer);*/
         }
 
         public void Create()
@@ -96,22 +99,22 @@ namespace Game.Markers
                 FunkySheep.Types.String name = ScriptableObject.CreateInstance<FunkySheep.Types.String>();
                 name.apiName = "name";
                 createService.fields.Add(name);
-                name.value = createUIContainer.Q<TextField>("MarkerName").value;
+                //name.value = createUIContainer.Q<TextField>("MarkerName").value;
 
                 FunkySheep.Types.String date = ScriptableObject.CreateInstance<FunkySheep.Types.String>();
                 date.apiName = "date";
                 createService.fields.Add(date);
-                date.value = createUIContainer.Q<TextField>("MarkerDate").value;
+                //date.value = createUIContainer.Q<TextField>("MarkerDate").value;
 
                 FunkySheep.Types.String time = ScriptableObject.CreateInstance<FunkySheep.Types.String>();
                 time.apiName = "time";
                 createService.fields.Add(time);
-                time.value = createUIContainer.Q<TextField>("MarkerTime").value;
+                //time.value = createUIContainer.Q<TextField>("MarkerTime").value;
 
                 FunkySheep.Types.String type = ScriptableObject.CreateInstance<FunkySheep.Types.String>();
                 type.apiName = "type";
                 createService.fields.Add(type);
-                type.value = createUIContainer.Q<DropdownField>("MarkerType").value;
+                //type.value = createUIContainer.Q<DropdownField>("MarkerType").value;
 
                 FunkySheep.Types.Double latitude = ScriptableObject.CreateInstance<FunkySheep.Types.Double>();
                 latitude.apiName = "latitude";
@@ -142,28 +145,28 @@ namespace Game.Markers
             FunkySheep.Types.String _id = ScriptableObject.CreateInstance<FunkySheep.Types.String>();
             _id.apiName = "_id";
             patchService.fields.Add(_id);
-            _id.value = createUIContainer.Q<Label>("MarkerId").text;
+            //_id.value = createUIContainer.Q<Label>("MarkerId").text;
             patchService.id = _id;
 
             FunkySheep.Types.String name = ScriptableObject.CreateInstance<FunkySheep.Types.String>();
             name.apiName = "name";
             patchService.fields.Add(name);
-            name.value = createUIContainer.Q<TextField>("MarkerName").value;
+            //name.value = createUIContainer.Q<TextField>("MarkerName").value;
 
             FunkySheep.Types.String date = ScriptableObject.CreateInstance<FunkySheep.Types.String>();
             date.apiName = "date";
             patchService.fields.Add(date);
-            date.value = createUIContainer.Q<TextField>("MarkerDate").value;
+            //date.value = createUIContainer.Q<TextField>("MarkerDate").value;
 
             FunkySheep.Types.String time = ScriptableObject.CreateInstance<FunkySheep.Types.String>();
             time.apiName = "time";
             patchService.fields.Add(time);
-            time.value = createUIContainer.Q<TextField>("MarkerTime").value;
+            //time.value = createUIContainer.Q<TextField>("MarkerTime").value;
 
             FunkySheep.Types.String type = ScriptableObject.CreateInstance<FunkySheep.Types.String>();
             type.apiName = "type";
             patchService.fields.Add(type);
-            type.value = createUIContainer.Q<DropdownField>("MarkerType").value;
+            //type.value = createUIContainer.Q<DropdownField>("MarkerType").value;
 
             patchService.Execute();
             patchService.fields.Clear();

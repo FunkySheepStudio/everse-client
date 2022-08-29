@@ -2,7 +2,7 @@ using System;
 using FunkySheep.SimpleJSON;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
+using TMPro;
 
 namespace Game.Authentication
 {
@@ -15,27 +15,32 @@ namespace Game.Authentication
         public FunkySheep.Types.String id;
         public FunkySheep.Types.String nickname;
 
-        public VisualTreeAsset loginUI;
-
-        Button btnLogin;
-        TextField txtLogin;
-        TextField txtPassword;
-
-        TemplateContainer loginUIContainer;
+        public GameObject UI;
 
         private void Awake()
         {
-            loginUIContainer = loginUI.Instantiate();
-            if (Game.UI.Manager.Instance.rootDocument)
-                Game.UI.Manager.Instance.rootDocument.rootVisualElement.Q<VisualElement>("CenterCenter").Add(loginUIContainer);
-            
-            btnLogin = loginUIContainer.Q<Button>("btnLogin");
-            btnLogin.clicked += Login;
-            txtLogin = loginUIContainer.Q<TextField>("txtLogin");
-            txtPassword = loginUIContainer.Q<TextField>("txtPassword");
-
-            txtLogin.value = login.value;
-            txtPassword.value = password.value;
+            if (Game.Manager.Instance.UIManager)
+            {
+                UI = Game.Manager.Instance.UIManager.Load(UI);
+                if (!login.reset)
+                {
+                    UI.GetComponentInChildren<UnityEngine.UI.Toggle>().isOn = true;
+                    foreach (TMP_InputField textBox in UI.GetComponentsInChildren<TMP_InputField>())
+                    {
+                        switch (textBox.name)
+                        {
+                            case "txtLogin":
+                                textBox.text = login.value;
+                                break;
+                            case "txtPassword":
+                                textBox.text = password.value;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
         }
 
         private void Start()
@@ -49,20 +54,19 @@ namespace Game.Authentication
 #endif
         }
 
+        public void Login()
+        {
+            authenticate.Execute();
+        }
+
         void ServerAutoLogin()
         {
             string[] arguments = Environment.GetCommandLineArgs();
+
             login.value = arguments[1];
             password.value = arguments[2];
             Debug.Log("Login" + login.value);
             Debug.Log("Password" + password.value);
-            authenticate.Execute();
-        }
-
-        void Login()
-        {
-            login.value = txtLogin.value;
-            password.value = txtPassword.value;
             authenticate.Execute();
         }
 
@@ -73,8 +77,9 @@ namespace Game.Authentication
                 id.value = authResponse["data"]["user"]["_id"];
                 nickname.value = authResponse["data"]["user"]["nickname"];
                 SceneManager.LoadScene("Game/Components/Netcode/Netcode", LoadSceneMode.Single);
-                if (Game.UI.Manager.Instance.rootDocument)
-                    Game.UI.Manager.Instance.rootDocument.rootVisualElement.Q<VisualElement>("CenterCenter").Remove(loginUIContainer);
+                /*if (Game.UI.Manager.Instance.rootDocument)
+                    Game.UI.Manager.Instance.rootDocument.rootVisualElement.Q<VisualElement>("CenterCenter").Remove(loginUIContainer);*/
+                Game.Manager.Instance.UIManager.UnLoad(UI);
                 gameObject.SetActive(false);
             }
             else

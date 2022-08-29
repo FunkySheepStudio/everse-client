@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.5
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.06708118, g: 0.32567424, b: 0.549261, a: 0.5}
+  m_IndirectSpecularColor: {r: 0.0675422, g: 0.32592463, b: 0.5497413, a: 0.5}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -263,6 +263,7 @@ GameObject:
   - component: {fileID: 2018725484}
   - component: {fileID: 2018725485}
   - component: {fileID: 2018725487}
+  - component: {fileID: 2018725488}
   m_Layer: 0
   m_Name: Authentication
   m_TagString: Untagged
@@ -302,7 +303,7 @@ MonoBehaviour:
   password: {fileID: 11400000, guid: bc6db6dd55af4f84f995d50cdb805576, type: 2}
   id: {fileID: 11400000, guid: e6189b1629da7ce418a97f188c6c405b, type: 2}
   nickname: {fileID: 11400000, guid: 0d9226c7b524bac4797e472529701035, type: 2}
-  loginUI: {fileID: 9197481963319205126, guid: 42964ce4c49fde244b978045b96cf312, type: 3}
+  UI: {fileID: 7311664860282018779, guid: f8093ebd06f7e0c4193982770f534e52, type: 3}
 --- !u!114 &2018725487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,6 +324,34 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: Game.Authentication.Manager, Everse
         m_MethodName: onAuthReceived
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2018725488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018725483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea6fa645e603fbd4eb304db51cebd76c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: f6b527d328d6a5c4a92be406c6e60f40, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2018725485}
+        m_TargetAssemblyTypeName: Game.Authentication.Manager, Game
+        m_MethodName: Login
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

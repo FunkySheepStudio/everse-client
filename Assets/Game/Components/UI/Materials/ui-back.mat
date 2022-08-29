@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ui-menu-back
+  m_Name: ui-back
   m_Shader: {fileID: -6465566751694194690, guid: 2ada01201e174c24f900245c271e5680, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
