@@ -93,7 +93,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 571494118c06fd74ea611f42538ade84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rootDocument: {fileID: 0}
+  cam: {fileID: 0}
+  loadedUis: []
 --- !u!114 &3077282152402807083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,11 +107,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59fa7dfc1e28d744792bc5a80c47ef7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttons:
-  - icon: {fileID: 3286163911610860551, guid: e390fc67ec40c6944ab25a4698f3ac5f, type: 3}
-    color: {r: 95.87451, g: 0, b: 0, a: 0}
-    text: Mine
-  prefab: {fileID: 997723504753629758, guid: c53a8d2e12f931f4cab218b0e3fd93c3, type: 3}
+  UI: {fileID: 0}
+  onShowCicularMenu:
+    m_Name: On Show Cicular Menu
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: bbbf5e53-752e-45e0-916d-5d06520aead0
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!222 &3077282152402807093
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -17,7 +17,7 @@ namespace Game.Authentication
 
         public GameObject UI;
 
-        private void Awake()
+        public void Show()
         {
             if (Game.Manager.Instance.UIManager)
             {
@@ -41,15 +41,11 @@ namespace Game.Authentication
                     }
                 }
             }
-        }
-
-        private void Start()
-        {
 #if UNITY_SERVER
 #if !UNITY_EDITOR
         ServerAutoLogin();
 #else
-        Login();
+            Login();
 #endif
 #endif
         }
@@ -79,7 +75,8 @@ namespace Game.Authentication
                 SceneManager.LoadScene("Game/Components/Netcode/Netcode", LoadSceneMode.Single);
                 /*if (Game.UI.Manager.Instance.rootDocument)
                     Game.UI.Manager.Instance.rootDocument.rootVisualElement.Q<VisualElement>("CenterCenter").Remove(loginUIContainer);*/
-                Game.Manager.Instance.UIManager.UnLoad(UI);
+                if (Game.Manager.Instance.UIManager)
+                    Game.Manager.Instance.UIManager.UnLoad(UI);
                 gameObject.SetActive(false);
             }
             else

@@ -419,11 +419,10 @@
       "url": "https://registry.npmjs.org"
     },
     "net.funkysheep.unity.netwind": {
-      "version": "0.1.2",
+      "version": "file:C:/Users/Kaas/Documents/FunkySheep/Framework/Unity-Netwind",
       "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://registry.npmjs.org"
+      "source": "local",
+      "dependencies": {}
     },
     "net.funkysheep.unity.network": {
       "version": "0.1.9",
