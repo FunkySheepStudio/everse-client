@@ -88,12 +88,21 @@
                 },
                 {
                     "name": "Point",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "f45b293b-66d1-40eb-99b8-f45b1d7a2b82",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "CircularMenu",
+                    "type": "Button",
+                    "id": "71f7b319-4774-4078-95ca-61414ab73808",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -292,6 +301,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Point",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7f20f27a-88c5-4914-b08a-9f5f3c12a2ab",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CircularMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

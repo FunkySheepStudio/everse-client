@@ -8,19 +8,28 @@ namespace Game.UI.CircleMenu
     public class Manager : MonoBehaviour
     {
         public GameObject UI;
-        public InputAction onShowCicularMenu;
+
+        PlayerInputs playerInputs;
+        InputAction circularMenuAction;
         private void Awake()
         {
-            onShowCicularMenu.performed += Load;
-            onShowCicularMenu.canceled += UnLoad;
+            playerInputs = new PlayerInputs();
         }
 
-        void Load(InputAction.CallbackContext callback)
+        private void OnEnable()
+        {
+            circularMenuAction = playerInputs.Player.CircularMenu;
+            circularMenuAction.Enable();
+            circularMenuAction.started += Load;
+            circularMenuAction.canceled += UnLoad;
+        }
+
+        private void Load(InputAction.CallbackContext callbackContext)
         {
             UI = Game.Manager.Instance.UIManager.Load(UI);
         }
 
-        void UnLoad(InputAction.CallbackContext callback)
+        private void UnLoad(InputAction.CallbackContext callbackContext)
         {
             Game.Manager.Instance.UIManager.UnLoad(UI);
         }

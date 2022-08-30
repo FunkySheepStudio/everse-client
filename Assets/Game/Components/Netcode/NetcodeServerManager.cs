@@ -16,6 +16,7 @@ namespace Game.Netcode
 
 #elif UNITY_EDITOR
             NetworkManager.Singleton.StartClient();
+            SceneManager.LoadScene("Game/Components/UI/UI", LoadSceneMode.Additive);
             /*NetworkManager.Singleton.StartHost();
             NetworkManager.Singleton.SceneManager.LoadScene("Game/Components/World/World", LoadSceneMode.Additive);*/
 #else

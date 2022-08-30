@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
-
+using UnityEngine.Rendering.Universal;
 
 namespace Game.Player
 {
@@ -23,6 +23,8 @@ namespace Game.Player
                     component.SetActive(true);
                 }
                 GetComponent<UnityEngine.InputSystem.PlayerInput>().actions = playerInputActionsAsset;
+                UniversalAdditionalCameraData cameraData = GetComponentInChildren<Camera>().GetUniversalAdditionalCameraData();
+                cameraData.cameraStack.Add(Game.Manager.Instance.UIManager.cam);
             } else
             {
                 GetComponent<UnityEngine.InputSystem.PlayerInput>().actions = null;

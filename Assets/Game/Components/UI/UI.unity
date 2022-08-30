@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.5
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.20896894, g: 0.39043757, b: 0.58295417, a: 0.5}
+  m_IndirectSpecularColor: {r: 0.5574218, g: 0.55515754, b: 0.6814273, a: 0.5}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -459,24 +459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59fa7dfc1e28d744792bc5a80c47ef7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UI: {fileID: 3077282152402807086, guid: 1eec083823ea73d4a8cb44f7b89a63ac, type: 3}
-  onShowCicularMenu:
-    m_Name: On Show Cicular Menu
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 8f6c888c-b482-475e-9797-fa2fe218e8eb
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 3f75bf57-1312-4b56-98ce-c7eeed35d867
-      m_Path: <Keyboard>/tab
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: On Show Cicular Menu
-      m_Flags: 0
-    m_Flags: 0
+  UI: {fileID: 3704649674280577962, guid: 1937bc3d7dac0bf419d82049343bda47, type: 3}
 --- !u!4 &1858180709
 Transform:
   m_ObjectHideFlags: 0

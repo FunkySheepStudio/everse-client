@@ -1494,7 +1494,7 @@ MonoBehaviour:
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
   m_Cameras: []
-  m_RendererIndex: -1
+  m_RendererIndex: 0
   m_VolumeLayerMask:
     serializedVersion: 2
     m_Bits: 1
@@ -1646,8 +1646,7 @@ MonoBehaviour:
   createService: {fileID: 11400000, guid: a912ccf9d64ce67408be21b61ecec43a, type: 2}
   findService: {fileID: 11400000, guid: 6703f627780397142b387e73e8fc4ed4, type: 2}
   patchService: {fileID: 11400000, guid: 5b119f69c55d1a64482a3bf3539aa176, type: 2}
-  iconUI: {fileID: 9197481963319205126, guid: 23c87df5db0a3164798426b8da3c4109, type: 3}
-  createUI: {fileID: 9197481963319205126, guid: 10d02d9822e55904ba787ae0086732b9, type: 3}
+  UI: {fileID: 0}
 --- !u!114 &4267727371831310214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3280,7 +3279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: 4419d82f33d36e848b3ed5af4c8da37e, type: 3}
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 3
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
