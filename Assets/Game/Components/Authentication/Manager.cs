@@ -72,7 +72,7 @@ namespace Game.Authentication
             {
                 id.value = authResponse["data"]["user"]["_id"];
                 nickname.value = authResponse["data"]["user"]["nickname"];
-                SceneManager.LoadScene("Game/Components/Netcode/Netcode", LoadSceneMode.Single);
+                //SceneManager.LoadScene("Game/Components/Netcode/Netcode", LoadSceneMode.Single);
                 /*if (Game.UI.Manager.Instance.rootDocument)
                     Game.UI.Manager.Instance.rootDocument.rootVisualElement.Q<VisualElement>("CenterCenter").Remove(loginUIContainer);*/
                 if (Game.Manager.Instance.UIManager)

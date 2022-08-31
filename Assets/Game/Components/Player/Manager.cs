@@ -23,6 +23,10 @@ namespace Game.Player
                     component.SetActive(true);
                 }
                 GetComponent<UnityEngine.InputSystem.PlayerInput>().actions = playerInputActionsAsset;
+
+                UniversalAdditionalCameraData cameraUIData = Game.Manager.Instance.UIManager.cam.GetUniversalAdditionalCameraData();
+                cameraUIData.renderType = CameraRenderType.Overlay;
+
                 UniversalAdditionalCameraData cameraData = GetComponentInChildren<Camera>().GetUniversalAdditionalCameraData();
                 cameraData.cameraStack.Add(Game.Manager.Instance.UIManager.cam);
             } else

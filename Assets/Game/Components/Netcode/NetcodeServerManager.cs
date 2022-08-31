@@ -7,21 +7,34 @@ namespace Game.Netcode
     [RequireComponent(typeof(Unity.Netcode.NetworkManager))]
     public class NetcodeServerManager : MonoBehaviour
     {
-        // Start is called before the first frame update
         void Start()
         {
 #if UNITY_SERVER
             NetworkManager.Singleton.StartServer();
-            NetworkManager.Singleton.SceneManager.LoadScene("Game/Components/World/World", LoadSceneMode.Additive);
+            SceneEventProgressStatus status = NetworkManager.Singleton.SceneManager.LoadScene("Game/Components/World/World", LoadSceneMode.Additive);
+            //NetworkManager.Singleton.SceneManager.LoadScene("Game/Components/Authentication/Authentication", LoadSceneMode.Additive);
+            NetworkManager.Singleton.SceneManager.OnSceneEvent += NetworkManager.Singleton.GetComponent<NetcodeServerManager>().LoadScene;
 
 #elif UNITY_EDITOR
             NetworkManager.Singleton.StartClient();
-            SceneManager.LoadScene("Game/Components/UI/UI", LoadSceneMode.Additive);
             /*NetworkManager.Singleton.StartHost();
             NetworkManager.Singleton.SceneManager.LoadScene("Game/Components/World/World", LoadSceneMode.Additive);*/
 #else
             NetworkManager.Singleton.StartClient();
 #endif
+        }
+
+        public void LoadScene(SceneEvent sceneEvent)
+        {
+            switch (sceneEvent.SceneEventType)
+            {
+                case SceneEventType.LoadComplete:
+                    {
+                        NetworkManager.Singleton.SceneManager.OnSceneEvent -= NetworkManager.Singleton.GetComponent<NetcodeServerManager>().LoadScene;
+                        NetworkManager.Singleton.SceneManager.LoadScene("Game/Components/Authentication/Authentication", LoadSceneMode.Additive);
+                        break;
+                    }
+            }
         }
     }
 }

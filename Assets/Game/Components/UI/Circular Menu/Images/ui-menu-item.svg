@@ -3,12 +3,15 @@
 
 <svg
    width="500"
-   height="500.00128"
-   viewBox="0 0 132.29167 132.29201"
+   height="500"
+   viewBox="0 0 500 500"
    version="1.1"
    id="svg1574"
    inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
    sodipodi:docname="ui-menu-item.svg"
+   inkscape:export-filename="ui-menu-item.png"
+   inkscape:export-xdpi="192.6525"
+   inkscape:export-ydpi="192.6525"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -25,14 +28,14 @@
      inkscape:document-units="mm"
      showgrid="true"
      inkscape:zoom="1.0444209"
-     inkscape:cx="370.54026"
-     inkscape:cy="177.13165"
+     inkscape:cx="269.52735"
+     inkscape:cy="344.68862"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
-     inkscape:window-x="-8"
+     inkscape:window-x="3832"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer2"
      shape-rendering="crispEdges">
     <inkscape:grid
        type="xygrid"
@@ -46,7 +49,8 @@
      inkscape:label="Calque 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-38.854168,-82.354167)">
+     transform="translate(-38.854168,-82.354167)"
+     style="display:none">
     <path
        id="path2165"
        style="fill:#ffffff;stroke:#ffffff;stroke-width:0.190546;stroke-linejoin:round;stroke-opacity:1"
@@ -165,5 +169,25 @@
        sodipodi:nodetypes="ccccc"
        inkscape:transform-center-x="43.338406"
        inkscape:transform-center-y="-20.577518" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Calque 2">
+    <path
+       style="fill:#adadad;stroke-linejoin:round"
+       id="path1619"
+       sodipodi:type="arc"
+       sodipodi:cx="250"
+       sodipodi:cy="-250"
+       sodipodi:rx="250"
+       sodipodi:ry="250"
+       sodipodi:start="1.0471976"
+       sodipodi:end="2.0943951"
+       sodipodi:arc-type="slice"
+       d="M 374.99999,-33.493643 A 250,250 0 0 1 125,-33.493649 L 250,-250 Z"
+       inkscape:transform-center-x="5.0240524e-06"
+       inkscape:transform-center-y="-125"
+       transform="scale(1,-1)" />
   </g>
 </svg>
