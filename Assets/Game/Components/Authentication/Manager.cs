@@ -15,6 +15,8 @@ namespace Game.Authentication
         public FunkySheep.Types.String id;
         public FunkySheep.Types.String nickname;
 
+        public FunkySheep.Events.SimpleEvent onAuthenticated;
+
         public GameObject UI;
 
         public void Show()
@@ -77,6 +79,8 @@ namespace Game.Authentication
                     Game.UI.Manager.Instance.rootDocument.rootVisualElement.Q<VisualElement>("CenterCenter").Remove(loginUIContainer);*/
                 if (Game.Manager.Instance.UIManager)
                     Game.Manager.Instance.UIManager.UnLoad(UI);
+
+                onAuthenticated.Raise();
                 gameObject.SetActive(false);
             }
             else

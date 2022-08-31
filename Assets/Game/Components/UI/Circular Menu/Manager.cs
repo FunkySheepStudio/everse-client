@@ -33,6 +33,7 @@ namespace Game.UI.CircleMenu
             {
                 GameObject menuItemGo = GameObject.Instantiate(menuItemPrefab, transform);
                 menuItemGo.GetComponent<Image>().rectTransform.Rotate(60 * i * Vector3.forward);
+                menuItemGo.transform.GetChild(0).GetComponent<CircleMenu.MenuItem>().menuItem = menu.items[i];
                 menuItemGo.SetActive(false);
             }
         }

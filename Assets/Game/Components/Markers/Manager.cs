@@ -37,7 +37,7 @@ namespace Game.Markers
             createUIContainer.Q<Button>("markers-btn-create").clicked += Patch;*/
         }
 
-        private void Start()
+        public void Init()
         {
             Vector2Int mapPosition = new Vector2Int((int)initialMapPosition.value.x, (int)initialMapPosition.value.y);
             Download(mapPosition);
@@ -134,7 +134,8 @@ namespace Game.Markers
 
                 createService.Execute();
                 createService.fields.Clear();
-                DestroyImmediate(markerGo);
+                //DestroyImmediate(markerGo);
+                markerGo.SetActive(false);
                 creating = false;
             }
         }
@@ -190,11 +191,25 @@ namespace Game.Markers
 
         public void OnServiceReception(FunkySheep.SimpleJSON.JSONNode jsonMarkers)
         {
+            GameObject marker;
+            Vector2 marker2DPosition;
+
             switch ((string)jsonMarkers["method"])
             {
                 case "create":
-                    markerGo.name = jsonMarkers["data"]["_id"];
-                    markerGo.GetComponent<CapsuleCollider>().enabled = true;
+                    marker = GameObject.Instantiate(markerAsset);
+                    marker.name = jsonMarkers["data"]["_id"];
+                    marker2DPosition = CalculatePosition(jsonMarkers["data"]["latitude"].AsDouble, jsonMarkers["data"]["longitude"].AsDouble);
+
+                    marker.transform.position = new Vector3(
+                        marker2DPosition.x,
+                        jsonMarkers["data"]["height"].AsFloat,
+                        marker2DPosition.y
+                    );
+                    marker.GetComponent<Marker>().markersManager = this;
+                    marker.GetComponent<CapsuleCollider>().enabled = true;
+                    currentMarkers.Add(marker);
+
                     creating = false;
                     break;
                 case "find":
@@ -204,9 +219,9 @@ namespace Game.Markers
                     {
                         if (currentMarkers.Find(item => item.name == markers[i]["_id"]))
                             break;
-                        GameObject marker = GameObject.Instantiate(markerAsset);
+                        marker = GameObject.Instantiate(markerAsset);
                         marker.name = markers[i]["_id"];
-                        Vector2 marker2DPosition = CalculatePosition(markers[i]["latitude"].AsDouble, markers[i]["longitude"].AsDouble);
+                        marker2DPosition = CalculatePosition(markers[i]["latitude"].AsDouble, markers[i]["longitude"].AsDouble);
 
                         marker.transform.position = new Vector3(
                             marker2DPosition.x,

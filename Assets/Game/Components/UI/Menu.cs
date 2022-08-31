@@ -15,12 +15,10 @@ namespace Game.UI
     [Serializable]
     public class MenuItem
     {
-        [SerializeField]
-        Sprite icon;
-        [SerializeField]
-        string text;
-        [SerializeField]
-        UnityEvent callback;
+        public Sprite icon;
+        public Color color;
+        public string text;
+        public UnityEvent callback;
     }
 }
 

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.5
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.62919265, g: 0.58495104, b: 0.69630545, a: 0.5}
+  m_IndirectSpecularColor: {r: 0.74847203, g: 0.6728355, b: 0.77092725, a: 0.5}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -157,7 +157,9 @@ MonoBehaviour:
   onDisconnect: {fileID: 11400000, guid: ed37dfd9f33638c48bc5c852284ddc16, type: 2}
   services:
   - {fileID: 11400000, guid: 7f5c2323b2aa383499001f38260f446e, type: 2}
+  - {fileID: 11400000, guid: a912ccf9d64ce67408be21b61ecec43a, type: 2}
   - {fileID: 11400000, guid: 6703f627780397142b387e73e8fc4ed4, type: 2}
+  - {fileID: 11400000, guid: 5b119f69c55d1a64482a3bf3539aa176, type: 2}
   - {fileID: 11400000, guid: 666c4a1942f1c3e4588b66719fe86550, type: 2}
   - {fileID: 11400000, guid: ca13774aea029c940bb7adb7d2c86cff, type: 2}
   - {fileID: 11400000, guid: 78d92cdc2eca7aa4296d362200ec3aa2, type: 2}
@@ -275,6 +277,7 @@ MonoBehaviour:
   password: {fileID: 11400000, guid: bc6db6dd55af4f84f995d50cdb805576, type: 2}
   id: {fileID: 11400000, guid: e6189b1629da7ce418a97f188c6c405b, type: 2}
   nickname: {fileID: 11400000, guid: 0d9226c7b524bac4797e472529701035, type: 2}
+  onAuthenticated: {fileID: 11400000, guid: 4173a0f970f3e0b4bb76913807c1abd1, type: 2}
   UI: {fileID: 7311664860282018779, guid: f8093ebd06f7e0c4193982770f534e52, type: 3}
 --- !u!114 &2018725487
 MonoBehaviour:
