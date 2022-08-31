@@ -694,15 +694,15 @@
          id="feBlend1541" />
     </filter>
     <filter
-       inkscape:menu-tooltip="Transparent plastic with deep colors"
+       inkscape:menu-tooltip="Pressed metal with a rolled edge"
        inkscape:menu="Bevels"
-       inkscape:label="Deep Colors Plastic"
+       inkscape:label="Pressed Steel"
        style="color-interpolation-filters:sRGB;"
        id="filter2687"
-       x="-0.28467632"
-       y="-0.65590548"
-       width="1.5693526"
-       height="2.311811">
+       x="-0.33022453"
+       y="-0.76085037"
+       width="1.6604491"
+       height="2.5217008">
       <feGaussianBlur
          in="SourceGraphic"
          result="result6"
@@ -758,7 +758,79 @@
          in="result7"
          operator="in"
          in2="SourceGraphic"
-         id="feComposite2685" />
+         id="feComposite2685"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix3402" />
+      <feGaussianBlur
+         id="feGaussianBlur3404"
+         result="result1"
+         stdDeviation="3"
+         in="fbSourceGraphic" />
+      <feBlend
+         in2="result1"
+         id="feBlend3406"
+         result="result5"
+         mode="multiply"
+         in="result1" />
+      <feGaussianBlur
+         id="feGaussianBlur3408"
+         in="result5"
+         result="result6"
+         stdDeviation="1" />
+      <feComposite
+         in2="result5"
+         id="feComposite3410"
+         result="result8"
+         in="result6"
+         operator="xor" />
+      <feComposite
+         in2="result8"
+         id="feComposite3412"
+         in="result6"
+         result="fbSourceGraphic"
+         operator="xor" />
+      <feSpecularLighting
+         id="feSpecularLighting3414"
+         in="fbSourceGraphic"
+         result="result1"
+         lighting-color="rgb(255,255,255)"
+         surfaceScale="2"
+         specularConstant="2.2"
+         specularExponent="55">
+        <fePointLight
+           id="fePointLight3416"
+           x="-5000"
+           y="-10000"
+           z="20000" />
+      </feSpecularLighting>
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite3418"
+         in="result1"
+         result="result2"
+         operator="in" />
+      <feComposite
+         in2="result2"
+         id="feComposite3420"
+         in="fbSourceGraphic"
+         result="result4"
+         operator="arithmetic"
+         k2="2"
+         k3="1" />
+      <feComposite
+         in2="result4"
+         id="feComposite3422"
+         in="result4"
+         operator="in"
+         result="result91" />
+      <feBlend
+         in2="result91"
+         id="feBlend3424"
+         mode="darken" />
     </filter>
   </defs>
   <g
