@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 
 namespace Game.PlaneRace
@@ -27,7 +26,7 @@ namespace Game.PlaneRace
         public GameObject gate;
         public List<GameObject> gates = new List<GameObject>();
         public int laps = 4;
-        public List<VectorImage> powersImages;
+        //public List<VectorImage> powersImages;
         public GameObject UI;
 
         /*public VisualTreeAsset scoreUI;

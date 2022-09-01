@@ -19,23 +19,7 @@ namespace Game.Markers
         bool creating = false;
         public GameObject UI;
 
-        /*public VisualTreeAsset iconUI;
-        public VisualTreeAsset createUI;
-
-        TemplateContainer iconUIContainer;
-        TemplateContainer createUIContainer;*/
-
         GameObject markerGo;
-
-        private void Awake()
-        {
-            /*iconUIContainer = iconUI.Instantiate();
-            iconUIContainer.Q<Button>("markers-btn-add").clicked += Create;
-            Game.UI.Manager.Instance.rootDocument.rootVisualElement.Q<VisualElement>("Top").Add(iconUIContainer);
-
-            createUIContainer = createUI.Instantiate();
-            createUIContainer.Q<Button>("markers-btn-create").clicked += Patch;*/
-        }
 
         public void Init()
         {
@@ -74,15 +58,11 @@ namespace Game.Markers
         public void Open(Marker marker)
         {
             UI = Game.Manager.Instance.UIManager.Load(UI);
-            /*createUIContainer.Q<Label>("MarkerId").text = marker.name;
-            Game.UI.Manager.Instance.rootDocument.rootVisualElement.Q<VisualElement>("CenterCenter").Add(createUIContainer);*/
         }
 
         public void Close(Marker marker)
         {
             Game.Manager.Instance.UIManager.UnLoad(UI);
-            /*createUIContainer.Q<Label>("MarkerId").text = "";
-            Game.UI.Manager.Instance.rootDocument.rootVisualElement.Q<VisualElement>("CenterCenter").Remove(createUIContainer);*/
         }
 
         public void Create()

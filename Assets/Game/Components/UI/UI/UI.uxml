@@ -1,9 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="Top" style="flex-direction: row; height: 10%;" />
-    <ui:VisualElement name="Center" style="flex-direction: row; justify-content: center; height: 80%;">
-        <ui:VisualElement name="CenterLeft" style="width: 10%;" />
-        <ui:VisualElement name="CenterCenter" style="width: 80%;" />
-        <ui:VisualElement name="CenterRight" style="width: 10%;" />
-    </ui:VisualElement>
-    <ui:VisualElement name="Bottom" style="flex-direction: row; height: 10%;" />
-</ui:UXML>
