@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using FunkySheep.Events;
 
 
 namespace Game.UI
@@ -20,6 +19,7 @@ namespace Game.UI
         public Color color;
         public string text;
         public FunkySheep.Events.SimpleEvent onClickEvent;
+        public UnityEvent onClickUnityEvent;
     }
 }
 

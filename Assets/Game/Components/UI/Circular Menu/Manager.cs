@@ -7,6 +7,7 @@ namespace Game.UI.CircleMenu
 {
     public class Manager : MonoBehaviour
     {
+        public GameObject player;
         public GameObject menuItemPrefab;
         public Menu menu;
         public Menu fallBackMenu;
@@ -29,6 +30,9 @@ namespace Game.UI.CircleMenu
 
         public void Load(Menu menu)
         {
+            foreach (Transform child in transform)
+                Destroy(child.gameObject);
+
             for (int i = 0; i < menu.items.Count; i++)
             {
                 GameObject menuItemGo = GameObject.Instantiate(menuItemPrefab, transform);
@@ -40,17 +44,22 @@ namespace Game.UI.CircleMenu
 
         public void UnLoad()
         {
-
+            Load(fallBackMenu);
         }
 
         private void Show(InputAction.CallbackContext callbackContext)
         {
+            player.GetComponent<Game.Player.Inputs.InputManager>().enabled = false;
+            player.GetComponentInChildren<Cinemachine.CinemachineVirtualCamera>().enabled = false;
+
             foreach (Transform child in transform)
                 child.gameObject.SetActive(true);
         }
 
         private void Hide(InputAction.CallbackContext callbackContext)
         {
+            player.GetComponent<Game.Player.Inputs.InputManager>().enabled = true;
+            player.GetComponentInChildren<Cinemachine.CinemachineVirtualCamera>().enabled = true;
             foreach (Transform child in transform)
                 child.gameObject.SetActive(false);
         }

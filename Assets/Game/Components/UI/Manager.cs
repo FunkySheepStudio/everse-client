@@ -8,6 +8,7 @@ namespace Game.UI
     {
         public Camera cam;
         public List<GameObject> loadedUis = new List<GameObject>();
+        public GameObject circularMenu;
 
         public void Awake()
         {

@@ -60,6 +60,11 @@ namespace Game.Buildings.Editor
             ObjExporter exporter = new ObjExporter();
             string filename = exporter.DoExport(building, false);
             StartCoroutine(Upload(filename, building));
+            foreach (FunkySheep.Events.JSONNodeListener item in GetComponents<FunkySheep.Events.JSONNodeListener>())
+            {
+                item.enabled = false;
+            }
+            enabled = false;
         }
 
         IEnumerator Upload(string filename, GameObject building)

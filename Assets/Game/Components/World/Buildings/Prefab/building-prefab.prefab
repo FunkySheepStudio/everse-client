@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 7372831627541930337}
   - component: {fileID: 7372831627541930339}
   - component: {fileID: 3251162011269809893}
+  - component: {fileID: 3720367483375756638}
+  - component: {fileID: 5628886319925407994}
   m_Layer: 0
   m_Name: building-prefab
   m_TagString: Untagged
@@ -147,3 +149,102 @@ MonoBehaviour:
   tilePosition: {x: 0, y: 0}
   insideTileQuarterPosition: {x: 0, y: 0}
   lastInsideTileQuarterPosition: {x: 0, y: 0}
+--- !u!114 &3720367483375756638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7372831627541930268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1c0bf93aec72674d8efa6ed1e44e284, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  invokeMethod:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5628886319925407994}
+        m_TargetAssemblyTypeName: Game.Buildings.UI.Manager, Game
+        m_MethodName: LoadMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  invokeExitMethod:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5628886319925407994}
+        m_TargetAssemblyTypeName: Game.Buildings.UI.Manager, Game
+        m_MethodName: UnLoadMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5628886319925407994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7372831627541930268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11565bc33f300f24cb465992d2f3c059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menu:
+    items:
+    - icon: {fileID: 3286163911610860551, guid: 07aa0efb9ff4e334d80c01c984e5f3c9, type: 3}
+      color: {r: 1, g: 0, b: 0, a: 1}
+      text: 
+      onClickEvent: {fileID: 0}
+      onClickUnityEvent:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 7372831627541930337}
+            m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+            m_MethodName: set_enabled
+            m_Mode: 6
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 1
+            m_CallState: 2
+          - m_Target: {fileID: 7372831627541930339}
+            m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+            m_MethodName: set_enabled
+            m_Mode: 6
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 1
+            m_CallState: 2
+          - m_Target: {fileID: 7372831627541930336}
+            m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+            m_MethodName: set_enabled
+            m_Mode: 6
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 1
+            m_CallState: 2
