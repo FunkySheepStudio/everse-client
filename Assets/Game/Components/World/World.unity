@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.5
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.7353566, g: 0, b: 0.7353566, a: 0.5}
+  m_IndirectSpecularColor: {r: 0.50407356, g: 0.5390494, b: 0.6779943, a: 0.5}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -315,6 +315,8 @@ GameObject:
   - component: {fileID: 295731375}
   - component: {fileID: 295731377}
   - component: {fileID: 295731376}
+  - component: {fileID: 295731378}
+  - component: {fileID: 295731379}
   m_Layer: 0
   m_Name: Buildings
   m_TagString: Untagged
@@ -382,6 +384,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 295731378}
+        m_TargetAssemblyTypeName: Game.Buildings.Price, Game
+        m_MethodName: Init
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &295731376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408,6 +422,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   logos: {fileID: 919132149155446097, guid: d6522302a5aea1b46963edf172e599d1, type: 3}
   material: {fileID: 2100000, guid: 24358c38712d28c4c8646fe96438b0f8, type: 2}
+--- !u!114 &295731378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295731372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acdfd143cdf953e4cbba261d5c54d8c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &295731379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295731372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea6fa645e603fbd4eb304db51cebd76c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: cbbb54af940997641a0642568515523d, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 295731378}
+        m_TargetAssemblyTypeName: Game.Buildings.Price, Game
+        m_MethodName: Switch
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &380914337
 GameObject:
   m_ObjectHideFlags: 0

@@ -34,9 +34,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _PriceShow: 1
     - _QueueControl: 0
     - _QueueOffset: 0
-    m_Colors: []
+    - _show: 0
+    m_Colors:
+    - _PriceColor: {r: 1, g: 0, b: 0, a: 0.5882353}
   m_BuildTextureStacks: []
 --- !u!114 &5238914601754529417
 MonoBehaviour:

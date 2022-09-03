@@ -28,7 +28,7 @@ namespace Game.UI.CircleMenu
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            menuItem.callback.Invoke();
+            menuItem.onClickEvent.Raise();
         }
 
         private void OnDisable()
