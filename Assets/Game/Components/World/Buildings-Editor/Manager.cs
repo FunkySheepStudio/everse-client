@@ -17,6 +17,8 @@ namespace Game.Buildings.Editor
         public FunkySheep.Types.Double latitude;
         public FunkySheep.Types.Double longitude;
         public FunkySheep.Types.Float height;
+        public FunkySheep.Types.Float x;
+        public FunkySheep.Types.Float y;
 
         private void Start()
         {
@@ -46,6 +48,8 @@ namespace Game.Buildings.Editor
             latitude.value = GetComponent<GetCoordinates>().calculatedLatitude;
             longitude.value = GetComponent<GetCoordinates>().calculatedLongitude;
             height.value = transform.position.y;
+            x.value = transform.position.x;
+            y.value = transform.position.z;
 
             createService.Execute();
         }
