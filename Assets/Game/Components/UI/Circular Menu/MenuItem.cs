@@ -18,12 +18,12 @@ namespace Game.UI.CircleMenu
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            GetComponent<Image>().color = new Color(125, 125, 125);
+            GetComponent<Image>().color = new Color(0, 0, 0);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            GetComponent<Image>().color = new Color(0, 0, 0);
+            GetComponent<Image>().color = new Color(255, 255, 255);
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -36,7 +36,7 @@ namespace Game.UI.CircleMenu
 
         private void OnDisable()
         {
-            GetComponent<Image>().color = new Color(0, 0, 0);
+            GetComponent<Image>().color = new Color(255, 255, 255);
         }
     }
 

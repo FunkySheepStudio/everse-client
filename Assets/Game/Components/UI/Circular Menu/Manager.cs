@@ -9,6 +9,8 @@ namespace Game.UI.CircleMenu
     {
         public GameObject player;
         public GameObject menuItemPrefab;
+        public GameObject root;
+        public GameObject text;
         public Menu menu;
         public Menu fallBackMenu;
 
@@ -30,16 +32,19 @@ namespace Game.UI.CircleMenu
 
         public void Load(Menu menu)
         {
-            foreach (Transform child in transform)
+            foreach (Transform child in root.transform)
                 Destroy(child.gameObject);
 
             for (int i = 0; i < menu.items.Count; i++)
             {
-                GameObject menuItemGo = GameObject.Instantiate(menuItemPrefab, transform);
+                GameObject menuItemGo = GameObject.Instantiate(menuItemPrefab, root.transform);
                 menuItemGo.GetComponent<Image>().rectTransform.Rotate(60 * i * Vector3.forward);
                 menuItemGo.transform.GetChild(0).GetComponent<CircleMenu.MenuItem>().menuItem = menu.items[i];
-                menuItemGo.SetActive(false);
+                text.GetComponent<TMPro.TextMeshProUGUI>().text = menu.items[i].text;
             }
+
+            foreach (Transform child in transform)
+                child.gameObject.SetActive(false);
         }
 
         public void UnLoad()
