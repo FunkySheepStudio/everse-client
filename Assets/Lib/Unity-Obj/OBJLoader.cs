@@ -187,9 +187,9 @@ namespace FunkySheep.Obj
                 //new object
                 if ((buffer.Is("o") || buffer.Is("g")) && SplitMode == SplitMode.Object) {
                     buffer.ReadUntilNewLine();
-                    string[] objectNameTable = buffer.GetString(1).Split("_");
-                    string objectName = objectNameTable[0] + "_"  + objectNameTable[1];
-                    //string objectName = buffer.GetString(1);
+                    /*string[] objectNameTable = buffer.GetString(1).Split("_");
+                    string objectName = objectNameTable[0] + "_"  + objectNameTable[1];*/
+                    string objectName = buffer.GetString(1);
                     setCurrentObjectFunc.Invoke(objectName);
                     continue;
                 }
