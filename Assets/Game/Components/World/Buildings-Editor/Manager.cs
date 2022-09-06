@@ -73,9 +73,7 @@ namespace Game.Buildings.Editor
 
         IEnumerator Upload(string filename, GameObject building)
         {
-            List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
             byte[] arr = File.ReadAllBytes(filename);
-            formData.Add(new MultipartFormFileSection("model", arr));
             WWWForm form = new WWWForm();
             form.AddBinaryData("model", arr);
 
