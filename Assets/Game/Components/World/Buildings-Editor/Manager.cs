@@ -75,9 +75,13 @@ namespace Game.Buildings.Editor
         {
             List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
             byte[] arr = File.ReadAllBytes(filename);
-            formData.Add(new MultipartFormFileSection(building.name, arr));
+            formData.Add(new MultipartFormFileSection("model", arr));
+            WWWForm form = new WWWForm();
+            form.AddBinaryData("model", arr);
 
-            UnityWebRequest request = UnityWebRequest.Post("http://localhost:8080/buildings_models", formData);
+            UnityWebRequest request = UnityWebRequest.Post("http://localhost:8080/buildings_models", form);
+            request.SetRequestHeader("building_id", building.name);
+            request.SetRequestHeader("lod_level", "2");
             yield return request.SendWebRequest();
 
             if (request.result != UnityWebRequest.Result.Success)

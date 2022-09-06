@@ -47,7 +47,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _DayNight: 0.4830801
+    - _DayNight: 0.0058083236
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
