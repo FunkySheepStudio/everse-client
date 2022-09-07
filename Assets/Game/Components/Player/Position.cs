@@ -28,6 +28,7 @@ namespace Game.Player
         {
             lastPosition = transform.position;
             netObject = GetComponent<Unity.Netcode.NetworkObject>();
+            UpdateWorldTiles();
         }
 
         private void Update()
@@ -71,22 +72,26 @@ namespace Game.Player
 
             if (insideTileQuarterPosition != lastInsideTileQuarterPosition)
             {
-                onEarthTilePositionChanged.Raise(tilePosition);
-                onEarthTilePositionChanged.Raise(tilePosition + Vector2Int.up);
-                onEarthTilePositionChanged.Raise(tilePosition + Vector2Int.up + Vector2Int.right);
-                onEarthTilePositionChanged.Raise(tilePosition + Vector2Int.right);
-                onEarthTilePositionChanged.Raise(tilePosition + Vector2Int.down + Vector2Int.right);
-                onEarthTilePositionChanged.Raise(tilePosition + Vector2Int.down);
-                onEarthTilePositionChanged.Raise(tilePosition + Vector2Int.down + Vector2Int.left);
-                onEarthTilePositionChanged.Raise(tilePosition + Vector2Int.left);
-                onEarthTilePositionChanged.Raise(tilePosition + Vector2Int.up + Vector2Int.left);
-                
+                UpdateWorldTiles();
                 /*onEarthTilePositionChanged.Raise(tilePosition + insideTileQuarterPosition.y * Vector2Int.up);
                 onEarthTilePositionChanged.Raise(tilePosition + insideTileQuarterPosition.x * Vector2Int.right);
                 onEarthTilePositionChanged.Raise(tilePosition + insideTileQuarterPosition);*/
 
                 lastInsideTileQuarterPosition = insideTileQuarterPosition;
             }
+        }
+
+        public void UpdateWorldTiles()
+        {
+            onEarthTilePositionChanged.Raise(tilePosition);
+            onEarthTilePositionChanged.Raise(tilePosition + Vector2Int.up);
+            onEarthTilePositionChanged.Raise(tilePosition + Vector2Int.up + Vector2Int.right);
+            onEarthTilePositionChanged.Raise(tilePosition + Vector2Int.right);
+            onEarthTilePositionChanged.Raise(tilePosition + Vector2Int.down + Vector2Int.right);
+            onEarthTilePositionChanged.Raise(tilePosition + Vector2Int.down);
+            onEarthTilePositionChanged.Raise(tilePosition + Vector2Int.down + Vector2Int.left);
+            onEarthTilePositionChanged.Raise(tilePosition + Vector2Int.left);
+            onEarthTilePositionChanged.Raise(tilePosition + Vector2Int.up + Vector2Int.left);
         }
 
         public void CalculateGPS()

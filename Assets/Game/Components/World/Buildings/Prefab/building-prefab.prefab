@@ -9,13 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7372831627541930270}
-  - component: {fileID: 7372831627541930271}
   - component: {fileID: 7372831627541930336}
   - component: {fileID: 7372831627541930337}
   - component: {fileID: 7372831627541930339}
   - component: {fileID: 3251162011269809893}
   - component: {fileID: 3720367483375756638}
   - component: {fileID: 5628886319925407994}
+  - component: {fileID: 5047944077049756188}
   m_Layer: 0
   m_Name: building-prefab
   m_TagString: Untagged
@@ -38,19 +38,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7372831627541930271
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7372831627541930268}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c6b06575e4ed67478baed6fe5f221e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buildingsModelFind: {fileID: 0}
 --- !u!114 &7372831627541930336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,3 +237,27 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 1
             m_CallState: 2
+--- !u!205 &5047944077049756188
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7372831627541930268}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 0, z: 0}
+  m_Size: 1
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.6
+    fadeTransitionWidth: 0
+    renderers: []
+  - screenRelativeHeight: 0.3
+    fadeTransitionWidth: 0
+    renderers: []
+  - screenRelativeHeight: 0.1
+    fadeTransitionWidth: 0
+    renderers: []
+  m_Enabled: 1
