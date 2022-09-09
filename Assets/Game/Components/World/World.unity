@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.5
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.458274, g: 0.50330794, b: 0.64648616, a: 0.5}
+  m_IndirectSpecularColor: {r: 0.65922785, g: 0.60868293, b: 0.7170979, a: 0.5}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -476,6 +476,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c6b06575e4ed67478baed6fe5f221e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  templateModelUrl: http://localhost:8080/buildings_models/
+  templateMaterialUrl: http://localhost:8080/buildings_materials/
 --- !u!114 &295731381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1534,7 +1536,7 @@ MonoBehaviour:
   timeOfDay: {fileID: 11400000, guid: 38d1155860b8f9b439ee879298cd20e7, type: 2}
   skybox: {fileID: 2100000, guid: db3eea50d1ad2864d96a7655861759c9, type: 2}
   sun: {fileID: 705507994}
-  simulate: 1
+  simulate: 0
   nightLightsMaterials:
   - {fileID: 2100000, guid: 23055002f81e3d344b1a2158b1d85509, type: 2}
 --- !u!4 &1726589046

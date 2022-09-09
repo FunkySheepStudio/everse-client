@@ -101,7 +101,7 @@ namespace Game.Buildings.Editor
                 lodgroup.SetLODs(lod);
                 lodgroup.RecalculateBounds();
 
-                buildingGO.transform.parent = existingBuildingGo.transform;
+                buildingGO.transform.SetParent(existingBuildingGo.transform, false);
             }
         }
     }

@@ -41,29 +41,11 @@
         },
         {
             "m_Id": "ee794bf3091a4f7196ce55ef9d6a3a4b"
-        },
-        {
-            "m_Id": "4880f6910ffc42a3a59bd26f3d4ddf4f"
         }
     ],
     "m_GroupDatas": [],
     "m_StickyNoteDatas": [],
-    "m_Edges": [
-        {
-            "m_OutputSlot": {
-                "m_Node": {
-                    "m_Id": "4880f6910ffc42a3a59bd26f3d4ddf4f"
-                },
-                "m_SlotId": 0
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "fe994df253a84bd7b8838cdebbff973b"
-                },
-                "m_SlotId": 0
-            }
-        }
-    ],
+    "m_Edges": [],
     "m_VertexContext": {
         "m_Position": {
             "x": 459.0,
@@ -240,41 +222,6 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
-    "m_ObjectId": "4880f6910ffc42a3a59bd26f3d4ddf4f",
-    "m_Group": {
-        "m_Id": ""
-    },
-    "m_Name": "Property",
-    "m_DrawState": {
-        "m_Expanded": true,
-        "m_Position": {
-            "serializedVersion": "2",
-            "x": 16.0,
-            "y": 130.0,
-            "width": 0.0,
-            "height": 0.0
-        }
-    },
-    "m_Slots": [
-        {
-            "m_Id": "6a64a5b5754e4679b95da1b88ced825a"
-        }
-    ],
-    "synonyms": [],
-    "m_Precision": 0,
-    "m_PreviewExpanded": true,
-    "m_PreviewMode": 0,
-    "m_CustomColors": {
-        "m_SerializableColors": []
-    },
-    "m_Property": {
-        "m_Id": "62410949007c42789794e20cc1599777"
-    }
-}
-
-{
-    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "5082741c692c41db9a6cf5c2164cfaac",
     "m_Id": 0,
@@ -315,31 +262,6 @@
     },
     "isMainColor": true,
     "m_ColorMode": 0
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
-    "m_ObjectId": "6a64a5b5754e4679b95da1b88ced825a",
-    "m_Id": 0,
-    "m_DisplayName": "_Color",
-    "m_SlotType": 1,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "Out",
-    "m_StageCapability": 3,
-    "m_Value": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0,
-        "w": 0.0
-    },
-    "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0,
-        "w": 0.0
-    },
-    "m_Labels": []
 }
 
 {
@@ -495,8 +417,8 @@
     "m_StageCapability": 2,
     "m_Value": {
         "x": 0.5,
-        "y": 0.5,
-        "z": 0.5
+        "y": 0.2572532892227173,
+        "z": 0.0
     },
     "m_DefaultValue": {
         "x": 0.0,
