@@ -2,7 +2,7 @@ using System;
 using FunkySheep.SimpleJSON;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
+
 
 namespace Game.Authentication
 {
@@ -19,33 +19,11 @@ namespace Game.Authentication
 
         public GameObject UI;
 
-        public void Show()
+        public void Start()
         {
-            if (Game.Manager.Instance.UIManager)
-            {
-                UI = Game.Manager.Instance.UIManager.Load(UI);
-                if (!login.reset)
-                {
-                    UI.GetComponentInChildren<UnityEngine.UI.Toggle>().isOn = true;
-                    foreach (TMP_InputField textBox in UI.GetComponentsInChildren<TMP_InputField>())
-                    {
-                        switch (textBox.name)
-                        {
-                            case "txtLogin":
-                                textBox.text = login.value;
-                                break;
-                            case "txtPassword":
-                                textBox.text = password.value;
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                }
-            }
 #if UNITY_SERVER
 #if !UNITY_EDITOR
-        ServerAutoLogin();
+            ServerAutoLogin();
 #else
             Login();
 #endif
@@ -74,19 +52,17 @@ namespace Game.Authentication
             {
                 id.value = authResponse["data"]["user"]["_id"];
                 nickname.value = authResponse["data"]["user"]["nickname"];
-                //SceneManager.LoadScene("Game/Components/Netcode/Netcode", LoadSceneMode.Single);
-                /*if (Game.UI.Manager.Instance.rootDocument)
-                    Game.UI.Manager.Instance.rootDocument.rootVisualElement.Q<VisualElement>("CenterCenter").Remove(loginUIContainer);*/
-                if (Game.Manager.Instance.UIManager)
-                    Game.Manager.Instance.UIManager.UnLoad(UI);
-
                 onAuthenticated.Raise();
-                gameObject.SetActive(false);
             }
             else
             {
                 Debug.Log(authResponse["data"].ToString());
             }
+        }
+
+        public void LoadNetCodeScene()
+        {
+            SceneManager.LoadScene("Game/Components/Netcode/Netcode", LoadSceneMode.Single);
         }
     }
 }

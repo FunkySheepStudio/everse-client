@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace Game.UI
 {
@@ -7,12 +8,19 @@ namespace Game.UI
     public class Manager : MonoBehaviour
     {
         public Camera cam;
+        public Camera mainCam;
         public List<GameObject> loadedUis = new List<GameObject>();
         public GameObject circularMenu;
 
         public void Awake()
         {
             Game.Manager.Instance.UIManager = this;
+
+            UniversalAdditionalCameraData cameraUIData = cam.GetUniversalAdditionalCameraData();
+            cameraUIData.renderType = CameraRenderType.Overlay;
+
+            UniversalAdditionalCameraData cameraData = mainCam.GetUniversalAdditionalCameraData();
+            cameraData.cameraStack.Add(Game.Manager.Instance.UIManager.cam);
         }
 
         public GameObject Load(GameObject ui)

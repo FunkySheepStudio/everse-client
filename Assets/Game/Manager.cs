@@ -8,15 +8,17 @@ namespace Game
         public Game.UI.Manager UIManager;
         public void Start()
         {
-            SceneManager.LoadSceneAsync("Game/Components/Netcode/Netcode");
-            /*#if UNITY_SERVER
-                    SceneManager.LoadSceneAsync("Game/Components/Authentication/Authentication", LoadSceneMode.Single);
-            #else
-                        SceneManager.LoadScene("Game/Components/UI/UI", LoadSceneMode.Single);
-                        SceneManager.LoadSceneAsync("Game/Components/Authentication/Authentication", LoadSceneMode.Additive);
-            #endif
-                    }*/
+#if UNITY_SERVER
+            SceneManager.LoadSceneAsync("Game/Components/Authentication/Authentication Server", LoadSceneMode.Single);
+#else
+            SceneManager.LoadSceneAsync("Game/Components/Authentication/Authentication Client", LoadSceneMode.Single);
+#endif
         }
+
+        /*public static void LoadScene(string scene)
+        {
+            SceneManager.LoadScene(scene, LoadSceneMode.Single);
+        }*/
     }
 
 }

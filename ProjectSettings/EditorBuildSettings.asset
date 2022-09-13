@@ -9,19 +9,13 @@ EditorBuildSettings:
     path: Assets/Game/Game.unity
     guid: 94d461d5b1870ab4193c0ae83f4a1d46
   - enabled: 1
-    path: Assets/Game/Components/UI/UI.unity
-    guid: 95b39c3f78092494cb572ab93008fe04
-  - enabled: 1
-    path: Assets/Game/Components/Authentication/Authentication.unity
+    path: Assets/Game/Components/Authentication/Authentication Server.unity
     guid: 6613b8c92e3bf8d4393fe322fce7bf94
   - enabled: 1
-    path: Assets/Game/Components/Netcode/NetCode.unity
+    path: Assets/Game/Components/Netcode/Netcode.unity
     guid: 41288d4434ba5f94cb5ac4942c27982d
   - enabled: 1
-    path: Assets/Game/Components/World/World.unity
-    guid: 133c6c847e46f924ea6312cc5616b16e
-  - enabled: 1
-    path: Assets/Mini-Games/Plane Race/Plane Race.unity
-    guid: cb3691e0cab60ac43b5709e25be4ba14
+    path: Assets/Game/Components/World/World 1.unity
+    guid: b92463973241a7a41a97f20211e122ad
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}
