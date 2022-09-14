@@ -6,6 +6,7 @@ namespace Game
     public class Manager : Singleton<Manager>
     {
         public Game.UI.Manager UIManager;
+        public FunkySheep.Earth.Manager earthManager;
         public void Start()
         {
 #if UNITY_SERVER

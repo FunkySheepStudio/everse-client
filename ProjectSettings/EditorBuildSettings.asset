@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Game/Components/Authentication/Authentication Server.unity
     guid: 6613b8c92e3bf8d4393fe322fce7bf94
   - enabled: 1
-    path: Assets/Game/Components/Netcode/Netcode.unity
+    path: Assets/Game/Components/Netcode/NetCode.unity
     guid: 41288d4434ba5f94cb5ac4942c27982d
   - enabled: 1
     path: Assets/Game/Components/World/World 1.unity

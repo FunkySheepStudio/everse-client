@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.5
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.65922785, g: 0.60868293, b: 0.7170979, a: 0.5}
+  m_IndirectSpecularColor: {r: 0.7353566, g: 0, b: 0.7353566, a: 0.5}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1018,6 +1018,7 @@ MonoBehaviour:
   latitude: {fileID: 11400000, guid: 1ccafd01e79cc9c4bbb58c488adde6fe, type: 2}
   longitude: {fileID: 11400000, guid: 31dd15ddd45ce1840949a4cdda2134b6, type: 2}
   onStartedEvent: {fileID: 11400000, guid: 1e685dbd91264994aabbb98304a96ad0, type: 2}
+  onNoGpsEvent: {fileID: 0}
 --- !u!4 &939605766
 Transform:
   m_ObjectHideFlags: 0
@@ -1131,12 +1132,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1100245711}
+  - component: {fileID: 1100245716}
   - component: {fileID: 1100245712}
+  - component: {fileID: 1100245717}
   - component: {fileID: 1100245715}
   - component: {fileID: 1100245714}
   - component: {fileID: 1100245713}
-  - component: {fileID: 1100245717}
-  - component: {fileID: 1100245716}
   m_Layer: 0
   m_Name: Earth
   m_TagString: Untagged
@@ -1176,8 +1177,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zoomLevel: {fileID: 11400000, guid: 3c67854377f8eff499cddc25ae9a481d, type: 2}
-  initialLatitude: {fileID: 11400000, guid: 1ccafd01e79cc9c4bbb58c488adde6fe, type: 2}
-  initialLongitude: {fileID: 11400000, guid: 31dd15ddd45ce1840949a4cdda2134b6, type: 2}
+  initialLatitude: {fileID: 11400000, guid: b477a1893ba47fa4ea7da654da5377b7, type: 2}
+  initialLongitude: {fileID: 11400000, guid: fe0c7774b848d70458096ebda058983e, type: 2}
   initialMapPosition: {fileID: 11400000, guid: 225ded4de921a5b4f81526d848fcf829, type: 2}
   initialMercatorPosition: {fileID: 11400000, guid: eed82b21d5f7ca9469baabddd913b59a, type: 2}
   onStarted: {fileID: 11400000, guid: 3785cf3207a61ef41b7ea94111ce5aab, type: 2}
@@ -1320,6 +1321,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b31e5498d0d0acf40979fb727d227ad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  networkLatitude:
+    m_InternalValue: 0
+  networkLongitude:
+    m_InternalValue: 0
+  FirstPlayerLatitude: {fileID: 11400000, guid: 1ccafd01e79cc9c4bbb58c488adde6fe, type: 2}
+  FirstPlayerLongitude: {fileID: 11400000, guid: 31dd15ddd45ce1840949a4cdda2134b6, type: 2}
 --- !u!1 &1171716213
 GameObject:
   m_ObjectHideFlags: 0
