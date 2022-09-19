@@ -43,23 +43,28 @@ namespace Game.Player.World
             }
         }
 
+        private void Update()
+        {
+            if (!isSpawnPositionSet && isLocalPlayer)
+            {
+                SetSpawningPosition();
+            }
+        }
+
         public void SetSpawningPosition()
         {
-            if (!isSpawnPositionSet && isServer)
+            Vector2 spawningPosition = Game.Manager.Instance.earthManager.CalculatePosition(syncInitialLatitude, syncInitialLongitude);
+
+            float? height = FunkySheep.Earth.Terrain.Manager.GetHeight(spawningPosition);
+            if (height != null)
             {
-                Vector2 spawningPosition = Game.Manager.Instance.earthManager.CalculatePosition(syncInitialLatitude, syncInitialLongitude);
+                transform.position = new Vector3(
+                    spawningPosition.x,
+                    height.Value,
+                    spawningPosition.y
+                    );
 
-                float? height = FunkySheep.Earth.Terrain.Manager.GetHeight(spawningPosition);
-                if (height != null)
-                {
-                    transform.position = new Vector3(
-                        spawningPosition.x,
-                        height.Value,
-                        spawningPosition.y
-                        );
-
-                    isSpawnPositionSet = true;
-                }
+                isSpawnPositionSet = true;
             }
         }
     }

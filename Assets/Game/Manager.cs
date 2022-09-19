@@ -15,11 +15,6 @@ namespace Game
             SceneManager.LoadSceneAsync("Game/Components/Authentication/Authentication Client", LoadSceneMode.Single);
 #endif
         }
-
-        /*public static void LoadScene(string scene)
-        {
-            SceneManager.LoadScene(scene, LoadSceneMode.Single);
-        }*/
     }
 
 }

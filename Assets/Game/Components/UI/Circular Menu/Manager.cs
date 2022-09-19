@@ -54,7 +54,7 @@ namespace Game.UI.CircleMenu
 
         private void Show(InputAction.CallbackContext callbackContext)
         {
-            player.GetComponent<Game.Player.Inputs.InputManager>().enabled = false;
+            //player.GetComponent<Game.Player.Inputs.InputManager>().enabled = false;
             player.GetComponentInChildren<Cinemachine.CinemachineVirtualCamera>().enabled = false;
 
             foreach (Transform child in transform)
@@ -63,7 +63,7 @@ namespace Game.UI.CircleMenu
 
         private void Hide(InputAction.CallbackContext callbackContext)
         {
-            player.GetComponent<Game.Player.Inputs.InputManager>().enabled = true;
+            //player.GetComponent<Game.Player.Inputs.InputManager>().enabled = true;
             player.GetComponentInChildren<Cinemachine.CinemachineVirtualCamera>().enabled = true;
             foreach (Transform child in transform)
                 child.gameObject.SetActive(false);

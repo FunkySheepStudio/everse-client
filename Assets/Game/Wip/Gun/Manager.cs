@@ -1,11 +1,10 @@
 using UnityEngine;
-using FunkySheep.NetWind;
 
 namespace Game.Guns
 {
-    public class Manager : EmptyStateBehaviour
+    public class Manager
     {
-        public GameObject hand;
+        /*public GameObject hand;
         public Gun gun;
         private Game.Player.Inputs.InputManager _inputManager;
         private GameObject gunGo;
@@ -28,6 +27,6 @@ namespace Game.Guns
             {
                 gun.Shoot(gunGo.transform.position + gunGo.transform.up * 0.20f, transform.forward);
             }
-        }
+        }*/
     }
 }

@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIManager: {fileID: 0}
+  earthManager: {fileID: 0}
 --- !u!4 &356409578
 Transform:
   m_ObjectHideFlags: 0
