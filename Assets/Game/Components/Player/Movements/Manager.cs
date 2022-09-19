@@ -7,38 +7,27 @@ namespace Game.Player.Movements
     {
         public GameObject player;
         public Inputs inputs;
-
-        bool setPosition = false;
+        public Controllers.Controller controller;
         Vector3 position = Vector3.zero;
+
+        private void Awake()
+        {
+            controller = new Controllers.CharacterControler(this);
+        }
 
         public override void Simulate(int tick, float deltaTime)
         {
-            if (IsOwn || IsServer)
+            controller.Simulate(tick, deltaTime);
+            if (position != Vector3.zero)
             {
-                Move(deltaTime);
-                if (setPosition)
-                {
-                    player.transform.position = position;
-                    setPosition = false;
-                }
+                transform.position = position;
+                position = Vector3.zero;
             }
         }
 
         public void SetPosition(Vector3 position)
         {
             this.position = position;
-            setPosition = true;
-        }
-
-        void Move(float deltaTime)
-        {
-            if (inputs.Current.movement != Vector2.zero)
-            {
-                player.transform.position += new Vector3(
-                inputs.Current.movement.x,
-                0,
-                inputs.Current.movement.y) * deltaTime;
-            }
         }
     }
 }

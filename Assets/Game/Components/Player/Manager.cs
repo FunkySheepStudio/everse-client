@@ -1,30 +1,23 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.Netcode;
+using Mirror;
 
 namespace Game.Player
 {
-    [RequireComponent(typeof(NetworkObject))]
-    public class Manager : MonoBehaviour
+    public class Manager : NetworkBehaviour
     {
-        public FunkySheep.Events.SimpleEvent onSpawn;
         public List<GameObject> NetworkOwnerComponents;
-        public UnityEngine.InputSystem.InputActionAsset playerInputActionsAsset;
-        NetworkObject _networkObject;
 
         private void Start()
         {
-            _networkObject = GetComponent<NetworkObject>();
 
-            if (_networkObject.IsOwner)
+            if (isLocalPlayer)
             {
                 foreach (GameObject component  in NetworkOwnerComponents)
                 {
                     component.SetActive(true);
                 }
             }
-
-            onSpawn.Raise();
         }
     }
 }

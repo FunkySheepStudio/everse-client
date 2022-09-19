@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: gps-longitude
   m_EditorClassIdentifier: 
   apiName: 
-  reset: 0
-  value: 4.38995
+  reset: 1
+  value: 0

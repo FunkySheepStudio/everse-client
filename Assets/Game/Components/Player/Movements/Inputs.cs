@@ -66,8 +66,12 @@ namespace Game.Player.Movements
         {
             if (IsOwn)
             {
-                cumulativeInput.movement = playerInputs.Player.Move.ReadValue<Vector2>();
+                Vector2 movement = playerInputs.Player.Move.ReadValue<Vector2>();
+                if (movement.magnitude > 1f)
+                    movement.Normalize();
 
+                cumulativeInput.movement += movement;
+                
                 sampleCount++;
             }
         }

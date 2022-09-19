@@ -1,40 +1,66 @@
 using UnityEngine;
-using Unity.Netcode;
+using Mirror;
 
 namespace Game.World
 {
     public class NetworkManager : NetworkBehaviour
     {
-        public NetworkVariable<double> networkLatitude = new NetworkVariable<double>(default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-        public NetworkVariable<double> networkLongitude = new NetworkVariable<double>(default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        [SyncVar(hook = nameof(SetInitialLatitude))]
+        public double syncInitialLatitude = 0;
+        [SyncVar(hook = nameof(SetInitialLongitude))]
+        public double syncInitialLongitude = 0;
+        
+        public FunkySheep.Types.Double EarthInitialLatitude;
+        public FunkySheep.Types.Double EarthInitialLongitude;
 
-        public FunkySheep.Types.Double FirstPlayerLatitude;
-        public FunkySheep.Types.Double FirstPlayerLongitude;
+        public FunkySheep.Types.Double PlayerInitialLatitude;
+        public FunkySheep.Types.Double PlayerInitialLongitude;
+
+        bool InitialLatitudeSynced;
+        bool InitialLongitudeSynced;
 
         private void Awake()
         {
             Game.Manager.Instance.earthManager = GetComponent<FunkySheep.Earth.Manager>();
         }
 
-        public override void OnNetworkSpawn()
+        public void ServerInit(double latitude, double longitude)
         {
-#if UNITY_SERVER
-            networkLatitude.Value = Game.Manager.Instance.earthManager.initialLatitude.value = FirstPlayerLatitude.value;
-            networkLongitude.Value = Game.Manager.Instance.earthManager.initialLongitude.value = FirstPlayerLongitude.value;
-#else
-            Game.Manager.Instance.earthManager.initialLatitude.value = networkLatitude.Value;
-            Game.Manager.Instance.earthManager.initialLongitude.value = networkLongitude.Value;
+            syncInitialLatitude = EarthInitialLatitude.value = latitude;
+            syncInitialLongitude = EarthInitialLongitude.value = longitude;
+            GetComponent<FunkySheep.Earth.Manager>().Init();
+            SpawnWorldTile(EarthInitialLatitude.value, EarthInitialLongitude.value);
+        }
 
-            networkLatitude.OnValueChanged += (double previous, double current) =>
-            {
-                Game.Manager.Instance.earthManager.initialLatitude.value = current;
-            };
+        void SetInitialLatitude(double lastLatitude, double newLattidue)
+        {
+            EarthInitialLatitude.value = newLattidue;
+            InitialLatitudeSynced = true;
+            ClientInit();
+        }
 
-            networkLongitude.OnValueChanged += (double previous, double current) =>
+        void SetInitialLongitude(double lastLongitude, double newLongitude)
+        {
+            EarthInitialLongitude.value = newLongitude;
+            InitialLongitudeSynced = true;
+            ClientInit();
+        }
+
+        void ClientInit()
+        {
+            if (InitialLatitudeSynced && InitialLongitudeSynced)
             {
-                Game.Manager.Instance.earthManager.initialLongitude.value = current;
-            };
-#endif
+                GetComponent<FunkySheep.Earth.Manager>().Init();
+                SpawnWorldTile(PlayerInitialLatitude.value, PlayerInitialLongitude.value);
+            }
+        }
+
+        public void SpawnWorldTile(double latitude, double longitude)
+        {
+            Vector2 spawningPosition = Game.Manager.Instance.earthManager.CalculatePosition(latitude, longitude);
+            Vector3 initialWorldPosition = new Vector3(spawningPosition.x, 0, spawningPosition.y);
+            Vector2Int tilePosition = Game.Manager.Instance.earthManager.CalculateTilePosition(initialWorldPosition);
+            Game.Manager.Instance.earthManager.AddTile(tilePosition);
         }
     }
 }

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: gps-latitude
   m_EditorClassIdentifier: 
   apiName: 
-  reset: 0
-  value: 44.620614
+  reset: 1
+  value: 0

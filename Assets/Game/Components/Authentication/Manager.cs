@@ -62,7 +62,7 @@ namespace Game.Authentication
 
         public void LoadNetCodeScene()
         {
-            SceneManager.LoadScene("Game/Components/Netcode/Netcode", LoadSceneMode.Single);
+            SceneManager.LoadScene("Game/Components/Mirror/Mirror", LoadSceneMode.Single);
         }
     }
 }
