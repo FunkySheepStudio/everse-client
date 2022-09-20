@@ -32,7 +32,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""type"": ""Button"",
                     ""id"": ""6bc1aaf4-b110-4ff7-891e-5b9fe6f32c4d"",
                     ""expectedControlType"": ""Button"",
-                    ""processors"": """",
+                    ""processors"": ""Normalize(min=-1,max=1)"",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
@@ -41,7 +41,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""type"": ""Value"",
                     ""id"": ""2690c379-f54d-45be-a724-414123833eb4"",
                     ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
+                    ""processors"": ""NormalizeVector2"",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
