@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Mirror;
 
 namespace Game.Player.States
 {
@@ -10,10 +11,11 @@ namespace Game.Player.States
         public GameObject cameraController;
         public Transform cam;
 
-        public float speed = 10;
+        public float speed = 5;
 
         PlayerInputs playerInputs;
         CharacterController characterController;
+        Animator animator;
         float smoothVelocity;
         float gravity = 9.8f;
         float vSpeed = 0f;
@@ -26,7 +28,9 @@ namespace Game.Player.States
                 playerInputs = new PlayerInputs();
                 playerInputs.Player.Enable();
                 characterController = player.GetComponent<CharacterController>();
-                GameObject.Instantiate(model, player.transform);
+                animator = model.GetComponent<Animator>();
+                player.GetComponent<NetworkAnimator>().animator = animator;
+
                 GameObject cameraGo = GameObject.Instantiate(cameraController, player.transform);
                 Cinemachine.CinemachineFreeLook freeLookCamera = cameraGo.GetComponent<Cinemachine.CinemachineFreeLook>();
                 freeLookCamera.LookAt = player.transform;
@@ -48,6 +52,8 @@ namespace Game.Player.States
             Vector3 vel = Vector3.down;
             if (characterController.isGrounded)
             {
+                animator.SetBool("Grounded", true);
+                animator.SetBool("Jump", false);
                 vSpeed = 0; // grounded character has vSpeed = 0...
                 if (playerInputs.Player.Jump.ReadValue<float>() != 0 )
                 { // unless it jumps:
@@ -58,6 +64,12 @@ namespace Game.Player.States
             vSpeed -= gravity * Time.deltaTime;
             vel.y = vSpeed; // include vertical speed in vel
                             // convert vel to displacement and Move the character:
+
+            if (vel.y >= 0.1)
+            {
+                animator.SetBool("Jump", true);
+            }
+
             characterController.Move(vel * Time.deltaTime);
         }
 
@@ -80,6 +92,11 @@ namespace Game.Player.States
                 // Move
                 Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
                 characterController.Move(moveDir.normalized * speed * Time.deltaTime);
+
+                animator.SetFloat("Speed", 1);
+            } else
+            {
+                animator.SetFloat("Speed", 0);
             }
         }
     }
