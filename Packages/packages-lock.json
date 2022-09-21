@@ -367,9 +367,9 @@
       "url": "https://registry.npmjs.org"
     },
     "net.funkysheep.unity.earth": {
-      "version": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Framework/Unity-Earth",
+      "version": "0.1.9",
       "depth": 0,
-      "source": "local",
+      "source": "registry",
       "dependencies": {
         "net.funkysheep.unity.simplejson": "0.1.0",
         "net.funkysheep.unity.events": "0.1.0",
@@ -378,7 +378,8 @@
         "net.funkysheep.unity.tiles": "0.1.0",
         "net.funkysheep.unity.vectors": "0.1.0",
         "net.funkysheep.unity.network": "0.1.7"
-      }
+      },
+      "url": "https://registry.npmjs.org"
     },
     "net.funkysheep.unity.effects": {
       "version": "0.1.0",
@@ -418,12 +419,6 @@
         "net.funkysheep.unity.effects": "0.1.0"
       },
       "url": "https://registry.npmjs.org"
-    },
-    "net.funkysheep.unity.netwind": {
-      "version": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Framework/Unity-Netwind",
-      "depth": 0,
-      "source": "local",
-      "dependencies": {}
     },
     "net.funkysheep.unity.network": {
       "version": "0.2.0",

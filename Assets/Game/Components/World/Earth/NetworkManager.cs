@@ -62,5 +62,10 @@ namespace Game.World
             Vector2Int tilePosition = Game.Manager.Instance.earthManager.CalculateTilePosition(initialWorldPosition);
             Game.Manager.Instance.earthManager.AddTile(tilePosition);
         }
+
+        public void SpawnWorldTile(Vector2Int tilePosition)
+        {
+            Game.Manager.Instance.earthManager.AddTile(tilePosition);
+        }
     }
 }

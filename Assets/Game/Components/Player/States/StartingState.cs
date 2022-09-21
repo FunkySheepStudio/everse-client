@@ -24,6 +24,9 @@ namespace Game.Player.States
             if (!isSpawnPositionSet && player.isLocalPlayer)
             {
                 SetSpawningPosition(player);
+            } else
+            {
+                player.SwitchState(player.walkingState);
             }
         }
 
@@ -41,6 +44,7 @@ namespace Game.Player.States
                     );
 
                 isSpawnPositionSet = true;
+                player.UpdateWorldTiles();
                 ActivateComponents(player);
             }
         }
