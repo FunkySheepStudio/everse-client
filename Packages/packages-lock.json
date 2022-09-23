@@ -359,6 +359,15 @@
       },
       "url": "https://packages.unity.com"
     },
+    "net.funkysheep.unity.buildings": {
+      "version": "0.1.9",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "net.funkysheep.unity.vectors": "0.1.0"
+      },
+      "url": "https://registry.npmjs.org"
+    },
     "net.funkysheep.unity.crypto": {
       "version": "0.1.0",
       "depth": 0,
@@ -367,7 +376,7 @@
       "url": "https://registry.npmjs.org"
     },
     "net.funkysheep.unity.earth": {
-      "version": "0.1.9",
+      "version": "0.2.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -377,7 +386,8 @@
         "net.funkysheep.unity.osm": "0.1.0",
         "net.funkysheep.unity.tiles": "0.1.0",
         "net.funkysheep.unity.vectors": "0.1.0",
-        "net.funkysheep.unity.network": "0.1.7"
+        "net.funkysheep.unity.network": "0.1.7",
+        "net.funkysheep.unity.buildings": "0.1.7"
       },
       "url": "https://registry.npmjs.org"
     },
@@ -435,11 +445,10 @@
       "url": "https://registry.npmjs.org"
     },
     "net.funkysheep.unity.osm": {
-      "version": "0.1.0",
+      "version": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Framework/Unity-OSM",
       "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://registry.npmjs.org"
+      "source": "local",
+      "dependencies": {}
     },
     "net.funkysheep.unity.simplejson": {
       "version": "0.1.0",

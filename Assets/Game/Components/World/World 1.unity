@@ -171,7 +171,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afec82785ba80f7459011e9612f7ea9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  earth: {fileID: 1100245712}
+  zoomLevel: {fileID: 11400000, guid: 3c67854377f8eff499cddc25ae9a481d, type: 2}
+  tileSize: {fileID: 11400000, guid: 4b0c99defd41a84458e71f6a7656fbf4, type: 2}
+  initialOffset: {fileID: 11400000, guid: 14667fbe75ba069409a56428e39dff15, type: 2}
+  initialMapPosition: {fileID: 11400000, guid: 225ded4de921a5b4f81526d848fcf829, type: 2}
   url: {fileID: 11400000, guid: 29dafbe20c1eb124c91aca8fa029a2ff, type: 2}
   textureResolution: {fileID: 11400000, guid: 0161f8f866a9f45418f06c8966021bc6, type: 2}
   addedTileEvent: {fileID: 11400000, guid: 18cac7f8eb97cbe4e981d63a4459dad1, type: 2}
@@ -319,6 +322,7 @@ GameObject:
   - component: {fileID: 295731379}
   - component: {fileID: 295731381}
   - component: {fileID: 295731380}
+  - component: {fileID: 295731382}
   m_Layer: 0
   m_Name: Buildings
   m_TagString: Untagged
@@ -389,6 +393,18 @@ MonoBehaviour:
       - m_Target: {fileID: 295731378}
         m_TargetAssemblyTypeName: Game.Buildings.Price, Game
         m_MethodName: Init
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 295731374}
+        m_TargetAssemblyTypeName: FunkySheep.Earth.Buildings.Manager, FunkySheep.Earth
+        m_MethodName: AddBuilding
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -506,6 +522,39 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &295731382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295731372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f595d76393ef4794c9cb608a7e1b6720, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  facadePlanner: {fileID: 11400000, guid: 689d3dea18e4bf4489f0a36915652f5c, type: 2}
+  facadeConstructor: {fileID: 11400000, guid: aeddb09709304834aa4a2f95ece67bd2, type: 2}
+  roofPlanner: {fileID: 11400000, guid: 38c7f38468066b041aa75f8442d17745, type: 2}
+  roofConstructor: {fileID: 11400000, guid: 2b208089de62e324e9e0d969477e940c, type: 2}
+  foundationPolygon: {fileID: 0}
+  config:
+    floors: 5
+    entranceInterval: 12
+    hasAttic: 1
+    roofConfig:
+      type: 0
+      thickness: 0.2
+      overhang: 0.2
+    palette:
+      socleColor: {r: 0.7529412, g: 0.7529412, b: 0.7529412, a: 1}
+      socleWindowColor: {r: 0.3764706, g: 0.3764706, b: 0.3764706, a: 1}
+      doorColor: {r: 0.3764706, g: 0.3764706, b: 0.3764706, a: 1}
+      wallColor: {r: 1, g: 1, b: 1, a: 1}
+      frameColor: {r: 0.7529412, g: 0.7529412, b: 0.7529412, a: 1}
+      glassColor: {r: 1, g: 1, b: 1, a: 1}
+      roofColor: {r: 0.1254902, g: 0.1254902, b: 0.1254902, a: 1}
 --- !u!1 &380914337
 GameObject:
   m_ObjectHideFlags: 0
@@ -680,7 +729,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afec82785ba80f7459011e9612f7ea9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  earth: {fileID: 1100245712}
+  zoomLevel: {fileID: 11400000, guid: 3c67854377f8eff499cddc25ae9a481d, type: 2}
+  tileSize: {fileID: 11400000, guid: 4b0c99defd41a84458e71f6a7656fbf4, type: 2}
+  initialOffset: {fileID: 11400000, guid: 14667fbe75ba069409a56428e39dff15, type: 2}
+  initialMapPosition: {fileID: 11400000, guid: 225ded4de921a5b4f81526d848fcf829, type: 2}
   url: {fileID: 11400000, guid: e3202dd2001dc584588490c876fe336b, type: 2}
   textureResolution: {fileID: 11400000, guid: 0161f8f866a9f45418f06c8966021bc6, type: 2}
   addedTileEvent: {fileID: 11400000, guid: d6a6c259653afe048b80c2f46740d7a8, type: 2}
@@ -1080,7 +1132,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4f6925f8ec9c8a4f828049c21d6697c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  earth: {fileID: 1100245712}
+  tileSize: {fileID: 11400000, guid: 4b0c99defd41a84458e71f6a7656fbf4, type: 2}
+  initialOffset: {fileID: 11400000, guid: 14667fbe75ba069409a56428e39dff15, type: 2}
   addedTileEvent: {fileID: 11400000, guid: 7298d18c648a4614882739bf227ef025, type: 2}
   material: {fileID: 2100000, guid: bb7f407b4fc56154aa1843dd7ce42e7f, type: 2}
 --- !u!114 &1097300366
@@ -1182,8 +1235,9 @@ MonoBehaviour:
   initialMapPosition: {fileID: 11400000, guid: 225ded4de921a5b4f81526d848fcf829, type: 2}
   initialMercatorPosition: {fileID: 11400000, guid: eed82b21d5f7ca9469baabddd913b59a, type: 2}
   onStarted: {fileID: 11400000, guid: 3785cf3207a61ef41b7ea94111ce5aab, type: 2}
-  onMapPositionChanged: {fileID: 11400000, guid: a0e475e34cacc114482fbec9b6e6c189, type: 2}
-  tilesManager: {fileID: 0}
+  onAddedTile: {fileID: 11400000, guid: a0e475e34cacc114482fbec9b6e6c189, type: 2}
+  tilesManager: {fileID: 1100245714}
+  AutoInit: 0
 --- !u!114 &1100245713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1412,7 +1466,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afec82785ba80f7459011e9612f7ea9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  earth: {fileID: 1100245712}
+  zoomLevel: {fileID: 11400000, guid: 3c67854377f8eff499cddc25ae9a481d, type: 2}
+  tileSize: {fileID: 11400000, guid: 4b0c99defd41a84458e71f6a7656fbf4, type: 2}
+  initialOffset: {fileID: 11400000, guid: 14667fbe75ba069409a56428e39dff15, type: 2}
+  initialMapPosition: {fileID: 11400000, guid: 225ded4de921a5b4f81526d848fcf829, type: 2}
   url: {fileID: 11400000, guid: d87f41d86d2a23b48844c0a020273d3e, type: 2}
   textureResolution: {fileID: 11400000, guid: 0161f8f866a9f45418f06c8966021bc6, type: 2}
   addedTileEvent: {fileID: 11400000, guid: 220c268eb0ab6334dbb0fa9cdf80ba70, type: 2}
