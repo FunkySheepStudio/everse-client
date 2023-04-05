@@ -421,10 +421,13 @@
       "url": "https://registry.npmjs.org"
     },
     "net.funkysheep.unity.gps": {
-      "version": "0.1.8",
+      "version": "0.2.0",
       "depth": 0,
       "source": "registry",
-      "dependencies": {},
+      "dependencies": {
+        "net.funkysheep.unity.events": "0.1.0",
+        "net.funkysheep.unity.types": "0.1.0"
+      },
       "url": "https://registry.npmjs.org"
     },
     "net.funkysheep.unity.logos": {
@@ -437,7 +440,7 @@
       "url": "https://registry.npmjs.org"
     },
     "net.funkysheep.unity.network": {
-      "version": "0.2.0",
+      "version": "2.0.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -446,6 +449,7 @@
         "net.funkysheep.unity.events": "0.1.0",
         "net.funkysheep.unity.crypto": "0.1.0",
         "net.funkysheep.unity.files": "0.1.0",
+        "net.funkysheep.unity.qrcode": "0.0.1",
         "net.funkysheep.unity.time": "0.1.0"
       },
       "url": "https://registry.npmjs.org"
@@ -453,6 +457,13 @@
     "net.funkysheep.unity.osm": {
       "version": "0.1.0",
       "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://registry.npmjs.org"
+    },
+    "net.funkysheep.unity.qrcode": {
+      "version": "0.0.1",
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://registry.npmjs.org"
