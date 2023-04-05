@@ -445,10 +445,11 @@
       "url": "https://registry.npmjs.org"
     },
     "net.funkysheep.unity.osm": {
-      "version": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Framework/Unity-OSM",
+      "version": "0.1.0",
       "depth": 0,
-      "source": "local",
-      "dependencies": {}
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://registry.npmjs.org"
     },
     "net.funkysheep.unity.simplejson": {
       "version": "0.1.0",
